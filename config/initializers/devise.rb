@@ -242,12 +242,11 @@ Devise.setup do |config|
   # config.navigational_formats = ['*/*', :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :delete
+  config.sign_out_via = :get
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :google_oauth2, '633454475473-10mlp3pdbsb7d0ocdv3pro9lnj19n0li.apps.googleusercontent.com', '_itL0Rvm1YPpx2cJDqAyh1oy', {}
 
   # ==> Warden configuration
