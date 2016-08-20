@@ -4,3 +4,10 @@
 Signed in as <%= current_user.name %>. Not you?
 <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
 <% end %>
+
+<%= fa_icon("hdd-o", text: "Other") %>
+<%= fa_icon("rss", text: "Wireless") %>
+<%= fa_icon("signal", text: "WiFI") %>
+<%= fa_icon("desktop", text: "DSL") %>
+<%= fa_icon("ban", text: "Unassigned") %>
+<%= fa_icon("home", text: "Tanglewood") %>
