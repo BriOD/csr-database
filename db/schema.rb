@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20160820195549) do
   create_table "services", force: :cascade do |t|
     t.string   "icon",       default: "", null: false
     t.string   "main_type",  default: "", null: false
-    t.string   "name",       default: "", null: false
+    t.string   "main_name",  default: "", null: false
     t.string   "sub_type"
     t.string   "sub_name"
     t.datetime "created_at",              null: false
