@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(version: 20160820195549) do
   enable_extension "plpgsql"
 
   create_table "services", force: :cascade do |t|
-    t.string   "service_icon",     default: "", null: false
-    t.string   "service_type",     default: "", null: false
-    t.string   "service_name",     default: "", null: false
-    t.string   "sub_service_type", default: "", null: false
-    t.string   "sub_service_name", default: "", null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "icon",       default: "", null: false
+    t.string   "main_type",  default: "", null: false
+    t.string   "name",       default: "", null: false
+    t.string   "sub_type"
+    t.string   "sub_name"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "users", force: :cascade do |t|

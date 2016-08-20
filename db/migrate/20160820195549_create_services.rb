@@ -1,11 +1,11 @@
 class CreateServices < ActiveRecord::Migration[5.0]
   def change
     create_table :services do |t|
-      t.string :service_icon,      null: false, default: ''
-      t.string :service_type,      null: false, default: ''
-      t.string :service_name,      null: false, default: ''
-      t.string :sub_service_type,  null: false, default: '', unique: true
-      t.string :sub_service_name,  null: false, default: '', unique: true
+      t.string :icon,      null: false, default: ''
+      t.string :main_type, null: false, default: ''
+      t.string :name,      null: false, default: ''
+      t.string :sub_type
+      t.string :sub_name
 
       t.timestamps
     end

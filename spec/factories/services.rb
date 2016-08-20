@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :service do |f|
-    f.service_icon 'signal'
-    f.service_type 'wifi'
-    f.service_name 'WiFi'
-    f.sub_service_type 'bentoncity'
-    f.sub_service_type 'Benton City'
+    f.icon 'signal'
+    f.main_type 'wifi'
+    f.name 'WiFi'
+    f.sub_type 'bentoncity'
+    f.sub_name 'Benton City'
   end
 end
