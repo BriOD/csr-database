@@ -1,7 +1,96 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Service.create(
+  [
+    {
+      icon: 'ban',
+      main_type: 'unassigned',
+      main_name: 'Unassigned'
+    },
+    {
+      icon: 'desktop',
+      main_type: 'dsl',
+      main_name: 'DSL'
+    },
+    {
+      icon: 'hdd-o',
+      main_type: 'other',
+      main_name: 'Other'
+    },
+    {
+      icon: 'home',
+      main_type: 'other',
+      main_name: 'Tanglewood',
+      sub_type: 'tanglewood',
+      sub_name: 'Tanglewood'
+    },
+    {
+      icon: 'signal',
+      main_type: 'wifi',
+      main_name: 'WiFi',
+      sub_type: 'hamsprairie',
+      sub_name: 'Hams Prairie'
+    },
+    {
+      icon: 'signal',
+      main_type: 'wifi',
+      main_name: 'WiFi',
+      sub_type: 'bentoncity',
+      sub_name: 'Benton City'
+    },
+    {
+      icon: 'signal',
+      main_type: 'wifi',
+      main_name: 'WiFi',
+      sub_type: 'lakebreeze',
+      sub_name: 'Lake Breeze'
+    },
+    {
+      icon: 'rss',
+      main_type: 'wireless',
+      main_name: 'Wireless',
+      sub_type: 'centralia3650',
+      sub_name: 'Centralia 3650'
+    },
+    {
+      icon: 'rss',
+      main_type: 'wireless',
+      main_name: 'Wireless',
+      sub_type: 'fulton3650',
+      sub_name: 'Fulton 3650'
+    },
+    {
+      icon: 'rss',
+      main_type: 'wireless',
+      main_name: 'Wireless',
+      sub_type: 'fulton900',
+      sub_name: 'Fulton 900'
+    },
+    {
+      icon: 'rss',
+      main_type: 'wireless',
+      main_name: 'Wireless',
+      sub_type: 'mexico3650',
+      sub_name: 'Mexico 3650'
+    },
+    {
+      icon: 'rss',
+      main_type: 'wireless',
+      main_name: 'Wireless',
+      sub_type: 'mexico900',
+      sub_name: 'Mexico 900'
+    },
+    {
+      icon: 'rss',
+      main_type: 'wireless',
+      main_name: 'Wireless',
+      sub_type: 'mexicoLTE',
+      sub_name: 'Mexico LTE'
+    },
+    {
+      icon: 'rss',
+      main_type: 'wireless',
+      main_name: 'Wireless',
+      sub_type: 'kingdomcity',
+      sub_name: 'Kingdom City'
+    }
+  ]
+)
