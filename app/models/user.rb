@@ -5,6 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :validatable
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 
+  validates_presence_of :first_name, :last_name
+
   def self.find_for_google_oauth2(access_token, _signed_in_resource = nil)
     # data = access_token.info
 
@@ -15,11 +17,16 @@ class User < ApplicationRecord
     # return registered_user if registered_user
 
     User.create(
-      name: access_token.info['name'], # data['name'],
+      first_name: access_token.info['first_name'],
+      last_name: access_token.info['last_name'],
       provider: access_token.provider,
-      email: access_token.info['email'], # data['email'],
+      email: access_token.info['email'],
       uid: access_token.uid,
       password: Devise.friendly_token[0, 20]
     )
+  end
+
+  def name
+    "#{first_name} #{last_name}"
   end
 end
