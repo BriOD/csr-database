@@ -14,7 +14,7 @@ Services [DONE]
 = SubName
 = Icon
 
-IP Ranges
+IP Ranges [DONE]
 = Range_ID (ip2long, primary key)
 = Network - '198.153.80.0/24'
 = Gateway - '198.153.80.1'
