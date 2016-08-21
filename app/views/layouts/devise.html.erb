@@ -1,0 +1,39 @@
+<html lang="en">
+  <head>
+    <title>Kingdom | CSR Database</title>
+		<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/devise_custom.css" />
+
+  	<script type="text/javascript" src="/assets/respond.min.js"></script>
+	</head>
+	<body>
+    <div id="container">
+      <div id="logo">
+          <img src="/assets/logo.png" alt="" />
+      </div>
+      <div id="loginbox">
+        <form id="loginform" method="post" action="">
+  				<p>Enter username and password to continue.</p>
+          <div class="input-group input-sm">
+              <span class="input-group-addon"><i style="width:10px;" class="fa fa-user"></i></span><input class="form-control" type="text" name="username" placeholder="Username" />
+          </div>
+          <div class="input-group">
+              <span class="input-group-addon"><i style="width:10px;" class="fa fa-lock"></i></span><input class="form-control" type="password" name="password" placeholder="Password" />
+          </div>
+          <div class="form-actions clearfix">
+              <input type="submit" class="btn btn-block btn-primary btn-default" value="Login" />
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="/assets/jquery.min.js"></script>
+    <script src="/assets/jquery-ui.custom.min.js"></script>
+  </body>
+</html>
+
+<%= yield %>
