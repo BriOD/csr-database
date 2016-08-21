@@ -15,18 +15,27 @@ body {
   padding: 0;
   margin: 0;
 }
-a.grey {
-  color: #aaa;
+p {
+  margin-top: 15px;
+  padding: 0 20px;
 }
-a.blue {
-  font-weight: bold;
+.form-actions {
+  padding: 5px 20px 15px;
+  border-radius: 0 0 30px 30px;
 }
-@media (max-width: 400px) {
-  a.grey,
-  a.blue {
-    font-size: 12px;
-  }
+.input-group {
+  padding: 0 20px 5px;
 }
+.mainbox {
+  background: #ffffff;
+  box-shadow: 0 0 4px #000000;
+  border-radius: 7px;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+}
+
+/* ====== CONTAINER ====== */
 #container {
   top: 0;
   position: absolute;
@@ -42,85 +51,38 @@ a.blue {
     width: 90%;
   }
 }
-#logo,
-#loginbox {
+
+/* ====== LOGO ====== */
+.logo,
+.loginbox,
+.signupbox {
   width: 400px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
 }
 @media (max-width: 480px) {
-  #logo,
-  #loginbox {
+  .logo,
+  .loginbox,
+  .signupbox {
     width: 100%;
   }
 }
-#logo {
+.logo {
   padding: 20px 0 20px 5px;
 }
-#logo img {
+.logo img {
   width: 215px;
   margin: 0 auto;
   display: block;
 }
-#loginbox {
+
+/* ====== LOGIN BOX ======  */
+.loginbox {
   height: 230px;
-  background: #ffffff;
-  box-shadow: 0 0 4px #000000;
-  border-radius: 7px;
-  overflow: hidden !important;
-  text-align: center;
-  position: relative;
 }
-#loginbox form {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-#loginbox form#loginform {
-  z-index: 200;
-}
-#loginbox form#recoverform {
-  z-index: 100;
-  opacity: 0;
-  display: none;
-}
-#loginbox form#recoverform .control-group {
-  margin: 23px 0;
-}
-#loginbox form#registerform {
-  z-index: 100;
-  opacity: 0;
-  display: none;
-}
-#loginbox p {
-  margin-top: 15px;
-  padding: 0 20px;
-}
-@media (max-width: 400px) {
-  #loginbox p {
-    font-size: 12px !important;
-  }
-}
-#loginbox .form-actions {
-  padding: 5px 20px 15px;
-  border-radius: 0 0 30px 30px;
-}
-#loginbox .form-actions .pull-left,
-#loginbox .form-actions .pull-right {
-  margin-bottom: 10px;
-}
-#loginbox .form-actions .pull-left {
-  text-align: left;
-}
-#loginbox .form-actions .pull-right {
-  text-align: right;
-}
-.input-group {
-  padding: 0 20px 5px;
-}
-hr {
-  margin: 8px 0 -5px;
+
+/* ====== SIGN UP BOX ====== */
+.signupbox {
+  height: 265px;
 }
