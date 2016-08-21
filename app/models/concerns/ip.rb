@@ -1,4 +1,4 @@
-module Ip
+module IP
   extend ActiveSupport::Concern
 
   # IP Class Methods
