@@ -1,14 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>CSR - Database</title>
+    <title>Kingdom | CSR Database</title></title>
+
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+		<!-- Custom CSS Stylesheet -->
+		<!-- Overrides any Bootstrap Default CSS -->
+		<link rel="stylesheet" href="assets/custom.css" />
+
+		<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3'></script>
+		<script type='text/javascript' src='../js/googleMaps.js'></script>
+
+    <script type="text/javascript">
+      function stopEnterKey(evt) {
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if ((evt.keyCode == 13) && (node.type == "text")) { return false; }
+      }
+      document.onkeypress = stopEnterKey;
+    </script>
+
+    <link rel="shortcut icon" href="favicon.ico">
   </head>
 
-  <body>
-    <%= yield %>
+  <body data-color="grey" class="old">
+
+    <div id="wrapper">
+      <div id="header">
+        <h1><a href="./dashboard.php">Kingdom | CSR Database</a></a></h1>
+        <a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>
+      </div><!-- end header -->
+
+      <div id="user-nav" class="hidden-xs">
+        <%= render 'layouts/navbar' %>
+      </div><!-- end user-nav -->
+
+      <div id="sidebar">
+        <%= render 'layouts/sidebar' %>
+      </div><!-- end sidebar -->
+
+      <section>
+        <%= yield %>
+      </section>
+
+      <div class="row">
+        <div id="footer" class="col-xs-12">
+          2016 &copy; Kingdom Telephone
+        </div><!-- end footer -->
+      </div><!-- end row -->
+    </div><!-- end wrapper -->
+
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/bootstrap.min.js"></script>
+
+    <script src="assets/custom.js"></script>
   </body>
 </html>
