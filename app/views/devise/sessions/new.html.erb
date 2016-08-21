@@ -1,25 +1,27 @@
-<%= form_for(resource, as: resource_name, class: 'loginform', url: session_path(resource_name)) do |f| %>
-  <p>Enter username and password to continue.</p>
-  <div class="input-group input-sm">
-    <span class="input-group-addon"><i style="width:10px;" class="fa fa-user"></i></span>
-    <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Username' %>
-  </div>
-
-  <div class="input-group input-sm">
-    <span class="input-group-addon"><i style="width:10px;" class="fa fa-lock"></i></span>
-    <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
+<div class="mainbox loginbox">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <p>Enter username and password to continue.</p>
     <div class="input-group input-sm">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <span class="input-group-addon"><i style="width:10px;" class="fa fa-user"></i></span>
+      <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Username' %>
     </div>
-  <% end -%>
 
-  <div class="form-actions clearfix">
-    <%= f.submit "Log in", class: 'btn btn-block btn-primary btn-default'%>
-  </div>
+    <div class="input-group input-sm">
+      <span class="input-group-addon"><i style="width:10px;" class="fa fa-lock"></i></span>
+      <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
+    </div>
 
-  <%= render "devise/shared/links" %>
-<% end %>
+    <% if devise_mapping.rememberable? -%>
+      <div class="input-group input-sm">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end -%>
+
+    <div class="form-actions clearfix">
+      <%= f.submit "Log in", class: 'btn btn-block btn-primary btn-default'%>
+    </div>
+
+    <%= render "devise/shared/links" %>
+  <% end %>
+</div>
