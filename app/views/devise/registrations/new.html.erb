@@ -1,29 +1,26 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<div class="mainbox signupbox">
+<%= form_for(resource, as: resource_name, class: 'loginform', url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+  <p>Enter username and password to continue.</p>
+  <div class="input-group input-sm">
+    <span class="input-group-addon"><i style="width:10px;" class="fa fa-user"></i></span>
+    <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Username' %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+  <div class="input-group input-sm">
+    <span class="input-group-addon"><i style="width:10px;" class="fa fa-lock"></i></span>
+    <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  <div class="input-group input-sm">
+    <span class="input-group-addon"><i style="width:10px;" class="fa fa-lock"></i></span>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'Confirm Password' %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="form-actions clearfix">
+    <%= f.submit "Sign Up", class: 'btn btn-block btn-primary btn-default'%>
   </div>
+
+  <%= render "devise/shared/links" %>
 <% end %>
-
-<%= render "devise/shared/links" %>
+</div>
