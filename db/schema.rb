@@ -10,27 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822045955) do
+ActiveRecord::Schema.define(version: 20160822142444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "address_books", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.integer  "company_id"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zipcode"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.string   "name"
+    t.string   "contact_first_name"
+    t.string   "contact_last_name"
+    t.string   "contact_email"
+    t.string   "billing_email"
+    t.integer  "address_book_id"
+    t.string   "main_number"
+    t.string   "contact_number"
+    t.string   "fax"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "customers", force: :cascade do |t|
-    t.integer  "ip_range_id"
+    t.integer  "ip_address_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "address_book_id"
-    t.integer  "home_phone"
-    t.integer  "cell_phone"
-    t.integer  "work_phone"
+    t.string   "home_phone"
+    t.string   "cell_phone"
+    t.string   "work_phone"
     t.text     "notes"
-    t.boolean  "active",          default: false
+    t.boolean  "active",        default: false
     t.string   "email"
-    t.integer  "lease_id"
-    t.integer  "company_id"
-    t.integer  "webspace_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "ip_addresses", force: :cascade do |t|
@@ -48,6 +71,21 @@ ActiveRecord::Schema.define(version: 20160822045955) do
     t.integer  "service_id", default: 1,  null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "leases", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.string   "modem_manufacturer"
+    t.string   "modem_model"
+    t.string   "modem_serial"
+    t.string   "modem_mac"
+    t.string   "router_manufacturer"
+    t.string   "router_model"
+    t.string   "router_serial"
+    t.string   "router_mac"
+    t.boolean  "tr069",               default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "services", force: :cascade do |t|
@@ -79,6 +117,16 @@ ActiveRecord::Schema.define(version: 20160822045955) do
     t.string   "uid"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "webspaces", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.boolean  "active",      default: false
+    t.string   "url"
+    t.string   "username"
+    t.string   "password"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
 end

@@ -120,3 +120,79 @@ IpRange.all.each do |range|
     )
   end
 end
+
+num = 1
+5.times do
+  c = Customer.create(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    home_phone: Faker::PhoneNumber.phone_number,
+    ip_address_id: num,
+    notes: Faker::Lorem.paragraph,
+    email: Faker::Internet.safe_email,
+    active: true
+  )
+
+  if num.odd?
+    AddressBook.create(
+      customer_id: c.id,
+      address_1: Faker::Address.street_address,
+      address_2: '',
+      city: Faker::Address.city,
+      state: Faker::Address.state_abbr,
+      zipcode: Faker::Address.zip
+    )
+  else
+    a = AddressBook.create(
+      company_id: nil,
+      address_1: Faker::Address.street_address,
+      address_2: '',
+      city: Faker::Address.city,
+      state: Faker::Address.state_abbr,
+      zipcode: Faker::Address.zip
+    )
+
+    comp = Company.create(
+      customer_id: c.id,
+      name: Faker::Company.name,
+      contact_first_name: Faker::Name.first_name,
+      contact_last_name: Faker::Name.last_name,
+      contact_email: Faker::Internet.safe_email,
+      billing_email: Faker::Internet.safe_email,
+      address_book_id: a.id,
+      main_number: Faker::PhoneNumber.phone_number,
+      contact_number: Faker::PhoneNumber.phone_number,
+      fax: Faker::PhoneNumber.phone_number
+    )
+
+    a.company_id = comp.id
+    a.save
+  end
+
+  Webspace.create(
+    customer_id: c.id,
+    active: true,
+    url: 'http://username.example.com',
+    username: 'username',
+    password: 'password'
+  ) if num == 3
+
+  Lease.create(
+    customer_id: c.id,
+    modem_manufacturer: 'Westell',
+    modem_model: '327W',
+    modem_serial: Faker::Crypto.md5,
+    modem_mac: Faker::Internet.mac_address,
+    tr069: true
+  ) if num == 1
+
+  Lease.create(
+    customer_id: c.id,
+    router_manufacturer: 'Comtrend',
+    router_model: 'AR-531U',
+    router_serial: Faker::Crypto.md5,
+    router_mac: Faker::Internet.mac_address,
+    tr069: true
+  ) if num == 3
+  num += 1
+end
