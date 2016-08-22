@@ -20,7 +20,7 @@ IP Ranges [DONE]
 = Gateway - '198.153.80.1'
 = Service_ID - 3 (DSL)
 
-IP Range Table
+IP Range Table [DONE]
 = ID (ip2long, primary_key)
 = Range_ID (ip2long, foreign_key)
 = IP_Address
@@ -43,6 +43,8 @@ t.integer :webspace_id
 t.integer :address_book_id
 
 Address_Book
+t.integer :customer_id
+t.integer :company_id
 t.string :address_1
 t.string :address_2
 t.string :city
@@ -50,12 +52,14 @@ t.string :state
 t.integer :zipcode
 
 Webspace
+t.integer :customer_id
 t.boolean :active, default: false
 t.string :url
 t.string :username
 t.string :password
 
 Company
+t.integer :customer_id
 t.string :Name
 t.string :contact_first_name
 t.string :contact_last_name
@@ -67,6 +71,7 @@ t.integer :contact_number
 t.integer :fax
 
 Lease
+t.integer :customer_id
 t.string :modem_manufacturer
 t.string :modem_model
 t.string :modem_serial
@@ -75,4 +80,4 @@ t.string :router_manufacturer
 t.string :router_model
 t.string :router_serial
 t.string :router_mac
-t.string :tr-069
+t.string :tr069
