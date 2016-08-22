@@ -97,13 +97,13 @@ Service.create(
 
 IpRange.create(
   [
-    { network: '198.153.82.1/24',   gateway: '198.153.82.1',   service_id: 2 },
-    { network: '198.153.83.1/24',   gateway: '198.153.83.1',   service_id: 2 },
-    { network: '198.153.84.1/24',   gateway: '198.153.84.1',   service_id: 2 },
-    { network: '198.153.85.1/24',   gateway: '198.153.85.1',   service_id: 7 },
-    { network: '198.153.86.1/24',   gateway: '198.153.86.1',   service_id: 8 },
-    { network: '192.69.123.1/25',   gateway: '192.69.123.1',   service_id: 2 },
-    { network: '192.69.123.128/25', gateway: '192.69.123.129', service_id: 9 }
+    { network: '192.168.82.1/24',    gateway: '192.168.82.1',   service_id: 2 },
+    { network: '192.168.83.1/24',    gateway: '192.168.83.1',   service_id: 2 },
+    { network: '192.168.84.1/24',    gateway: '192.168.84.1',   service_id: 2 },
+    { network: '192.168.85.1/24',    gateway: '192.168.85.1',   service_id: 9 },
+    { network: '192.168.86.1/24',    gateway: '192.168.86.1',   service_id: 8 },
+    { network: '192.168.23.1/25',   gateway: '192.168.123.1',   service_id: 1 },
+    { network: '192.168.23.128/25', gateway: '192.168.123.129', service_id: 3 }
   ]
 )
 
@@ -119,4 +119,65 @@ IpRange.all.each do |range|
       reserved: false
     )
   end
+end
+
+num = 1
+5.times do
+  addr = AddressBook.create(
+    address_1: Faker::Address.street_address,
+    address_2: '',
+    city: Faker::Address.city,
+    state: Faker::Address.state_abbr,
+    zipcode: Faker::Address.zip
+  )
+
+  c = Customer.create(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    home_phone: Faker::PhoneNumber.phone_number,
+    ip_address_id: num,
+    address_book_id: addr.id,
+    notes: Faker::Lorem.paragraph,
+    email: Faker::Internet.safe_email,
+    active: true
+  )
+
+  c.create_company(
+    address_book_id: addr.id,
+    name: Faker::Company.name,
+    contact_first_name: Faker::Name.first_name,
+    contact_last_name: Faker::Name.last_name,
+    contact_email: Faker::Internet.safe_email,
+    billing_email: Faker::Internet.safe_email,
+    main_number: Faker::PhoneNumber.phone_number,
+    contact_number: Faker::PhoneNumber.phone_number,
+    fax: Faker::PhoneNumber.phone_number
+  ) if num == 2 || num == 4
+
+  Webspace.create(
+    customer_id: c.id,
+    active: true,
+    url: 'http://username.example.com',
+    username: 'username',
+    password: 'password'
+  ) if num == 3
+
+  Lease.create(
+    customer_id: c.id,
+    modem_manufacturer: 'Westell',
+    modem_model: '327W',
+    modem_serial: Faker::Crypto.md5,
+    modem_mac: Faker::Internet.mac_address,
+    tr069: true
+  ) if num == 1
+
+  Lease.create(
+    customer_id: c.id,
+    router_manufacturer: 'Comtrend',
+    router_model: 'AR-531U',
+    router_serial: Faker::Crypto.md5,
+    router_mac: Faker::Internet.mac_address,
+    tr069: true
+  ) if num == 3
+  num += 1
 end

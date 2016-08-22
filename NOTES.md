@@ -20,7 +20,7 @@ IP Ranges [DONE]
 = Gateway - '198.153.80.1'
 = Service_ID - 3 (DSL)
 
-IP Range Table
+IP Range Table [DONE]
 = ID (ip2long, primary_key)
 = Range_ID (ip2long, foreign_key)
 = IP_Address
@@ -28,52 +28,56 @@ IP Range Table
 = Reserved
 
 Customer
-= ID
-= IP_Range_ID
-= First Name
-= Last Name
-= Company
-= Address 1
-= Address 2
-= City
-= State
-= Zip
-= Home_Phone
-= Cell_Phone
-= Work_Phone
-= Notes
-= TDNP (boolean)
-= Lease (boolean)
-= ID
-= IP_Range_ID
-= Webspace (boolean)
-= Web_URL
-= Web_User
-= Web_Pass
-= Email
-= Company_First_Name
-= Company_Last_Name
-= Company_Email
-= Company_Billing_email
-= Company_Contact_Email
-= Company_Address1
-= Company_Address2
-= Company_City
-= Company_State
-= Company_Zip
-= Company_Phone
-= Company_Contact
-= Company_Fax
+t.integer :ip_range_id
+t.string :first_name
+t.string :last_name
+t.integer :home_phone
+t.integer :cell_phone
+t.integer :work_phone
+t.text :notes
+t.boolean :active, default: false
+t.string :email
+t.integer :lease_id
+t.integer :company_id
+t.integer :webspace_id
+t.integer :address_book_id
+
+Address_Book
+t.integer :customer_id
+t.integer :company_id
+t.string :address_1
+t.string :address_2
+t.string :city
+t.string :state
+t.integer :zipcode
+
+Webspace
+t.integer :customer_id
+t.boolean :active, default: false
+t.string :url
+t.string :username
+t.string :password
+
+Company
+t.integer :customer_id
+t.string :Name
+t.string :contact_first_name
+t.string :contact_last_name
+t.string :contact_email
+t.string :billing_email
+t.integer :address_book_id
+t.integer :main_number
+t.integer :contact_number
+t.integer :fax
 
 Lease
-= ID
-= IP_Range_ID
-= Modem_Manufacturer
-= Modem_Model
-= Modem_Serial
-= Modem_MAC
-= Router_Manufacturer
-= Router_Model
-= Router_Serial
-= Router_MAC
-= TR-069
+t.integer :customer_id
+t.string :modem_manufacturer
+t.string :modem_model
+t.string :modem_serial
+t.string :modem_mac
+t.string :router_manufacturer
+t.string :router_model
+t.string :router_serial
+t.string :router_mac
+t.string :tr069
