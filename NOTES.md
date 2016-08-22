@@ -1,3 +1,15 @@
+/range/192.168.0.0/1/
+/range/[:ip_range_id]/address/[:id_address]
+
+localhost/192.168.0.0/ => IpRange Controller
+
+localhost/192.168.0.1/ => IpAddress Controller
+localhost/192.168.2.1/
+localhost/192.168.5.1/
+
+localhost/192.168.5.1/56/ => IpAddress Controller (Customer Info Actually)
+
+
 User Structure [DONE]
 = ID (primary_key)
 = First Name
