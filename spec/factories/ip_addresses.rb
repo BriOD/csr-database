@@ -1,3 +1,5 @@
+require 'faker'
+
 FactoryGirl.define do
   factory :ip_address do |f|
     f.ip_range_id 1

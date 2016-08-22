@@ -1,3 +1,5 @@
+require 'faker'
+
 FactoryGirl.define do
   factory :webspace do |f|
     f.customer_id 1

@@ -1,3 +1,5 @@
+require 'faker'
+
 FactoryGirl.define do
   factory :service do |f|
     f.icon 'signal'
