@@ -24,7 +24,7 @@ IP Range Table
 = ID (ip2long, primary_key)
 = Range_ID (ip2long, foreign_key)
 = IP_Address
-= User_ID
+= Customer_ID
 = Reserved
 
 Customer
