@@ -1,4 +1,4 @@
-User Structure
+User Structure [DONE]
 = ID (primary_key)
 = First Name
 = Last Name
@@ -6,7 +6,7 @@ User Structure
 = Password
 = Account Level
 
-Services
+Services [DONE]
 = ID (primary_key)
 = Type
 = Subtype
@@ -14,12 +14,11 @@ Services
 = SubName
 = Icon
 
-IP Ranges
+IP Ranges [DONE]
 = Range_ID (ip2long, primary key)
-= Network
-= Subnet
-= Gateway
-= Service_Type
+= Network - '198.153.80.0/24'
+= Gateway - '198.153.80.1'
+= Service_ID - 3 (DSL)
 
 IP Range Table
 = ID (ip2long, primary_key)
@@ -45,8 +44,6 @@ Customer
 = Notes
 = TDNP (boolean)
 = Lease (boolean)
-
-Customer_Other
 = ID
 = IP_Range_ID
 = Webspace (boolean)

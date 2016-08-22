@@ -26,6 +26,9 @@ p {
 .input-group {
   padding: 0 20px 5px;
 }
+.fa {
+  width: 10px;
+}
 .mainbox {
   background: #ffffff;
   box-shadow: 0 0 4px #000000;
@@ -84,5 +87,5 @@ p {
 
 /* ====== SIGN UP BOX ====== */
 .signupbox {
-  height: 265px;
+  height: 345px;
 }

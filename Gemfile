@@ -13,6 +13,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'therubyracer'
 gem 'devise'
+gem 'netaddr'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

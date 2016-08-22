@@ -1,3 +1,8 @@
+# ==============================================================================
+# Users Table
+#
+# first_name, last_name, email, encrypted_password, provider, uid
+# ==============================================================================
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
