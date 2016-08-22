@@ -97,13 +97,13 @@ Service.create(
 
 IpRange.create(
   [
-    { network: '198.153.82.1/24',   gateway: '198.153.82.1',   service_id: 2 },
-    { network: '198.153.83.1/24',   gateway: '198.153.83.1',   service_id: 2 },
-    { network: '198.153.84.1/24',   gateway: '198.153.84.1',   service_id: 2 },
-    { network: '198.153.85.1/24',   gateway: '198.153.85.1',   service_id: 7 },
-    { network: '198.153.86.1/24',   gateway: '198.153.86.1',   service_id: 8 },
-    { network: '192.69.123.1/25',   gateway: '192.69.123.1',   service_id: 2 },
-    { network: '192.69.123.128/25', gateway: '192.69.123.129', service_id: 9 }
+    { network: '192.168.82.1/24',    gateway: '192.168.82.1',   service_id: 2 },
+    { network: '192.168.83.1/24',    gateway: '192.168.83.1',   service_id: 2 },
+    { network: '192.168.84.1/24',    gateway: '192.168.84.1',   service_id: 2 },
+    { network: '192.168.85.1/24',    gateway: '192.168.85.1',   service_id: 9 },
+    { network: '192.168.86.1/24',    gateway: '192.168.86.1',   service_id: 8 },
+    { network: '192.168.23.1/25',   gateway: '192.168.123.1',   service_id: 1 },
+    { network: '192.168.23.128/25', gateway: '192.168.123.129', service_id: 3 }
   ]
 )
 

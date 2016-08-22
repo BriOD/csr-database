@@ -43,14 +43,20 @@ Customer
 = Work_Phone
 = Notes
 = TDNP (boolean)
-= Lease (boolean)
+= Email
+= Lease_ID
+= Company_ID
+= Webspace_ID
+
+Webspace
 = ID
-= IP_Range_ID
 = Webspace (boolean)
 = Web_URL
 = Web_User
 = Web_Pass
-= Email
+
+Company
+= ID
 = Company_First_Name
 = Company_Last_Name
 = Company_Email
@@ -67,7 +73,6 @@ Customer
 
 Lease
 = ID
-= IP_Range_ID
 = Modem_Manufacturer
 = Modem_Model
 = Modem_Serial
