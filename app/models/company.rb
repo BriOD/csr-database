@@ -1,4 +1,5 @@
 class Company < ApplicationRecord
-  # belongs_to :customer
-  # belongs_to :address_book
+  validates :main_number, allow_blank: true, numericality: { only_integer: true }
+  validates :contact_number, numericality: { only_integer: true }
+  validates :fax, allow_blank: true, numericality: { only_integer: true }
 end
