@@ -17,12 +17,12 @@ RSpec.describe AddressBook, type: :model do
   context 'is attached' do
     it 'to a customer' do
       customer.address_book_id = address_book.id
-      expect(address_book.customer).to be_valid
+      expect(address_book.customer).to_not be_nil
     end
 
     it 'to a company' do
       company.address_book_id = address_book.id
-      expect(address_book.company).to be_valid
+      expect(address_book.company).to_not be_nil
     end
   end
 end
