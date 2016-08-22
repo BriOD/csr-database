@@ -9,8 +9,8 @@ FactoryGirl.define do
     f.contact_email Faker::Internet.safe_email
     f.billing_email Faker::Internet.safe_email
     f.address_book_id '1'
-    f.main_number Faker::PhoneNumber.phone_number
-    f.contact_number Faker::PhoneNumber.phone_number
-    f.fax Faker::PhoneNumber.phone_number
+    f.main_number Faker::Number.number(10)
+    f.contact_number Faker::Number.number(10)
+    f.fax Faker::Number.number(10)
   end
 end
