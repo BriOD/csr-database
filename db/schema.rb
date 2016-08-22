@@ -16,15 +16,13 @@ ActiveRecord::Schema.define(version: 20160822142444) do
   enable_extension "plpgsql"
 
   create_table "address_books", force: :cascade do |t|
-    t.integer  "customer_id"
-    t.integer  "company_id"
     t.string   "address_1"
     t.string   "address_2"
     t.string   "city"
     t.string   "state"
     t.integer  "zipcode"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "companies", force: :cascade do |t|
@@ -44,16 +42,17 @@ ActiveRecord::Schema.define(version: 20160822142444) do
 
   create_table "customers", force: :cascade do |t|
     t.integer  "ip_address_id"
+    t.integer  "address_book_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "home_phone"
     t.string   "cell_phone"
     t.string   "work_phone"
     t.text     "notes"
-    t.boolean  "active",        default: false
+    t.boolean  "active",          default: false
     t.string   "email"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "ip_addresses", force: :cascade do |t|

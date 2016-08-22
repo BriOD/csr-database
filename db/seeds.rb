@@ -123,51 +123,36 @@ end
 
 num = 1
 5.times do
+  addr = AddressBook.create(
+    address_1: Faker::Address.street_address,
+    address_2: '',
+    city: Faker::Address.city,
+    state: Faker::Address.state_abbr,
+    zipcode: Faker::Address.zip
+  )
+
   c = Customer.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     home_phone: Faker::PhoneNumber.phone_number,
     ip_address_id: num,
+    address_book_id: addr.id,
     notes: Faker::Lorem.paragraph,
     email: Faker::Internet.safe_email,
     active: true
   )
 
-  if num.odd?
-    AddressBook.create(
-      customer_id: c.id,
-      address_1: Faker::Address.street_address,
-      address_2: '',
-      city: Faker::Address.city,
-      state: Faker::Address.state_abbr,
-      zipcode: Faker::Address.zip
-    )
-  else
-    a = AddressBook.create(
-      company_id: nil,
-      address_1: Faker::Address.street_address,
-      address_2: '',
-      city: Faker::Address.city,
-      state: Faker::Address.state_abbr,
-      zipcode: Faker::Address.zip
-    )
-
-    comp = Company.create(
-      customer_id: c.id,
-      name: Faker::Company.name,
-      contact_first_name: Faker::Name.first_name,
-      contact_last_name: Faker::Name.last_name,
-      contact_email: Faker::Internet.safe_email,
-      billing_email: Faker::Internet.safe_email,
-      address_book_id: a.id,
-      main_number: Faker::PhoneNumber.phone_number,
-      contact_number: Faker::PhoneNumber.phone_number,
-      fax: Faker::PhoneNumber.phone_number
-    )
-
-    a.company_id = comp.id
-    a.save
-  end
+  c.create_company(
+    address_book_id: addr.id,
+    name: Faker::Company.name,
+    contact_first_name: Faker::Name.first_name,
+    contact_last_name: Faker::Name.last_name,
+    contact_email: Faker::Internet.safe_email,
+    billing_email: Faker::Internet.safe_email,
+    main_number: Faker::PhoneNumber.phone_number,
+    contact_number: Faker::PhoneNumber.phone_number,
+    fax: Faker::PhoneNumber.phone_number
+  ) if num == 2 || num == 4
 
   Webspace.create(
     customer_id: c.id,
