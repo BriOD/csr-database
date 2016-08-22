@@ -97,40 +97,26 @@ Service.create(
 
 IpRange.create(
   [
-    {
-      network: '198.153.82.1/24',
-      gateway: '198.153.82.1',
-      service_id: 2
-    },
-    {
-      network: '198.153.83.1/24',
-      gateway: '198.153.83.1',
-      service_id: 2
-    },
-    {
-      network: '198.153.84.1/24',
-      gateway: '198.153.84.1',
-      service_id: 2
-    },
-    {
-      network: '198.153.85.1/24',
-      gateway: '198.153.85.1',
-      service_id: 7
-    },
-    {
-      network: '198.153.86.1/24',
-      gateway: '198.153.86.1',
-      service_id: 8
-    },
-    {
-      network: '192.69.123.1/25',
-      gateway: '192.69.123.1',
-      service_id: 2
-    },
-    {
-      network: '192.69.123.128/25',
-      gateway: '192.69.123.129',
-      service_id: 9
-    }
+    { network: '198.153.82.1/24',   gateway: '198.153.82.1',   service_id: 2 },
+    { network: '198.153.83.1/24',   gateway: '198.153.83.1',   service_id: 2 },
+    { network: '198.153.84.1/24',   gateway: '198.153.84.1',   service_id: 2 },
+    { network: '198.153.85.1/24',   gateway: '198.153.85.1',   service_id: 7 },
+    { network: '198.153.86.1/24',   gateway: '198.153.86.1',   service_id: 8 },
+    { network: '192.69.123.1/25',   gateway: '192.69.123.1',   service_id: 2 },
+    { network: '192.69.123.128/25', gateway: '192.69.123.129', service_id: 9 }
   ]
 )
+
+IpRange.all.each do |range|
+  ary = NetAddr::CIDR.create(range.network).enumerate
+  ary.shift(2)
+  ary.pop(1)
+  ary.each do |ip_addr|
+    IpAddress.create(
+      ip_range_id: range.id,
+      customer_id: nil,
+      ip: ip_addr,
+      reserved: false
+    )
+  end
+end
