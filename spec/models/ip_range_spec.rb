@@ -1,33 +1,46 @@
 require 'rails_helper'
 
 RSpec.describe IpRange, type: :model do
-  describe 'IpRange' do
+  describe 'validation' do
+    let(:service) { FactoryGirl.create(:service) }
+
     it 'has a valid factory' do
-      expect(FactoryGirl.create(:ip_range, network: '10.10.0.1/24', gateway: '10.10.0.1')).to be_valid
+      expect(FactoryGirl.create(:ip_range, service_id: service.id)).to be_valid
     end
 
-    it 'must have a valid ip address and cidr for the network' do
-      expect(FactoryGirl.build(:ip_range, network: '192.168.0.1')).to_not be_valid
-      expect(FactoryGirl.build(:ip_range, network: 'network')).to_not be_valid
-      expect(FactoryGirl.build(:ip_range, gateway: '10.10.0.1', network: '192.168.0.1/24')).to be_valid
+    context 'checks validtaion of network' do
+      it 'and must contain a CIDR (/24, /16, etc)' do
+        expect(FactoryGirl.build(:ip_range, network: '192.168.0.1', service_id: service.id)).to_not be_valid
+      end
+
+      it 'and cannot accept a non-ip address string' do
+        expect(FactoryGirl.build(:ip_range, network: 'network', service_id: service.id)).to_not be_valid
+      end
     end
 
     it 'must have a valid ip address for the gateway' do
-      expect(FactoryGirl.build(:ip_range, gateway: 'gateway')).to_not be_valid
+      expect(FactoryGirl.build(:ip_range, gateway: 'gateway', service_id: service.id)).to_not be_valid
     end
 
     it 'must have a service_id' do
       expect(FactoryGirl.build(:ip_range, service_id: nil)).to_not be_valid
     end
 
-    it 'cannot have the same network or gateway as a previous IP Range' do
-      expect(FactoryGirl.create(:ip_range, network: '192.168.0.1/24')).to be_valid
-      # Trying to use Same Network
-      expect(FactoryGirl.build(:ip_range, network: '192.168.0.1/24')).to_not be_valid
-      # Change to New Network
-      expect(FactoryGirl.build(:ip_range, network: '192.168.1.1/24')).to_not be_valid
-      # Change both Network & Gateway
-      expect(FactoryGirl.build(:ip_range, network: '192.168.1.1/24', gateway: '192.168.1.1')).to be_valid
+    context 'checks against previous ranges' do
+      it 'and cannot have the same network' do
+        FactoryGirl.create(:ip_range, service_id: service.id)
+        expect(FactoryGirl.build(:ip_range, network: '192.168.0.2/24', service_id: service.id)).to_not be_valid
+      end
+
+      it 'and cannot have the same gateway' do
+        FactoryGirl.create(:ip_range, service_id: service.id)
+        expect(FactoryGirl.build(:ip_range, gateway: '192.168.0.1', service_id: service.id)).to_not be_valid
+      end
+
+      it 'and has a unique network and gateway' do
+        FactoryGirl.create(:ip_range, service_id: service.id)
+        expect(FactoryGirl.build(:ip_range, network: '192.168.5.1/24', gateway: '192.168.5.1', service_id: service.id)).to be_valid
+      end
     end
   end
 end
