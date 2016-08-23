@@ -3,26 +3,18 @@
 </div><!-- end search -->
 
 <ul>
-  <li class="active"><a href="dashboard.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+  <li class="active"><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
-  <li class="submenu">
-  <a href="#"><i class="fa fa-desktop"></i> <span>DSL</span> <i class="arrow fa fa-chevron-right"></i></a>
-  <ul>
-    <li><a href="iprange.php?service=dsl&range=3225779072">192.69.123.128</a></li>
-    <li><a href="iprange.php?service=dsl&range=3225779200">192.69.124.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3225779456">192.69.125.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3225779712">192.69.126.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3331936768">198.153.82.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3331937024">198.153.83.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3331937280">198.153.84.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3331937536">198.153.85.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3331937792">198.153.86.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3331938048">198.153.87.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3331938304">198.153.88.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3331938560">198.153.89.0</a></li>
-    <li><a href="iprange.php?service=dsl&range=3331938816">198.153.90.0</a></li>
-  </ul>
-  </li>
+  <% Service.all.each do |serv| %>
+    <%= get_sidebar_service_links(serv.main_type) %>
+  <% end %>
+  <!-- <li class="submenu">
+    <a href=""><i class="fa fa-desktop"></i> <span>DSL</span> <i class="arrow fa fa-chevron-right"></i></a>
+    <ul>
+      <li><a href="/range/192.168.0.1/">192.168.0.1</a></li>
+      <li><a href="/range/192.168.1.1/">192.168.1.1</a></li>
+    </ul>
+  </li> -->
 
   <li class="submenu">
     <a href="#"><i class="fa fa-rss"></i> <span>BTW 3650</span> <i class="arrow fa fa-chevron-right"></i></a>

@@ -22,4 +22,8 @@ class IpRange < ApplicationRecord
             format: { multiline: true, with: @ip_regex }
 
   validates_presence_of :service_id
+
+  def network_name
+    NetAddr::CIDR.create(self.network).network
+  end
 end
