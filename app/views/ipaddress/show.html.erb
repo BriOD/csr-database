@@ -1,0 +1,435 @@
+<div id="content">
+  <div id="content-header" class="mini hidden-xs">
+    <h1>Customer Information -  </h1>
+  </div><!-- end content-header -->
+
+  <div id="breadcrumb">
+    <a href="index.php" title="Go" class="tip-bottom"><i class="fa fa-dashboard"></i> Dashboard</a>
+    <a href="iprange.php?range=3225779200"><i class="fa fa-desktop"></i> 192.69.124.0</a>
+    <a href="#" class="current"><i class="fa fa-user"></i> 192.69.124.12</a>
+  </div><!-- end breadcrum -->
+
+  <div class="container-fluid">
+  <!-- Content Goes Here -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="widget-box">
+        <div class="widget-title">
+          <span class="icon"><i class="fa fa-user"></i></span>
+          <h5>192.69.124.12</h5>
+          <h5 class="pull-right hidden-xs">Subnet: 255.255.255.0 | Gateway: 192.69.124.1</h5>
+        </div>
+        <div class="widget-content nopadding">
+          <form action="#" method="get" class="form-horizontal">
+            <div class="form-group">
+              <div class="col-sm-3">
+                <button type="button" class="btn btn-info btn-block" id="moveBtn">Move</button>
+              </div>
+
+              <div id="moveConfirm" class="modal fade" style="overflow-y: auto;">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3>Move Customer</h3>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <label class="col-sm-12 col-md-4 control-label">New IP Address</label>
+                        <div class="col-sm-12 col-md-8">
+                          <input type="text" class="form-control input-sm" id="move_new_ipaddress" name="move_new_ipaddress" placeholder="XXX.XXX.XXX.XXX" value="192.69.124.12" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <a data-dismiss="modal" id="moveConfirmBtn" class="btn btn-primary btn-small" href="move.php?account=3225779212">Confirm</a>
+                      <a data-dismiss="modal" class="btn btn-default btn-small" href="#">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+              <button type="button" class="btn btn-info btn-block" id="unassignBtn">Unassign</button>
+              </div>
+
+              <div id="unassignConfirm" class="modal fade" style="overflow-y: auto;">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3>Unassign Customer</h3>
+                    </div>
+                    <div class="modal-body">
+                      <h4><p align="center">Are you sure you want to unassign this IP address?<br>This cannot be reversed!</p></h4>
+                    </div>
+                    <div class="modal-footer">
+                      <button id="unassignConfirmBtn" class="btn btn-primary btn-small TDNP"  data-isTDNP="0" data-ipRange="192.69.124.0" data-ipAddress="192.69.124.12">Confirm</a>
+                      <button data-dismiss="modal" class="btn btn-default btn-small" href="#">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <a role="button" target="new" href="http://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a192.69.124.12&run=toolpage#" class="btn btn-info btn-block">MX-Toolbox</a>
+              </div>
+
+              <div class="col-sm-3">
+                <button type="button" class="btn btn-success btn-block" data-toggle="collapse" data-target="#mapContainer">Map</button>
+              </div>
+            </div>
+
+            <div id="mapContainer" class="form-group collapse">
+            <div class="row">
+            <div class="col-xs-12">
+            <div class="row">
+            <div class="col-sm-12">
+            <div class="input-group input-group-sm">
+            <input type="text" id="address_map_box" class="form-control input-sm" value=", , , , " />
+            <span class="input-group-btn">
+            <a id="encode_address" class="btn btn-inverse">Search</a>
+            </span>
+            </div>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-sm-12">
+            <div id='map_canvas' style='width:100%; height:500px'></div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label">First Name</label>
+            <div class="col-sm-9 col-lg-4">
+            <input type="text" class="form-control input-sm" name="cust_fname" Placeholder="John" value="" />
+            </div>
+            <label class="col-sm-3 col-lg-2 control-label">Last Name</label>
+            <div class="col-sm-9 col-lg-4">
+            <input type="text" class="form-control input-sm" name="cust_lname" placeholder="Smith" value="" />
+            </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label">E-Mail</label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+            <input type="text" class="form-control input-sm" id="cust_email" name="cust_email" placeholder="jsmith@ktis.net" value="" />
+            </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="col-sm-3 col-md-3 col-lg-2 control-label">Company Name</label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+            <div class="input-group input-group-sm">
+            <input type="text" class="form-control input-sm" id="cust_company" name="cust_company" placeholder="Company Name (If Applicable)" value="" />
+            <span class="input-group-btn">
+            <a id="encode_address" class="btn btn-inverse" data-toggle="collapse" data-target="#company">Show More</a>
+            </span>
+            </div>
+            </div>
+            </div>
+
+            <div class="form-group collapse" id="company">
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label">Contact First Name</label>
+            <div class="col-sm-9 col-lg-4">
+            <input type="text" class="form-control input-sm" id="company_contactFirstName" name="company_contactFirstName" Placeholder="John" value="" />
+            </div>
+            <label class="col-sm-3 col-lg-2 control-label">Contact Last Name</label>
+            <div class="col-sm-9 col-lg-4">
+            <input type="text" class="form-control input-sm" id="company_contactLastName" name="company_contactLastName" placeholder="Smith" value="" />
+            </div>
+            </div>
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label">Company E-Mail</label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+            <input type="text" class="form-control input-sm" id="company_email" name="company_email" placeholder="jsmith@company.com" value="" />
+            </div>
+            </div>
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label">Billing E-Mail</label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+            <input type="text" class="form-control input-sm" id="company_billingEmail" name="company_billingEmail" placeholder="jsmith@company.com" value="" />
+            </div>
+            </div>
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label">Contact E-Mail</label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+            <input type="text" class="form-control input-sm" id="company_contactEmail" name="company_contactEmail" placeholder="jsmith@company.com" value="" />
+            </div>
+            </div>
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label">Company Address</label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+            <input type="text" class="form-control input-sm" id="company_address1" name="company_address1" placeholder="Street Address" value="" />
+            </div>
+            </div>
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label"></label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+            <input type="text" class="form-control input-sm" id="company_address2" name="company_address2" placeholder="Apartment, Suite , Unit, Building, Floor, etc." value="" />
+            </div>
+            </div>
+            <div class="row">
+            <label class="col-sm-3 col-lg-3 control-label">City</label>
+            <div class="col-sm-9 col-lg-3">
+            <input type="text" class="form-control input-sm" id="company_city" name="company_city" placeholder="City" value="" />
+            </div>
+            <label class="col-sm-3 col-lg-1 control-label">State</label>
+            <div class="col-sm-9 col-lg-1">
+            <input type="text" class="form-control input-sm" id="company_state" name="company_state" placeholder="MO" value="" />
+            </div>
+            <label class="col-sm-3 col-lg-1 control-label">Zip</label>
+            <div class="col-sm-9 col-lg-2">
+            <input type="text" class="form-control input-sm" id="company_zipcode" name="company_zipcode" placeholder="Zip Code" value="" />
+            </div>
+            </div>
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label">Main Phone</label>
+            <div class="col-sm-9 col-lg-2">
+            <input type="text" class="form-control input-sm" style="text-align: center;" id="cust_companyphone" name="cust_companyphone" placeholder="XXX-XXX-XXXX" value="" />
+            </div>
+            <label class="col-sm-3 col-lg-2 control-label">Contact No</label>
+            <div class="col-sm-9 col-lg-2">
+            <input type="text" class="form-control input-sm" style="text-align: center;" id="cust_company_contactno" name="cust_company_contactno" placeholder="XXX-XXX-XXXX" value="" />
+            </div>
+            <label class="col-sm-3 col-lg-2 control-label">Fax</label>
+            <div class="col-sm-9 col-lg-2">
+            <input type="text" class="form-control input-sm" style="text-align: center;" id="cust_company_fax" name="cust_company_fax" placeholder="XXX-XXX-XXXX" value="" />
+            </div>
+            </div>
+            </div><!-- end collapsable company section -->
+
+            <div class="form-group">
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label">Address</label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+            <input type="text" class="form-control input-sm" id="cust_address1" name="cust_address1" placeholder="Street Address" value="" />
+            </div>
+            </div>
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label"></label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+            <input type="text" class="form-control input-sm" id="cust_address2" name="cust_address2" placeholder="Apartment, Suite , Unit, Building, Floor, etc." value="" />
+            </div>
+            </div>
+            <div class="row">
+            <label class="col-sm-3 col-lg-3 control-label">City</label>
+            <div class="col-sm-9 col-lg-3">
+            <input type="text" class="form-control input-sm" id="cust_city" name="cust_city" placeholder="City" value="" />
+            </div>
+            <label class="col-sm-3 col-lg-1 control-label">State</label>
+            <div class="col-sm-9 col-lg-1">
+            <input type="text" class="form-control input-sm" style="text-align: center;" id="cust_state" name="cust_state" placeholder="MO" value="" />
+            </div>
+            <label class="col-sm-3 col-lg-1 control-label">Zip</label>
+            <div class="col-sm-9 col-lg-2">
+            <input type="text" class="form-control input-sm" style="text-align: center;" id="cust_zipcode" name="cust_zipcode" placeholder="Zip Code" value="" />
+            </div>
+            </div>
+            </div><!-- end home address -->
+
+            <div class="form-group">
+            <div class="row">
+            <label class="col-sm-3 col-lg-2 control-label">Home Phone</label>
+            <div class="col-sm-9 col-lg-2">
+            <input type="text" class="form-control input-sm" style="text-align: center;" id="cust_homephone" name="cust_homephone" placeholder="XXX-XXX-XXXX" value="" />
+            </div>
+            <label class="col-sm-3 col-lg-2 control-label">Cell Phone</label>
+            <div class="col-sm-9 col-lg-2">
+            <input type="text" class="form-control input-sm" style="text-align: center;" id="cust_cellphone" name="cust_cellphone" placeholder="XXX-XXX-XXXX" value="" />
+            </div>
+            <label class="col-sm-3 col-lg-2 control-label">Work Phone</label>
+            <div class="col-sm-9 col-lg-2">
+            <input type="text" class="form-control input-sm" style="text-align: center;" id="cust_workphone" name="cust_workphone" placeholder="XXX-XXX-XXXX" value="" />
+            </div>
+            </div>
+            </div><!-- end phone info -->
+
+            <div class="form-group">
+            <label class="col-sm-3 col-md-3 col-lg-2 control-label">Notes</label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+            <textarea rows="5" class="form-control"></textarea>
+            </div>
+            </div><!-- end notes -->
+
+            <div class="form-group">
+            <div class="row">
+            <label class="col-sm-3 col-md-2 col-md-offset-3 control-label">Modem/Router Lease</label>
+            <div class="col-sm-3 col-md-2">
+            <div class="btn-group btn-toggle">
+            <button class="btn btn-default" data-toggle="collapse" data-target="#modemLease">Yes</button>
+            <button class="btn btn-primary active" data-toggle="collapse" data-target="#modemLease">No</button>
+            </div>
+            </div>
+
+            <label class="col-sm-3 col-md-2 control-label">Personal Webspace</label>
+            <div class="col-sm-3 col-md-2 ">
+            <div class="btn-group btn-toggle">
+            <button class="btn btn-default" data-toggle="collapse" data-target="#personalWebspace">Yes</button>
+            <button class="btn btn-primary active" data-toggle="collapse" data-target="#personalWebspace">No</button>
+            </div>
+            </div>
+            </div>
+            </div><!-- end notes -->
+
+            <div class="form-actions">
+              <div class="row">
+                <div class="col-xs-12 col-sm-3 col-sm-offset-6 col-lg-2 col-lg-offset-8">
+                  <button type="button" data-isTDNP="0" data-ipRange="192.69.124.0" data-ipAddress="192.69.124.12" class="btn btn-danger btn-block TDNP">Disconnect</button>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-lg-2">
+                  <button type="submit" class="btn btn-primary-outline btn-block">Save</button>
+                </div>
+              </div>
+            </div><!-- end form buttons -->
+
+          </form><!-- end form -->
+        </div><!-- end widget-content -->
+      </div><!-- end widget-box -->
+    </div><!-- end col-xs-12 -->
+  </div><!-- end main customer info -->
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="widget-box collapsable">
+        <div class="widget-title">
+          <span class="icon"><i class="fa fa-user"></i></span>
+          <h5>Modem Lease</h5>
+        </div>
+        <div class="collapse widget-content nopadding " id="modemLease">
+          <form action="#" method="get" class="form-horizontal">
+            <div class="form-group">
+              <div class="row">
+                <label class="col-sm-6 control-label">Modem Lease Information</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-sm-3 col-lg-2 control-label">Manufacturer</label>
+                <div class="col-sm-9 col-lg-4">
+                  <input type="text" class="form-control input-sm" name="lease_modemManufacturer" Placeholder="Comtrend" value="" />
+                </div>
+
+                <label class="col-sm-3 col-lg-2 control-label">Model</label>
+                <div class="col-sm-9 col-lg-4">
+                  <input type="text" class="form-control input-sm" name="lease_modemModel" placeholder="AR-5361u" value="" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-sm-3 col-lg-2 control-label">Serial No</label>
+                <div class="col-sm-9 col-lg-4">
+                  <input type="text" class="form-control input-sm" name="lease_modemSerial" Placeholder="1415381UXXF-AA009344" value="" />
+                </div>
+
+                <label class="col-sm-3 col-lg-2 control-label">MAC Address</label>
+                <div class="col-sm-9 col-lg-4">
+                  <input type="text" class="form-control input-sm" name="lease_modemMAC" placeholder="00:00:00:00:00:00" value="" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-sm-6 control-label">Router Lease Information</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="row">
+                <label class="col-sm-3 col-lg-2 control-label">Manufacturer</label>
+                <div class="col-sm-9 col-lg-4">
+                  <input type="text" class="form-control input-sm" name="lease_routerManufacturer" Placeholder="Calix" value="" />
+                </div>
+
+                <label class="col-sm-3 col-lg-2 control-label">Model</label>
+                <div class="col-sm-9 col-lg-4">
+                  <input type="text" class="form-control input-sm" name="lease_routerModel" placeholder="Gigacenter" value="" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <label class="col-sm-3 col-lg-2 control-label">Serial No</label>
+                <div class="col-sm-9 col-lg-4">
+                  <input type="text" class="form-control input-sm" name="lease_routerSerial" Placeholder="1415381UXXF-AA009344" value="" />
+                </div>
+
+                <label class="col-sm-3 col-lg-2 control-label">MAC Address</label>
+                <div class="col-sm-9 col-lg-4">
+                  <input type="text" class="form-control input-sm" name="lease_routerMAC" placeholder="00:00:00:00:00:00" value="" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <div class="row">
+                <div class="col-xs-12 col-sm-3 col-sm-offset-9 col-lg-2 col-lg-offset-10">
+                  <button type="submit" class="btn btn-primary-outline btn-block">Save</button>
+                </div>
+              </div>
+            </div><!-- end form buttons -->
+
+          </form><!-- end form -->
+        </div><!-- end widget-content -->
+      </div><!-- end widget-box -->
+    </div><!-- end col-xs-12 -->
+  </div><!-- end modem lease row -->
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="widget-box collapsable">
+          <div class="widget-title">
+            <span class="icon"><i class="fa fa-user"></i></span>
+            <h5>Personal Webspace</h5>
+          </div>
+          <div class="collapse widget-content nopadding " id="personalWebspace">
+            <form action="#" method="get" class="form-horizontal">
+
+              <div class="form-group">
+                <label class="col-sm-3 col-md-3 col-lg-2 control-label">URL</label>
+                <div class="col-sm-9 col-md-9 col-lg-10">
+                  <input type="text" class="form-control input-sm" id="web_url" name="web_url" placeholder="http://jsmith.ktis.net" value="" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="row">
+                  <label class="col-sm-3 col-lg-2 control-label">Username</label>
+                  <div class="col-sm-9 col-lg-4">
+                    <input type="text" class="form-control input-sm" name="web_username" Placeholder="jsmith" value="" />
+                  </div>
+
+                  <label class="col-sm-3 col-lg-2 control-label">Password</label></label>
+                  <div class="col-sm-9 col-lg-4">
+                    <input type="text" class="form-control input-sm" name="web_password" placeholder="password" value="" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-3 col-sm-offset-9 col-lg-2 col-lg-offset-10">
+                    <button type="submit" class="btn btn-primary-outline btn-block">Save</button>
+                  </div>
+                </div>
+              </div><!-- end form buttons -->
+
+            </form><!-- end form -->
+          </div><!-- end widget-content -->
+        </div><!-- end widget-box -->
+      </div><!-- end col-xs-12 -->
+    </div><!-- end modem lease row -->
+
+  </div><!-- end main content -->
+</div>

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :iprange, only: [:show]
+  resources :iprange, only: [:show] do
+    resources :ipaddress, only: [:show]
+  end
 
   root 'dashboard#index'
 
