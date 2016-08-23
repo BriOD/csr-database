@@ -6,15 +6,14 @@
   <li class="active"><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
   <% Service.main_types.each do |type| %>
-    <%
-
-  <li class="submenu">
-    <a href=""><i class="fa fa-desktop"></i> <span>DSL</span> <i class="arrow fa fa-chevron-right"></i></a>
-    <ul>
-      <li><a href="/range/192.168.0.1/">192.168.0.1</a></li>
-      <li><a href="/range/192.168.1.1/">192.168.1.1</a></li>
-    </ul>
-  </li>
+    <% serv = Service.find_by(main_type: type) %>
+    <li class="submenu">
+      <a href=""><%= fa_icon serv.icon %> <span><%= serv.main_name %></span> <i class="arrow fa fa-chevron-right"></i></a>
+      <ul>
+        <li><a href="/range/192.168.0.1/">192.168.0.1</a></li>
+        <li><a href="/range/192.168.1.1/">192.168.1.1</a></li>
+      </ul>
+    </li>
 
   <% end %>
 
