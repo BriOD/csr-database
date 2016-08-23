@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :ip_range, only: [:show] do
-    resources :ipaddress, only: [:show]
+    resources :ip_address, only: [:show]
   end
 
   root 'dashboard#index'

@@ -45,45 +45,45 @@ Service.create(
     },
     {
       icon: 'rss',
-      main_type: 'wireless',
-      main_name: 'Wireless',
-      sub_type: 'centralia3650',
+      main_type: 'wireless3650',
+      main_name: 'Wireless3650',
+      sub_type: 'centralia',
       sub_name: 'Centralia 3650'
     },
     {
       icon: 'rss',
-      main_type: 'wireless',
-      main_name: 'Wireless',
-      sub_type: 'fulton3650',
+      main_type: 'wireless3650',
+      main_name: 'Wireless3650',
+      sub_type: 'fulton',
       sub_name: 'Fulton 3650'
     },
     {
       icon: 'rss',
-      main_type: 'wireless',
-      main_name: 'Wireless',
-      sub_type: 'fulton900',
-      sub_name: 'Fulton 900'
+      main_type: 'wireless900',
+      main_name: 'Wireless 900',
+      sub_type: 'fulton',
+      sub_name: 'Fulton'
     },
     {
       icon: 'rss',
-      main_type: 'wireless',
-      main_name: 'Wireless',
-      sub_type: 'mexico3650',
+      main_type: 'wireless3650',
+      main_name: 'Wireless3650',
+      sub_type: 'mexico',
       sub_name: 'Mexico 3650'
     },
     {
       icon: 'rss',
-      main_type: 'wireless',
-      main_name: 'Wireless',
-      sub_type: 'mexico900',
-      sub_name: 'Mexico 900'
+      main_type: 'wireless900',
+      main_name: 'Wireless 900',
+      sub_type: 'mexico',
+      sub_name: 'Mexico'
     },
     {
       icon: 'rss',
-      main_type: 'wireless',
-      main_name: 'Wireless',
-      sub_type: 'mexicoLTE',
-      sub_name: 'Mexico LTE'
+      main_type: 'wirelesslte',
+      main_name: 'Wireless LTE',
+      sub_type: 'mexico',
+      sub_name: 'Mexico'
     },
     {
       icon: 'rss',
