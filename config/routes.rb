@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :iprange, only: [:show] do
+  resources :ip_range, only: [:show] do
     resources :ipaddress, only: [:show]
   end
 
