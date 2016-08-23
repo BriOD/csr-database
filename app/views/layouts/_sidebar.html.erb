@@ -7,64 +7,26 @@
 
   <% Service.main_types.each do |type| %>
     <% serv = Service.find_by(main_type: type) %>
-    <% ranges = IpRange.where(service_id: serv.id) %>
+    <% ranges = IpRange.where(service_id: serv.id).order('network::inet ASC') %>
     <% if ranges.size > 1 %>
-    <li class="submenu">
+    <%= content_tag(:li, class: 'submenu') do %>
       <a href=""><%= fa_icon serv.icon %> <span><%= serv.main_name %></span> <i class="arrow fa fa-chevron-right"></i></a>
-      <ul>
-      <% ranges.each do |range| %>
-        <%= content_tag(:li, link_to(range.network_name, iprange_path(range))) %>
-        <!-- <li><a href="/range/192.168.0.1/">192.168.0.1</a></li> -->
+      <%= content_tag(:ul) do %>
+        <% ranges.each do |range| %>
+          <%= content_tag(:li, link_to(range.network_name, iprange_path(range))) %>
+        <% end %>
       <% end %>
-      </ul>
-    </li>
+    <% end %>
     <% elsif ranges.size == 1 %>
       <% range = ranges.first %>
       <%= content_tag(:li) do %>
         <%= link_to(iprange_path(range)) do %>
           <%= fa_icon range.service.icon %>
-          <%= content_tag(:span, range.network_name) %>
+          <%= content_tag(:span, range.service.name) %>
         <% end %>
       <% end %>
     <% end %>
   <% end %>
 
-  <li class="submenu">
-    <a href="#"><i class="fa fa-rss"></i> <span>BTW 3650</span> <i class="arrow fa fa-chevron-right"></i></a>
-    <ul>
-      <li><a href="servicelookup.php?service=centralia3650">Centralia</a></li>
-      <li><a href="servicelookup.php?service=fulton3650">Fulton</a></li>
-      <li><a href="servicelookup.php?service=mexico3650">Mexico</a></li>
-    </ul>
-  </li>
-
-  <li class="submenu">
-    <a href="#"><i class="fa fa-rss"></i> <span>BTW 900</span> <i class="arrow fa fa-chevron-right"></i></a>
-    <ul>
-      <li><a href="servicelookup.php?service=fulton900">Fulton</a></li>
-      <li><a href="servicelookup.php?service=mexico900">Mexico</a></li>
-    </ul>
-  </li>
-
-  <li class="submenu">
-    <a href="#"><i class="fa fa-rss"></i> <span>LTE</span> <i class="arrow fa fa-chevron-right"></i></a>
-    <ul>
-      <li><a href="servicelookup.php?service=mexicolte">Mexico</a></li>
-    </ul>
-  </li>
-
-  <li class="submenu">
-    <a href="#"><i class="fa fa-signal"></i> <span>Wifi</span> <i class="arrow fa fa-chevron-right"></i></a>
-    <ul>
-      <li><a href="servicelookup.php?service=bentoncity">Benton City</a></li>
-      <li><a href="servicelookup.php?service=hamsprairie">Hams Prairie</a></li>
-      <li><a href="servicelookup.php?service=lakebreeze">Lake Breeze</a></li>
-    </ul>
-  </li>
-
-  <li><a href="servicelookup.php?service=tanglewood"><i class="fa fa-industry"></i><span>Tanglewood</span></a></li>
-  <li><a href="http://mailadmin.ktis.net/" target="new"><i class="fa fa-envelope-o"></i><span>Kingdom City</span></a></li>
   <li><a href="http://mailadmin.ktis.net/" target="new"><i class="fa fa-envelope-o"></i><span>E-Mail Accounts</span></a></li>
-  <li><a href="http://inside.ktis.net/" target="new"><i class="fa fa-globe"></i><span>Network Map</span></a></li>
-  <li><a href="https://orders.value.net/Tools/Partner/Orders/PlaceOrder.aspx" target="new"><i class="fa fa-ellipsis-h"></i><span>AT&T DSL</span></a></li>
 </ul>
