@@ -7,14 +7,26 @@
 
   <% Service.main_types.each do |type| %>
     <% serv = Service.find_by(main_type: type) %>
+    <% ranges = IpRange.where(service_id: serv.id) %>
+    <% if ranges.size > 1 %>
     <li class="submenu">
       <a href=""><%= fa_icon serv.icon %> <span><%= serv.main_name %></span> <i class="arrow fa fa-chevron-right"></i></a>
       <ul>
-        <li><a href="/range/192.168.0.1/">192.168.0.1</a></li>
-        <li><a href="/range/192.168.1.1/">192.168.1.1</a></li>
+      <% ranges.each do |range| %>
+        <%= content_tag(:li, link_to(range.network_name, iprange_path(range))) %>
+        <!-- <li><a href="/range/192.168.0.1/">192.168.0.1</a></li> -->
+      <% end %>
       </ul>
     </li>
-
+    <% elsif ranges.size == 1 %>
+      <% range = ranges.first %>
+      <%= content_tag(:li) do %>
+        <%= link_to(iprange_path(range)) do %>
+          <%= fa_icon range.service.icon %>
+          <%= content_tag(:span, range.network_name) %>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 
   <li class="submenu">
