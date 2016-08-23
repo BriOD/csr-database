@@ -10,6 +10,11 @@ localhost/192.168.5.1/
 localhost/192.168.5.1/56/ => IpAddress Controller (Customer Info Actually)
 
 
+if a range does not have a service_id it is set to unassigned
+
+eventually we would have an admin dashboard that can change the service of
+each range and manipulate the ranges in other ways
+
 User Structure [DONE]
 = ID (primary_key)
 = First Name
