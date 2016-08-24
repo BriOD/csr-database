@@ -145,7 +145,7 @@ IpRange.create(
 IpRange.all.each do |range|
   ary = NetAddr::CIDR.create(range.network).enumerate
   ary.shift(1)
-  range.gateway = ary[1]
+  range.gateway = ary[0]
   range.save
   ary.shift(1)
   ary.pop(1)
@@ -161,7 +161,7 @@ IpRange.all.each do |range|
 
     next if range.service_id == 1
 
-    next if rand(1..20).even?
+    next if rand(1..20) < 9
 
     addr = AddressBook.create(
       address_1: Faker::Address.street_address,
@@ -181,6 +181,9 @@ IpRange.all.each do |range|
       email: Faker::Internet.safe_email,
       active: true
     )
+
+    c.active = false if rand(1..20) < 3
+    c.save
 
     cust_ip_addr.customer_id = c.id
     cust_ip_addr.reserved = true
