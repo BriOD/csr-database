@@ -161,6 +161,8 @@ IpRange.all.each do |range|
 
     next if range.service_id == 1
 
+    next if rand(1..20).even?
+
     addr = AddressBook.create(
       address_1: Faker::Address.street_address,
       address_2: '',
@@ -179,6 +181,10 @@ IpRange.all.each do |range|
       email: Faker::Internet.safe_email,
       active: true
     )
+
+    cust_ip_addr.customer_id = c.id
+    cust_ip_addr.reserved = true
+    cust_ip_addr.save
 
     c.create_company(
       address_book_id: addr.id,
