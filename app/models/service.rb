@@ -9,6 +9,7 @@ class Service < ApplicationRecord
 
   has_many :ip_ranges
   has_many :ip_addresses, through: :ip_ranges
+  has_many :customers, through: :ip_ranges
 
   def name
     sub_name || main_name

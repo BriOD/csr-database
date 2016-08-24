@@ -7,6 +7,7 @@ class IpRange < ApplicationRecord
   include IP # Includes custom class methods
   belongs_to :service
   has_many :ip_addresses
+  has_many :customers, through: :ip_addresses
 
   validates :network,
             presence: true,
