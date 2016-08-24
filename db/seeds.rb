@@ -114,7 +114,7 @@ IpRange.create(
     { network: '191.84.6.54/24', gateway: '191.84.6.1', service_id: 3 },
     { network: '232.29.21.253/24', gateway: '232.29.21.1', service_id: 4 },
     { network: '122.190.121.198/24', gateway: '122.190.121.1', service_id: 3 },
-    { network: '236.191.194.149/31', gateway: '236.191.194.149', service_id: 3 },
+    { network: '236.191.194.149/25', gateway: '236.191.194.149', service_id: 3 },
     { network: '86.176.22.186/25', gateway: '86.176.22.129', service_id: 5 },
     { network: '220.78.128.16/25', gateway: '220.78.128.1', service_id: 3 },
     { network: '170.145.156.13/24', gateway: '170.145.156.1', service_id: 7 },
