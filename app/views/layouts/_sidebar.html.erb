@@ -18,7 +18,7 @@
       <% end %>
       <%= content_tag(:ul) do %>
         <% ranges.each do |range| %>
-          <%= content_tag(:li, link_to(range.network_name, iprange_path(range))) %>
+          <%= make_sidebar_submenu_link(range) %>
         <% end %>
       <% end %>
     <% end %>
