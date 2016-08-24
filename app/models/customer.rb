@@ -31,7 +31,7 @@ class Customer < ApplicationRecord
   end
 
   def home_phone
-    number_to_phone(home_phone, area_code: true)
+    # number_to_phone(home_phone, area_code: true)
   end
 
   def self.disconnected
