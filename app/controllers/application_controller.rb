@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   layout :layout_by_resource
 
-  include SidebarHelper
+  include ServiceHelper
 
   protected
 

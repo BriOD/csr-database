@@ -1,4 +1,4 @@
-module SidebarHelper
+module ServiceHelper
   def get_service_ranges(service)
     IpRange.where(service_id: service.id).order('network::inet ASC')
   end
