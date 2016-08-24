@@ -6,11 +6,16 @@
   <li class="active"><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
   <% Service.main_types.each do |type| %>
-    <% serv = Service.find_by(main_type: type) %>
-    <% ranges = IpRange.where(service_id: serv.id).order('network::inet ASC') %>
+    <% # get_sidebar_service_links(type) %>
+    <% service = Service.find_by(main_type: type) %>
+    <% ranges = get_service_ranges(service) %>
     <% if ranges.size > 1 %>
     <%= content_tag(:li, class: 'submenu') do %>
-      <a href=""><%= fa_icon serv.icon %> <span><%= serv.main_name %></span> <i class="arrow fa fa-chevron-right"></i></a>
+      <%= link_to(nil) do %>
+        <%= fa_icon service.icon %>
+        <%= content_tag :span, service.main_name %>
+        <%= content_tag :i, nil, class: 'arrow fa fa-chevron-right' %>
+      <% end %>
       <%= content_tag(:ul) do %>
         <% ranges.each do |range| %>
           <%= content_tag(:li, link_to(range.network_name, iprange_path(range))) %>
