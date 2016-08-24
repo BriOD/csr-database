@@ -55,7 +55,7 @@ Service.create(
       main_type: 'wireless900',
       main_name: 'Wireless 900',
       sub_type: 'fulton',
-      sub_name: 'Fulton'
+      sub_name: 'Fulton 900'
     },
     {
       icon: 'rss',
@@ -69,14 +69,14 @@ Service.create(
       main_type: 'wireless900',
       main_name: 'Wireless 900',
       sub_type: 'mexico',
-      sub_name: 'Mexico'
+      sub_name: 'Mexico 900'
     },
     {
       icon: 'rss',
       main_type: 'wirelesslte',
       main_name: 'Wireless LTE',
       sub_type: 'mexico',
-      sub_name: 'Mexico'
+      sub_name: 'Mexico LTE'
     },
     {
       icon: 'rss',
@@ -149,7 +149,7 @@ IpRange.all.each do |range|
   range.save
   ary.shift(1)
   ary.pop(1)
-  
+
   counter = 1
   ary.each do |ip_addr|
     cust_ip_addr = IpAddress.create(
@@ -158,7 +158,7 @@ IpRange.all.each do |range|
       ip: ip_addr,
       reserved: false
     )
-    
+
     next if range.service_id == 1
 
     addr = AddressBook.create(
@@ -168,7 +168,7 @@ IpRange.all.each do |range|
       state: Faker::Address.state_abbr,
       zipcode: Faker::Address.zip
     )
-  
+
     c = Customer.create(
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
@@ -179,7 +179,7 @@ IpRange.all.each do |range|
       email: Faker::Internet.safe_email,
       active: true
     )
-  
+
     c.create_company(
       address_book_id: addr.id,
       name: Faker::Company.name,
@@ -190,16 +190,16 @@ IpRange.all.each do |range|
       main_number: Faker::Number.number(10),
       contact_number: Faker::Number.number(10),
       fax: Faker::Number.number(10)
-    ) if counter % 7 == 0
-  
+    ) if (counter % 7).zero?
+
     Webspace.create(
       customer_id: c.id,
       active: true,
       url: 'http://username.example.com',
       username: 'username',
       password: 'password'
-    ) if counter % 5 == 0
-  
+    ) if (counter % 5).zero?
+
     Lease.create(
       customer_id: c.id,
       modem_manufacturer: 'Westell',
@@ -207,8 +207,8 @@ IpRange.all.each do |range|
       modem_serial: Faker::Crypto.md5,
       modem_mac: Faker::Internet.mac_address,
       tr069: true
-    ) if counter % 3 == 0 && counter.even?
-  
+    ) if (counter % 3).zero? && counter.even?
+
     Lease.create(
       customer_id: c.id,
       router_manufacturer: 'Comtrend',
@@ -216,7 +216,7 @@ IpRange.all.each do |range|
       router_serial: Faker::Crypto.md5,
       router_mac: Faker::Internet.mac_address,
       tr069: true
-    ) if counter % 3 == 0 && counter.odd?
+    ) if (counter % 3).zero? && counter.odd?
     counter += 1
   end
 end
