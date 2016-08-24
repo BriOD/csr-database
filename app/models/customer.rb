@@ -19,6 +19,14 @@ class Customer < ApplicationRecord
     end
   end
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  # def home_phone
+  #
+  # end
+
   def self.disconnected
     where(active: false)
   end
