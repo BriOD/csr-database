@@ -31,21 +31,7 @@
 
             <tbody>
               <% @range.ip_addresses.each do |ip| %>
-                <% if ip.customer.nil? %>
-                  <tr>
-                    <td><%= link_to ip.ip, iprange_ipaddress_path(ip.ip_range, ip) %></td><td class="hidden-xs">---</td>
-                    <td>Unassigned</td>
-                    <td>---</td>
-                    <td><%= make_tdnp_button(ip.customer) %></td>
-                  </tr>
-                <% else %>
-                  <%= ip.customer.active ?  '<tr>'.html_safe : '<tr class="tdnp">'.html_safe %>
-                    <td><%= link_to ip.ip, iprange_ipaddress_path(ip.ip_range, ip) %></td><td class="hidden-xs">000447725</td>
-                    <td><%= ip.customer.name %></td>
-                    <td><%= number_to_phone(ip.customer.home_phone, area_code: true) %></td>
-                    <td><%= make_tdnp_button(ip.customer) %></td>
-                  </tr>
-                <% end %>
+                <%= make_range_table_entry(ip) %>
               <% end %>
             </tbody><!-- end tbody -->
           </table><!-- end table -->
