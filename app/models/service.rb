@@ -1,7 +1,7 @@
 # ==============================================================================
 # Services Table
 #
-# id, icon, main_type, main_name, sub_type, sub_name
+# icon, main_type, main_name, sub_type, sub_name
 # ==============================================================================
 class Service < ApplicationRecord
   validates_presence_of :icon, :main_type, :main_name

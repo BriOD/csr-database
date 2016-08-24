@@ -1,10 +1,9 @@
 # ==============================================================================
 # IP_Ranges Table
 #
-# id, network, gateway, service_id
+# network, gateway, service_id
 # ==============================================================================
 class IpRange < ApplicationRecord
-  include IP # Includes custom class methods
   belongs_to :service
   has_many :ip_addresses
   has_many :customers, through: :ip_addresses
@@ -18,6 +17,10 @@ class IpRange < ApplicationRecord
             uniqueness: true
 
   validates_presence_of :service_id
+  
+  def name
+    network_name
+  end
 
   def network_name
     NetAddr::CIDR.create(self.network).network
