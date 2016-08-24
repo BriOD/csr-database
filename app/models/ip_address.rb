@@ -5,7 +5,7 @@
 # ==============================================================================
 class IpAddress < ApplicationRecord
   belongs_to :ip_range
-  belongs_to :customer
+  has_one :customer
 
   validates_uniqueness_of :ip
 end
