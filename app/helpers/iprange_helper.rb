@@ -18,19 +18,19 @@ module IprangeHelper
 
     if customer.nil?
       content_tag(:tr) do
-        content_tag(:td, link_to(ip_addr.ip, iprange_ipaddress_path(ip_addr.ip_range, ip_addr)))
-        content_tag(:td, '----', class: 'hidden-xs')
-        content_tag(:td, 'Unassigned')
-        content_tag(:td, '----')
-        content_tag(:td, make_tdnp_button(customer))
+        concat(content_tag(:td, make_table_link(ip_addr)))
+        concat(content_tag(:td, '----', class: 'hidden-xs'))
+        concat(content_tag(:td, 'Unassigned'))
+        concat(content_tag(:td, '----'))
+        concat(content_tag(:td, make_tdnp_button(customer)))
       end
     else
       content_tag(:tr, class: ('tdnp' unless customer.active)) do
-        content_tag(:td, link_to(ip_addr.ip, iprange_ipaddress_path(ip_addr.ip_range, ip_addr)))
-        content_tag(:td, customer.account_number, class: 'hidden-xs')
-        content_tag(:td, customer.name)
-        content_tag(:td, number_to_phone(customer.home_phone, area_code: true))
-        content_tag(:td, make_tdnp_button(customer))
+        concat(content_tag(:td, make_table_link(ip_addr)))
+        concat(content_tag(:td, customer.account_number, class: 'hidden-xs'))
+        concat(content_tag(:td, customer.name))
+        concat(content_tag(:td, number_to_phone(customer.home_phone, area_code: true)))
+        concat(content_tag(:td, make_tdnp_button(customer)))
       end
     end
   end
