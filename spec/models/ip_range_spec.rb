@@ -42,5 +42,13 @@ RSpec.describe IpRange, type: :model do
         expect(FactoryGirl.build(:ip_range, network: '192.168.5.1/24', gateway: '192.168.5.1', service_id: service.id)).to be_valid
       end
     end
+
+    describe 'methods' do
+      it '.name shows the name of the ip range without the CIDR (/24, /28, etc)'
+      it '.subnet_mask shows an ip ranges subnet mask'
+      it '.unassigned returns a count of unassigned ip addresses in a range'
+      it '.assigned returns a count of assigned ip addresses in a range'
+      it '.percentage_used returns the percentage of a range that has been assigned'
+    end
   end
 end

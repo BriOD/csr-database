@@ -17,12 +17,8 @@ class IpRange < ApplicationRecord
             uniqueness: true
 
   validates_presence_of :service_id
-  
-  def name
-    network_name
-  end
 
-  def network_name
+  def name
     NetAddr::CIDR.create(self.network).network
   end
 
