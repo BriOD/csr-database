@@ -41,7 +41,7 @@
                 <td class="hidden-sm hidden-xs"><%= range.unassigned %></td>
                 <td><%= range.percentage_used %>%</td>
                 <td class="hidden-xs">
-                  <%= make_progress_bar(range) %>
+                  <%= make_progress_bar_div(range) %>
                 </td>
               </tr>
               <% end %>
@@ -52,6 +52,4 @@
       </div><!-- end .widget-box -->
     </div><!-- end .row -->
   <% end %>
-
-  <!-- End Service Tables  -->
 </div><!-- end container-fluid -->
