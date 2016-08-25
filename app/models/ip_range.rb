@@ -8,9 +8,8 @@ class IpRange < ApplicationRecord
   has_many :ip_addresses
   has_many :customers, through: :ip_addresses
 
-  @ip_regex = /^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/
-  @network_regex = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$/
-
+  @ip_regex = %r{^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/}
+  @network_regex = %r{^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$}
 
   validates :network,
             presence: true,
@@ -25,11 +24,11 @@ class IpRange < ApplicationRecord
   validates_presence_of :service_id
 
   def name
-    NetAddr::CIDR.create(self.network).network
+    NetAddr::CIDR.create(network).network
   end
 
   def subnet_mask
-    NetAddr::CIDR.create(self.network).wildcard_mask
+    NetAddr::CIDR.create(network).wildcard_mask
   end
 
   def unassigned
