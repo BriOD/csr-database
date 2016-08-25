@@ -3,10 +3,10 @@
 </div><!-- end content-header -->
 
 <div id="breadcrumb">
-  <a href="index.php" title="Go" class="tip-bottom"><i class="fa fa-dashboard"></i> Dashboard</a>
-  <a href="iprange.php?range=3225779200"><i class="fa fa-desktop"></i> 192.69.124.0</a>
+  <%= make_breadcrumb_link('dashboard', '', 'Dashboard', 'tip-bottom', 'Go') %>
+  <%= make_breadcrumb_link('desktop', iprange_path(@ip_address.ip_range), @ip_address.ip_range.name) %>
   <a href="#" class="current"><i class="fa fa-user"></i> 192.69.124.12</a>
-</div><!-- end breadcrum -->
+</div><!-- end breadcrumb -->
 
   <div class="container-fluid">
   <!-- Content Goes Here -->

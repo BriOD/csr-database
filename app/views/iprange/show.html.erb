@@ -1,10 +1,10 @@
 <div id="content-header" class="mini hidden-xs">
-  <h1>Dashboard</h1>
+  <h1>Range Breakdown</h1>
 </div>
 
 <div id="breadcrumb">
-  <a href="/" title="Go" class="tip-bottom"><i class="fa fa-dashboard"></i> Dashboard</a>
-  <a href="#" class="current"><%= fa_icon @range.service.icon %> IP Range <%= @range.name %></a>
+  <%= make_breadcrumb_link('dashboard', '', 'Dashboard', 'tip-bottom', 'Go') %>
+  <%= make_breadcrumb_link('desktop', iprange_path(@range), @range.name, 'current') %>
 </div>
 
 <div class="container-fluid row">
