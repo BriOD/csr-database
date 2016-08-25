@@ -11,7 +11,7 @@ module DashboardHelper
     content_tag(
       :div,
       nil,
-      class: "progress-bar #{set_progress_bar_color(percentage)}",
+      class: "progress-bar #{progress_bar_color(percentage)}",
       role: 'progressbar',
       aria:
       {
@@ -23,7 +23,7 @@ module DashboardHelper
     )
   end
 
-  def set_progress_bar_color(percentage)
+  def progress_bar_color(percentage)
     if percentage > 90
       'progress-bar-danger'
     elsif percentage > 65
