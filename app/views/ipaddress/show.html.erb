@@ -3,9 +3,9 @@
 </div><!-- end content-header -->
 
 <div id="breadcrumb">
-  <%= make_breadcrumb_link('dashboard', '', 'Dashboard', 'tip-bottom', 'Go') %>
+  <%= make_breadcrumb_link('dashboard', '/', 'Dashboard') %>
   <%= make_breadcrumb_link('desktop', iprange_path(@ip_address.ip_range), @ip_address.ip_range.name) %>
-  <a href="#" class="current"><i class="fa fa-user"></i> 192.69.124.12</a>
+  <%= make_breadcrumb_link('user', '', @ip_address.ip, 'current') %>
 </div><!-- end breadcrumb -->
 
   <div class="container-fluid">
