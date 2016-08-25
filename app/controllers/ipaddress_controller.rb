@@ -9,9 +9,7 @@ class IpaddressController < ApplicationController
   # Read
   def show
     @ip_address = IpAddress.find(params[:id])
-    @customer = @ip_address.customer
-
-    @customer.new if @customer.nil?
+    @customer = @ip_address.customer || Customer.new
   end
 
   # Update
