@@ -175,6 +175,7 @@ IpRange.all.each do |range|
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       home_phone: Faker::Number.number(10),
+      account_number: Faker::Number.number(9),
       ip_address_id: cust_ip_addr.id,
       address_book_id: addr.id,
       notes: Faker::Lorem.paragraph,

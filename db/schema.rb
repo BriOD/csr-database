@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160822142444) do
   create_table "customers", force: :cascade do |t|
     t.integer  "ip_address_id"
     t.integer  "address_book_id"
+    t.integer  "account_number"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "home_phone"
