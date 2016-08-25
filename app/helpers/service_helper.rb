@@ -3,10 +3,6 @@ module ServiceHelper
     IpRange.where(service_id: service.id).order('network::inet ASC')
   end
 
-  def make_sidebar_submenu
-    #
-  end
-
   def make_sidebar_submenu_link(range)
     content_tag(:li, link_to(range.network_name, iprange_path(range)))
   end
@@ -28,7 +24,7 @@ module ServiceHelper
 
   def get_sidebar_service_links(type)
     service = Service.find_by(main_type: type)
-    ranges = get_service_ranges(serv)
+    ranges = get_service_ranges(service)
     if ranges.size > 1
       make_sidebar_submenu(ranges, service)
     elsif ranges.size == 1
