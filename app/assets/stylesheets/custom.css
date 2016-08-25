@@ -514,9 +514,7 @@ a:hover {
 @media (max-width: 767px) {
   #content-header {
     margin-top: 0;
-    /*height: 140px; FIX iPhone: Makes header take up too much space/not enough, let it dictate (by h1 text length) */
     height: auto;
-    /* FIX iPhone: allow h1, btn-group to set height*/
     text-align: center;
   }
   #content-header h1 {
