@@ -34,7 +34,7 @@
               <% ranges.each do |range| %>
               <tr>
                 <td>
-                  <%= link_to range.network_name, iprange_path(range), class: 'tip-right', title: "Subnet Mask: #{range.subnet_mask} Gateway: #{range.gateway}" %>
+                  <%= link_to range.name, iprange_path(range), class: 'tip-right', title: "Subnet Mask: #{range.subnet_mask} Gateway: #{range.gateway}" %>
                 </td>
                 <td class="hidden-sm hidden-xs"><%= range.assigned %></td>
                 <td class="hidden-sm hidden-xs"><%= range.unassigned %></td>

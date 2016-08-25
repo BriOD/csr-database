@@ -4,7 +4,7 @@
 
 <div id="breadcrumb">
   <a href="/" title="Go" class="tip-bottom"><i class="fa fa-dashboard"></i> Dashboard</a>
-  <a href="#" class="current"><%= fa_icon @range.service.icon %> IP Range <%= @range.network_name %></a>
+  <a href="#" class="current"><%= fa_icon @range.service.icon %> IP Range <%= @range.name %></a>
 </div>
 
 <div class="container-fluid row">
@@ -12,7 +12,7 @@
     <div class="widget-box">
       <div class="widget-title">
         <span class="icon"><%= fa_icon @range.service.icon %></span>
-        <h5>IP Range - <%= @range.network_name %></h5>
+        <h5>IP Range - <%= @range.name %></h5>
         <h5 class="pull-right">Subnet: <%= @range.subnet_mask %> | Gateway: <%= @range.gateway %></h5>
       </div>
       <div class="widget-content nopadding table-responsive">

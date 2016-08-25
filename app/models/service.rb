@@ -22,13 +22,4 @@ class Service < ApplicationRecord
   def self.sub_types(main_type)
     all.map { |serv| serv.sub_type if serv.main_type == main_type }.uniq.reject(&:nil?)
   end
-
-  def self.main_type_ids
-
-  end
-
-
-  def self.sub_type_ids(main_type)
-
-  end
 end
