@@ -27,7 +27,7 @@
 
     <div id="wrapper">
       <div id="header">
-        <h1><a href="./dashboard.php">Kingdom | CSR Database</a></h1>
+        <h1><a href="/">Kingdom | CSR Database</a></h1>
         <a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>
       </div><!-- end header -->
 
@@ -39,9 +39,9 @@
         <%= render 'layouts/sidebar' %>
       </div><!-- end sidebar -->
 
-      <section>
+      <div id="content">
         <%= yield %>
-      </section>
+      </div><!-- end content -->
 
       <div class="row">
         <div id="footer" class="col-xs-12">
