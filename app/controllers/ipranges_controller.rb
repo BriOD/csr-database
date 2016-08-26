@@ -1,5 +1,5 @@
 # IP Range Controller
-class IprangeController < ApplicationController
+class IprangesController < ApplicationController
   def show
     @range = IpRange.find(params[:id])
   end

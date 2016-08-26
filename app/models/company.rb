@@ -1,7 +1,7 @@
 # ==============================================================================
 # Company Table
 #
-# name, contact_first_name, contact_last_name, contact_email, billing_email, 
+# name, contact_first_name, contact_last_name, contact_email, billing_email,
 # address_book_id, main_number, contact_number, fax
 # ==============================================================================
 class Company < ApplicationRecord
@@ -10,4 +10,5 @@ class Company < ApplicationRecord
   validates :fax, allow_blank: true, numericality: { only_integer: true }
 
   belongs_to :customer
+  belongs_to :address_book
 end

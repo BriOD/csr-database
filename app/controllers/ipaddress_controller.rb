@@ -1,2 +1,0 @@
-class IpaddressController < ApplicationController
-end

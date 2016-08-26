@@ -1,0 +1,2 @@
+class WebspaceController < ApplicationController
+end

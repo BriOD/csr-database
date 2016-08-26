@@ -6,6 +6,8 @@
 # ==============================================================================
 class Customer < ApplicationRecord
   belongs_to :ip_address
+  delegate :ip_range, to: :ip_address
+  delegate :service, to: :ip_range
   belongs_to :address_book
 
   has_one :webspace

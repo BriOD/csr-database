@@ -3,7 +3,7 @@
 </div>
 
 <div id="breadcrumb">
-  <a href="/" class="current"><%= fa_icon "dashboard" %> Dashboard</a>
+  <%= make_breadcrumb_link('dashboard', '/', 'Dashboard') %>
 </div>
 
 <div class="container-fluid">
@@ -16,6 +16,7 @@
         <div class="widget-title">
           <span class="icon"><%= fa_icon service.icon %></span>
           <%= content_tag(:h5, "#{service.main_name} Range Statistics") %>
+          <%= content_tag(:h5, 'Create Range', class: 'pull-right') %>
         </div>
 
         <div class="widget-content nopadding table-responsive">
@@ -34,7 +35,7 @@
               <% ranges.each do |range| %>
               <tr>
                 <td>
-                  <%= link_to range.name, iprange_path(range), class: 'tip-right', title: "Subnet Mask: #{range.subnet_mask} Gateway: #{range.gateway}" %>
+                  <%= link_to range.name, iprange_path(range), class: 'tip-right', data: {html: true}, title: "Subnet Mask: #{range.subnet_mask} <br /> Gateway: #{range.gateway}" %>
                 </td>
                 <td class="hidden-sm hidden-xs"><%= range.assigned %></td>
                 <td class="hidden-sm hidden-xs"><%= range.unassigned %></td>

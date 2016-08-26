@@ -1,0 +1,29 @@
+<div class="col-sm-3">
+  <% if @customer.id.nil? %>
+    <button type="button" class="btn btn-info btn-block disabled" disabled="disabled" id="unassignBtn">Unassign</button>
+  <% else %>
+    <button type="button" class="btn btn-info btn-block" id="unassignBtn">Unassign</button>
+  <% end %>
+</div>
+
+<div id="unassignConfirm" class="modal fade" style="overflow-y: auto;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close" type="button">×</button>
+        <h3>Unassign Customer</h3>
+      </div>
+      <div class="modal-body">
+        <h4><p align="center">Are you sure you want to unassign this IP address?<br>This cannot be reversed!</p></h4>
+      </div>
+      <div class="modal-footer">
+        <% if @customer.id.nil? %>
+          <button class="btn btn-default btn-primary btn-disabled" href="#">Confirm</a>
+        <% else %>
+          <%= link_to 'Confirm', customer_path(@customer), method: :delete, class: 'btn btn-primary btn-small'  %>
+        <% end %>
+        <button data-dismiss="modal" class="btn btn-default btn-small" href="#">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div> <!-- end unassign modal -->
