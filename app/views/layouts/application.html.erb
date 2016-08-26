@@ -11,7 +11,7 @@
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhGy-m6er4TJWe1EkwRDKAjhbdDsWud1g&callback=initMap" type="text/javascript"></script>
 		<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3'></script>
-		<script type='text/javascript' src='/assets/googleMaps.js'></script>
+    <%= javascript_include_tag "googleMaps.min" %>
 
     <script type="text/javascript">
       function stopEnterKey(evt) {
@@ -54,11 +54,8 @@
 
 
     <%= javascript_include_tag "jquery.min" %>
-    <!-- <script src="/assets/jquery.min.js"></script> -->
     <%= javascript_include_tag "bootstrap.min" %>
-    <!-- <script src="/assets/bootstrap.min.js"></script> -->
 
     <%= javascript_include_tag "custom" %>
-    <!-- <script src="/assets/custom.js"></script> -->
   </body>
 </html>
