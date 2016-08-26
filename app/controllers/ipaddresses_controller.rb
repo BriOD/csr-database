@@ -1,4 +1,4 @@
-class IpaddressController < ApplicationController
+class IpaddressesController < ApplicationController
   # Create
   def new
   end
@@ -12,8 +12,8 @@ class IpaddressController < ApplicationController
     @ip_range = @ip_address.ip_range
     @customer = @ip_address.customer || Customer.new
 
-    @company = @customer.company || @customer.build_company
-    @company_address = @company.address_book || @company.build_address_book
+    @company = @customer.company || Company.new
+    @company_address = @company.address_book || AddressBook.new
   end
 
   # Update

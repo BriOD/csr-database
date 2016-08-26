@@ -1,4 +1,4 @@
-class CustomerController < ApplicationController
+class CustomersController < ApplicationController
   def destroy
     @customer = Customer.find(params[:id])
 

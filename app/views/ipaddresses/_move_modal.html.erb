@@ -14,7 +14,11 @@
         </div>
       </div>
       <div class="modal-footer">
-        <%= link_to 'Confirm', customer_move_path(@customer), class: 'btn btn-primary btn-small'%>
+        <% if @customer.id.nil? %>
+          <button class="btn btn-default btn-primary btn-disabled" href="#">Confirm</a>
+        <% else %>
+          <%= link_to 'Confirm', customer_move_path(@customer), class: 'btn btn-primary btn-small'%>
+        <% end %>
         <a data-dismiss="modal" class="btn btn-default btn-small" href="#">Cancel</a>
       </div>
     </div>
