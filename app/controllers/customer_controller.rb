@@ -12,6 +12,6 @@ class CustomerController < ApplicationController
   def move
     @customer = Customer.find(params[:id])
 
-    redirect_to iprange_ipaddress(@customer.ip_range, @customer.ip_address)
+    redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
   end
 end
