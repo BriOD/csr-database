@@ -25,7 +25,7 @@
               <%= render partial: 'ipaddresses/unassign_modal' %>
 
               <div class="col-sm-3">
-                <a role="button" target="new" href="http://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a192.69.124.12&run=toolpage#" class="btn btn-info btn-block">MX-Toolbox</a>
+                <a role="button" target="new" href="http://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a<%="#{@ip_address.ip}"%>&run=toolpage#" class="btn btn-info btn-block">MX-Toolbox</a>
               </div>
 
               <div class="col-sm-3">
