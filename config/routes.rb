@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   root 'dashboard#index'
   get '/dashboard', to: 'dashboard#index'
+  get '/settings', to: 'dashboard#settings'
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
