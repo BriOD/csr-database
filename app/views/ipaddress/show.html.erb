@@ -268,7 +268,7 @@
             <span class="icon"><i class="fa fa-user"></i></span>
             <h5>Modem Lease</h5>
           </div>
-          <div class="collapse widget-content nopadding " id="modemLease">
+          <div class="collapse widget-content nopadding<%= ' in' unless @customer.lease.nil? %>" id="modemLease">
             <% @lease = @customer.lease || @customer.build_lease %>
             <%= f.fields_for @lease do |lease| %>
               <div class="form-group">
@@ -345,7 +345,7 @@
                 </div>
               </div><!-- end form buttons -->
 
-            <% end %>
+            <% end %> <!-- end lease form -->
           </div><!-- end widget-content -->
         </div><!-- end widget-box -->
       </div><!-- end col-xs-12 -->
@@ -358,13 +358,13 @@
             <span class="icon"><i class="fa fa-user"></i></span>
             <h5>Personal Webspace</h5>
           </div>
-          <div class="collapse widget-content nopadding " id="personalWebspace">
-            <% @webspace = @customer.lease || @customer.build_lease %>
+          <div class="collapse widget-content nopadding<%= ' in' unless @customer.webspace.nil? %>" id="personalWebspace">
+            <% @webspace = @customer.webspace || @customer.build_webspace %>
             <%= f.fields_for @webspace do |webspace| %>
               <div class="form-group">
                 <label class="col-sm-3 col-md-3 col-lg-2 control-label">URL</label>
                 <div class="col-sm-9 col-md-9 col-lg-10">
-                  <input type="text" class="form-control input-sm" id="web_url" name="web_url" placeholder="http://jsmith.ktis.net" value="" />
+                  <%= webspace.url_field :url, class: "form-control input-sm", placeholder: 'http://smith.ktis.net' %>
                 </div>
               </div>
 
@@ -372,12 +372,12 @@
                 <div class="row">
                   <label class="col-sm-3 col-lg-2 control-label">Username</label>
                   <div class="col-sm-9 col-lg-4">
-                    <input type="text" class="form-control input-sm" name="web_username" Placeholder="jsmith" value="" />
+                    <%= webspace.text_field :username, class: "form-control input-sm", placeholder: 'jsmith' %>
                   </div>
 
                   <label class="col-sm-3 col-lg-2 control-label">Password</label></label>
                   <div class="col-sm-9 col-lg-4">
-                    <input type="text" class="form-control input-sm" name="web_password" placeholder="password" value="" />
+                    <%= webspace.text_field :password, class: "form-control input-sm", placeholder: 'Password' %>
                   </div>
                 </div>
               </div>
@@ -390,7 +390,7 @@
                 </div>
               </div><!-- end form buttons -->
 
-            <% end %><!-- end form -->
+            <% end %><!-- end webspace form -->
           </div><!-- end widget-content -->
         </div><!-- end widget-box -->
       </div><!-- end col-xs-12 -->
