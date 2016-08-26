@@ -1,16 +1,6 @@
 class CustomerController < ApplicationController
-  def new
-  end
-
-  def create
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
   def destroy
+    @customer = Customer.find(params[:id])
+    raise @customer
   end
 end

@@ -156,72 +156,15 @@ $('form').submit(function(){
 });
 
 $(document).ready(function(){
-    $("#unassignBtn").click(function(){
-        $("#unassignConfirm").modal();
+  $("#unassignBtn").click(function(){
+    $("#unassignConfirm").modal();
     });
 
 	$("#moveBtn").click(function(){
-        $("#moveConfirm").modal();
+    $("#moveConfirm").modal();
     });
 
-    $('[data-toggle="tooltip"]').tooltip();
-
-    $('.TDNP').click(function(){
-		var isTDNP = $(this).attr('data-isTDNP');
-		var ipRange = $(this).attr('data-ipRange');
-		var ipAddress = $(this).attr('data-ipAddress');
-		var dataString = 'isTDNP='+ isTDNP + '&ipRange=' + ipRange + '&ipAddress=' + ipAddress;
-
-		$.ajax({
-			type:"POST",
-			url:"../inc/ajax.php",
-			data: dataString,
-			cache: false,
-			success: function(html){
-				location.reload();
-			}
-		});
-
-		return false;
-	});
-
-    $('.moveConfirmBtn').click(function(){
-		var isTDNP = $(this).attr('data-isTDNP');
-		var ipRange = $(this).attr('data-ipRange');
-		var ipAddress = $(this).attr('data-ipAddress');
-		var dataString = 'isTDNP='+ isTDNP + '&ipRange=' + ipRange + '&ipAddress=' + ipAddress;
-
-		$.ajax({
-			type:"POST",
-			url:"../inc/ajax.php",
-			data: dataString,
-			cache: false,
-			success: function(html){
-				location.reload();
-			}
-		});
-
-		return false;
-	});
-
-    $('.unassignConfirmBtn').click(function(){
-		var isTDNP = $(this).attr('data-isTDNP');
-		var ipRange = $(this).attr('data-ipRange');
-		var ipAddress = $(this).attr('data-ipAddress');
-		var dataString = 'isTDNP='+ isTDNP + '&ipRange=' + ipRange + '&ipAddress=' + ipAddress;
-
-		$.ajax({
-			type:"POST",
-			url:"../inc/ajax.php",
-			data: dataString,
-			cache: false,
-			success: function(html){
-				location.reload();
-			}
-		});
-
-		return false;
-	});
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 // Google Maps
