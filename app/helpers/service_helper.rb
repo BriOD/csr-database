@@ -19,7 +19,7 @@ module ServiceHelper
     links = link_to(link.html_safe, '#')
 
     links << content_tag(:i, '', class: 'arrow fa fa-chevron-right')
-    links << content_tag(:ul, make_sidebar_submenu_links(service_ranges))
+    links << content_tag(:ul, make_sidebar_submenu_links(service_ranges).html_safe)
 
     content_tag(:li, links.html_safe, class: 'submenu')
   end
