@@ -1,5 +1,4 @@
 $(function(){
-
 	var ul = $('#sidebar > ul');
 	var ul2 = $('#sidebar > ul > li.open ul');
 

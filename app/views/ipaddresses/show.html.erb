@@ -20,15 +20,7 @@
           </div>
           <div class="widget-content nopadding">
             <div class="form-group">
-              <div class="col-sm-3">
-                <button type="button" class="btn btn-info btn-block" id="moveBtn">Move</button>
-              </div>
-
               <%= render partial: 'ipaddresses/move_modal' %>
-
-              <div class="col-sm-3">
-                <button type="button" class="btn btn-info btn-block" id="unassignBtn">Unassign</button>
-              </div>
 
               <%= render partial: 'ipaddresses/unassign_modal' %>
 
@@ -167,6 +159,7 @@
             </div><!-- end collapsable company section -->
 
             <div class="form-group">
+              <% @customer.build_address_book if @customer.address_book.nil? %>
               <%= f.fields_for @customer.address_book do |addr| %>
               <div class="row">
                 <label class="col-sm-3 col-lg-2 control-label">Address</label>

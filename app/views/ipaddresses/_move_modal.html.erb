@@ -1,3 +1,11 @@
+<div class="col-sm-3">
+  <% if @customer.id.nil? %>
+    <button type="button" class="btn btn-info btn-block disabled" disabled="disabled" id="moveBtn">Move</button>
+  <% else %>
+    <button type="button" class="btn btn-info btn-block" id="moveBtn">Move</button>
+  <% end %>
+</div>
+
 <div id="moveConfirm" class="modal fade" style="overflow-y: auto;">
   <div class="modal-dialog">
     <div class="modal-content">
