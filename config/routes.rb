@@ -3,6 +3,11 @@ Rails.application.routes.draw do
     resources :ipaddress, only: [:show]
   end
 
+  resources :customer, only: [:create, :update, :destroy]
+  resources :company, only: [:create, :update, :destroy]
+  resources :lease, only: [:create, :update, :destroy]
+  resources :webspace, only: [:create, :update, :destroy]
+
   root 'dashboard#index'
   get '/dashboard', to: 'dashboard#index'
 
