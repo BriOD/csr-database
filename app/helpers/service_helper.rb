@@ -16,9 +16,8 @@ module ServiceHelper
 
   def make_sidebar_submenu(service_ranges, service)
     link = "#{fa_icon(service.icon)}#{content_tag(:span, service.main_name)}"
+    link << fa_icon('chevron-right', class: 'arrow')
     links = link_to(link.html_safe, '#')
-
-    links << content_tag(:i, '', class: 'arrow fa fa-chevron-right')
     links << content_tag(:ul, make_sidebar_submenu_links(service_ranges).html_safe)
 
     content_tag(:li, links.html_safe, class: 'submenu')
