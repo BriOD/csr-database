@@ -12,7 +12,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   margin-top: -20px;
-  background: #000000 url('../assets/pattern.png') repeat scroll top center;
+  background: #000000 url(<%= asset_path 'pattern.png' %>) repeat scroll top center;
 }
 @media (nax-width: 767px) {
   body {
@@ -53,7 +53,7 @@ a:hover {
   z-index: 0;
 }
 #header h1 {
-  background: url("../assets/logo.png") no-repeat scroll 0 0 transparent;
+  background: url(<%= asset_path 'logo.png' %>) no-repeat scroll 0 0 transparent;
   height: 31px;
   left: 10px;
   line-height: 600px;
@@ -67,7 +67,7 @@ a:hover {
 }
 @media (max-width: 440px) {
   #header h1 {
-    background: url("../assets/logo-min.png") no-repeat scroll 0 0 transparent;
+    background: url(<%= asset_path 'logo-min.png' %>) no-repeat scroll 0 0 transparent;
   }
 }
 @media (max-width: 767px) {
@@ -357,7 +357,7 @@ a:hover {
   width: 205px;
 }
 #sidebar > ul > li.active > a {
-  background: url("../assets/menu-active.png") no-repeat scroll right center transparent !important;
+  background: url(<%= asset_path 'menu-active.png' %>) no-repeat scroll right center transparent !important;
 }
 @media (max-width: 767px) {
   #sidebar {
@@ -546,7 +546,7 @@ a:hover {
 #breadcrumb a {
   padding: 8px 20px 8px 10px;
   display: inline-block;
-  background-image: url('../assets/breadcrumb.png');
+  background-image: url(<%= asset_path 'breadcrumb.png' %>);
   background-position: center right;
   background-repeat: no-repeat;
   font-size: 11px;
@@ -1492,7 +1492,7 @@ fieldset[disabled] .btn-inverse.active {
   border: 0 !important;
 }
 .line {
-  background: url("../assets/line.png") repeat-x scroll 0 0 transparent;
+  background: url(<%= asset_path 'line.png' %>) repeat-x scroll 0 0 transparent;
   display: block;
   height: 8px;
 }
