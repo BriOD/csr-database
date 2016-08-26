@@ -6,7 +6,7 @@
   <li class="active"><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
   <% Service.main_types.each do |type| %>
-    <%= get_sidebar_service_links(type).html_safe %>
+    <%= get_sidebar_service_links(type) %>
   <% end %>
 
   <li><a href="http://mailadmin.ktis.net/" target="new"><i class="fa fa-envelope-o"></i><span>E-Mail Accounts</span></a></li>
