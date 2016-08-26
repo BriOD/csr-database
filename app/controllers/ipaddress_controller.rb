@@ -9,6 +9,7 @@ class IpaddressController < ApplicationController
   # Read
   def show
     @ip_address = IpAddress.find(params[:id])
+    @ip_range = @ip_address.ip_range
     @customer = @ip_address.customer || Customer.new
   end
 
