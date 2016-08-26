@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     resources :ipaddress, only: [:show]
   end
 
+  get 'customer/:id/move' => 'customer#move', as: :customer_move
+
   resources :customer, only: [:create, :update, :destroy]
   resources :company, only: [:create, :update, :destroy]
   resources :lease, only: [:create, :update, :destroy]

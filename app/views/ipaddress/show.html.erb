@@ -4,7 +4,7 @@
 
 <div id="breadcrumb">
   <%= make_breadcrumb_link('dashboard', '/', 'Dashboard') %>
-  <%= make_breadcrumb_link('desktop', iprange_path(@ip_address.ip_range), @ip_address.ip_range.name) %>
+  <%= make_breadcrumb_link('desktop', iprange_path(@ip_range), @ip_range.name) %>
   <%= make_breadcrumb_link('user', '', @ip_address.ip, 'current') %>
 </div><!-- end breadcrumb -->
 
@@ -41,7 +41,7 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <a data-dismiss="modal" id="moveConfirmBtn" class="btn btn-primary btn-small" href="move.php?account=3225779212">Confirm</a>
+                      <%= link_to 'Confirm', customer_move_path(@customer), class: 'btn btn-primary btn-small'%>
                       <a data-dismiss="modal" class="btn btn-default btn-small" href="#">Cancel</a>
                     </div>
                   </div>
