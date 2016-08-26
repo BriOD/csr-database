@@ -8,26 +8,6 @@
   <%= make_breadcrumb_link('user', '', @ip_address.ip, 'current') %>
 </div><!-- end breadcrumb -->
 
-
-<div id="unassignConfirm" class="modal fade" style="overflow-y: auto;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Unassign Customer</h3>
-      </div>
-      <div class="modal-body">
-        <h4><p align="center">Are you sure you want to unassign this IP address?<br>This cannot be reversed!</p></h4>
-      </div>
-      <div class="modal-footer">
-        <%= link_to 'Confirm', customer_path(@customer), method: :delete, class: 'btn btn-primary btn-small'  %>
-        <button data-dismiss="modal" class="btn btn-default btn-small" href="#">Cancel</a>
-      </div>
-    </div>
-  </div>
-</div> <!-- end unassign modal -->
-
-
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12">
@@ -71,6 +51,24 @@
               <div class="col-sm-3">
                 <button type="button" class="btn btn-info btn-block" id="unassignBtn">Unassign</button>
               </div>
+
+              <div id="unassignConfirm" class="modal fade" style="overflow-y: auto;">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3>Unassign Customer</h3>
+                    </div>
+                    <div class="modal-body">
+                      <h4><p align="center">Are you sure you want to unassign this IP address?<br>This cannot be reversed!</p></h4>
+                    </div>
+                    <div class="modal-footer">
+                      <%= link_to 'Confirm', customer_path(@customer), method: :delete, class: 'btn btn-primary btn-small'  %>
+                      <button data-dismiss="modal" class="btn btn-default btn-small" href="#">Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </div> <!-- end unassign modal -->
 
               <div class="col-sm-3">
                 <a role="button" target="new" href="http://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a192.69.124.12&run=toolpage#" class="btn btn-info btn-block">MX-Toolbox</a>
