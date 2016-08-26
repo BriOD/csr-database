@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'ruby', '2.3.1'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'font-awesome-rails'
 gem 'autoprefixer-rails'
@@ -13,6 +14,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'therubyracer'
 gem 'devise'
+gem 'faker'
 gem 'netaddr'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
@@ -35,7 +37,6 @@ end
 
 group :test do
   gem 'guard-rspec'
-  gem 'faker'
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', :require => false
