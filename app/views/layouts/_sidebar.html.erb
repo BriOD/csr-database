@@ -6,31 +6,7 @@
   <li class="active"><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
   <% Service.main_types.each do |type| %>
-    <% # get_sidebar_service_links(type) %>
-    <% service = Service.find_by(main_type: type) %>
-    <% ranges = get_service_ranges(service) %>
-    <% if ranges.size > 1 %>
-    <%= content_tag(:li, class: 'submenu') do %>
-      <%= link_to(nil) do %>
-        <%= fa_icon service.icon %>
-        <%= content_tag :span, service.main_name %>
-        <%= content_tag :i, nil, class: 'arrow fa fa-chevron-right' %>
-      <% end %>
-      <%= content_tag(:ul) do %>
-        <% ranges.each do |range| %>
-          <%= make_sidebar_submenu_link(range) %>
-        <% end %>
-      <% end %>
-    <% end %>
-    <% elsif ranges.size == 1 %>
-      <% range = ranges.first %>
-      <%= content_tag(:li) do %>
-        <%= link_to(iprange_path(range)) do %>
-          <%= fa_icon range.service.icon %>
-          <%= content_tag(:span, range.service.name) %>
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= get_sidebar_service_links(type).html_safe %>
   <% end %>
 
   <li><a href="http://mailadmin.ktis.net/" target="new"><i class="fa fa-envelope-o"></i><span>E-Mail Accounts</span></a></li>
