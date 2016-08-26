@@ -6,19 +6,25 @@
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/devise_custom.css" />
+    <%= stylesheet_link_tag "devise_custom" %>
+    <!-- <link rel="stylesheet" href="/assets/devise_custom.css" /> -->
 
-  	<script type="text/javascript" src="/assets/respond.min.js"></script>
+    <%= javascript_include_tag "respond.min" %>
+  	<!-- <script type="text/javascript" src="/assets/respond.min.js"></script> -->
 	</head>
 	<body>
     <div class="container">
       <div class="logo">
-          <img src="/assets/logo.png" alt="" />
+        <%= image_tag "logo.png" %>
+        <!-- <img src="/assets/logo.png" alt="" /> -->
       </div> <!-- end .logo -->
       <%= yield %>
     </div> <!-- end .container -->
 
-    <script src="/assets/jquery.min.js"></script>
-    <script src="/assets/jquery-ui.custom.min.js"></script>
+
+    <%= javascript_include_tag "jquery.min" %>
+    <%= javascript_include_tag "jquery-ui.custom.min" %>
+    <!-- <script src="/assets/jquery.min.js"></script>
+    <script src="/assets/jquery-ui.custom.min.js"></script> -->
   </body>
 </html>
