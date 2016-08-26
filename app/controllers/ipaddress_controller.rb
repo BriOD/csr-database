@@ -11,6 +11,9 @@ class IpaddressController < ApplicationController
     @ip_address = IpAddress.find(params[:id])
     @ip_range = @ip_address.ip_range
     @customer = @ip_address.customer || Customer.new
+
+    @company = @customer.company || @customer.build_company
+    @company_address = @company.address_book || @company.build_address_book
   end
 
   # Update
