@@ -8,14 +8,14 @@
 
 <div class="container-fluid">
   <% Service.main_types.each do |type| %>
-    <% service = Service.find_by(main_type: type) %>
-    <% ranges = get_service_ranges(service) %>
+    <% services = get_services(type) %>
+    <% ranges = get_service_ranges(services).flatten %>
 
     <div class="row col-xs-12">
       <div class="widget-box">
         <div class="widget-title">
-          <span class="icon"><%= fa_icon service.icon %></span>
-          <%= content_tag(:h5, "#{service.main_name} Range Statistics") %>
+          <span class="icon"><%= fa_icon services.first.icon %></span>
+          <%= content_tag(:h5, "#{services.first.main_name} Range Statistics") %>
           <%= content_tag(:h5, 'Create Range', class: 'pull-right') %>
         </div>
 
