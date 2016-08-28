@@ -101,7 +101,6 @@ IpRange.create(
     { network: '32.178.93.237/24', gateway: '32.178.93.1', service_id: 9 },
     { network: '16.89.154.225/24', gateway: '16.89.154.1', service_id: 3 },
     { network: '19.184.2.181/26', gateway: '19.184.2.129', service_id: 8 },
-    { network: '52.46.132.184/28', gateway: '52.46.132.177', service_id: 8 },
     { network: '10.174.77.173/28', gateway: '10.174.77.161', service_id: 7 },
     { network: '79.216.223.43/26', gateway: '79.216.223.1', service_id: 7 },
     { network: '165.103.176.13/27', gateway: '165.103.176.1', service_id: 3 },
@@ -111,10 +110,7 @@ IpRange.create(
     { network: '190.56.3.170/24', gateway: '190.56.3.1', service_id: 5 },
     { network: '123.41.92.175/24', gateway: '123.41.92.1', service_id: 2 },
     { network: '65.35.252.103/24', gateway: '65.35.252.1', service_id: 9 },
-    { network: '191.84.6.54/24', gateway: '191.84.6.1', service_id: 3 },
     { network: '232.29.21.253/24', gateway: '232.29.21.1', service_id: 4 },
-    { network: '122.190.121.198/24', gateway: '122.190.121.1', service_id: 3 },
-    { network: '236.191.194.149/25', gateway: '236.191.194.149', service_id: 3 },
     { network: '86.176.22.186/25', gateway: '86.176.22.129', service_id: 5 },
     { network: '220.78.128.16/25', gateway: '220.78.128.1', service_id: 3 },
     { network: '170.145.156.13/24', gateway: '170.145.156.1', service_id: 7 },
@@ -122,7 +118,6 @@ IpRange.create(
     { network: '45.118.19.96/26', gateway: '45.118.19.65', service_id: 6 },
     { network: '50.161.204.143/24', gateway: '50.161.204.1', service_id: 3 },
     { network: '88.112.14.126/27', gateway: '88.112.14.97', service_id: 3 },
-    { network: '228.140.70.163/28', gateway: '228.140.70.161', service_id: 8 },
     { network: '92.136.16.173/26', gateway: '92.136.16.129', service_id: 11 },
     { network: '28.25.36.25/27', gateway: '28.25.36.1', service_id: 13 },
     { network: '139.53.119.57/26', gateway: '139.53.119.1', service_id: 12 },
@@ -133,11 +128,6 @@ IpRange.create(
     # Blank IP Ranges
     { network: '108.236.156.4/24', gateway: '108.236.156.1', service_id: 1 },
     { network: '242.52.15.153/24', gateway: '242.52.15.1', service_id: 1 },
-    { network: '145.143.221.24/26', gateway: '145.143.221.1', service_id: 1 },
-    { network: '16.79.45.95/28', gateway: '16.79.45.81', service_id: 1 },
-    { network: '159.211.161.44/24', gateway: '159.211.161.1', service_id: 1 },
-    { network: '221.4.97.134/28', gateway: '221.4.97.129', service_id: 1 },
-    { network: '117.59.119.235/24', gateway: '117.59.119.1', service_id: 1 },
     { network: '179.221.58.185/24', gateway: '179.221.58.1', service_id: 1 }
   ]
 )
