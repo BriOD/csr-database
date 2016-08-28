@@ -39,7 +39,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="input-group input-group-sm">
-                        <input type="text" id="address_map_box" class="form-control input-sm" value=", , , , " />
+                        <%= text_field_tag 'address_map_box', encode_address(@customer), class: 'form-control input-sm' %>
                         <span class="input-group-btn">
                           <a id="encode_address" class="btn btn-inverse">Search</a>
                         </span>
