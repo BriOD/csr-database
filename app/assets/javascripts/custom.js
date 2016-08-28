@@ -149,10 +149,6 @@ $('.btn-toggle').click(function() {
 
 });
 
-$('form').submit(function(){
-    return false;
-});
-
 $(document).ready(function(){
   $("#unassignBtn").click(function(){
     $("#unassignConfirm").modal();
@@ -238,7 +234,7 @@ $(document).ready(function(){
 //         }
 //     });
 // }
-// 
+//
 // $(document).ready(function() {
 //     init();
 //
