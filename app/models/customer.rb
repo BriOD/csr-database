@@ -15,9 +15,9 @@ class Customer < ApplicationRecord
   has_one :lease
 
   validates_format_of :email, with: /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
-  validates :home_phone, numericality: { only_integer: true }
-  validates :cell_phone, allow_blank: true, numericality: { only_integer: true }
-  validates :work_phone, allow_blank: true, numericality: { only_integer: true }
+  # validates :home_phone, numericality: { only_integer: true }
+  # validates :cell_phone, allow_blank: true, numericality: { only_integer: true }
+  # validates :work_phone, allow_blank: true, numericality: { only_integer: true }
 
   validate :name?
 

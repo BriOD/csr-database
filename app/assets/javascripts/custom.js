@@ -37,7 +37,6 @@ $(function(){
 			$('#sidebar').attr('style','');
 			$('#user-nav > ul').css({width:'auto',margin:'0'});
 		}
-
 	});
 
 	if($(window).width() <= 767)
@@ -159,6 +158,16 @@ $(document).ready(function(){
     });
 
   $('[data-toggle="tooltip"]').tooltip();
+
+  $(function() {
+    $('#lease_checkbox').change(function() {
+      $('#modemLease.collapse').collapse();
+    })
+
+    $('#webspace_checkbox').change(function() {
+      $('#personalWebspace.collapse').collapse();
+    })
+  })
 });
 //
 // // Google Maps
