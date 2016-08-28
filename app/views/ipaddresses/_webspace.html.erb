@@ -1,5 +1,6 @@
 <% webspace = customer.webspace || customer.build_webspace %>
 <%= form_for webspace, html: {class: 'form-horizontal'} do |f| %>
+<%= f.hidden_field :customer_id, :value => customer.id %>
   <div class="row">
     <div class="col-xs-12">
       <div class="widget-box collapsable">

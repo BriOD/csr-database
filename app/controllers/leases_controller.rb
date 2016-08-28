@@ -17,7 +17,8 @@ class LeasesController < ApplicationController
   def lease_params
     params.require(:lease).permit(
       :modem_manufacturer, :modem_model, :modem_serial, :modem_mac,
-      :router_manufacturer, :router_model, :router_serial, :router_mac
+      :router_manufacturer, :router_model, :router_serial, :router_mac,
+      :customer_id
     )
   end
 end

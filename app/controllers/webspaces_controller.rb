@@ -2,9 +2,8 @@ class WebspacesController < ApplicationController
   def create
     webspace = Webspace.new(webspace_params)
 
-    raise
-
     if webspace.save
+      customer = webspace.customer
       redirect_to iprange_ipaddress_path(customer.ip_range, customer.ip_address)
     else
       redirect_back(fallback_location: root_path)
@@ -23,6 +22,6 @@ class WebspacesController < ApplicationController
   private
 
   def webspace_params
-    params.require(:webspace).permit(:url, :username, :password)
+    params.require(:webspace).permit(:url, :username, :password, :customer_id)
   end
 end
