@@ -77,118 +77,14 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <%= f.fields_for @company do |company| %>
-              <label class="col-sm-3 col-md-3 col-lg-2 control-label">Company Name</label>
-              <div class="col-sm-9 col-md-9 col-lg-10">
-                <div class="input-group input-group-sm">
-                  <%= company.text_field :name, class: "form-control input-sm", placeholder: 'Company Name (If Applicable)' %>
-                  <span class="input-group-btn">
-                    <a class="btn btn-inverse" data-toggle="collapse" data-target="#company">Show More</a>
-                  </span>
-                </div>
-              </div>
-            </div>
+            <%= f.fields_for @company do |company| %>
+            <%= render partial: 'ipaddresses/company', locals: {company: company} %>
+            <% end %> <!-- end company section -->
 
-            <div class="form-group collapse" id="company">
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Contact First Name</label>
-                <div class="col-sm-9 col-lg-4">
-                  <%= company.text_field :contact_first_name, class: "form-control input-sm", placeholder: 'John' %>
-                </div>
-                <label class="col-sm-3 col-lg-2 control-label">Contact Last Name</label>
-                <div class="col-sm-9 col-lg-4">
-                  <%= company.text_field :contact_last_name, class: "form-control input-sm", placeholder: 'Smith' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Billing E-Mail</label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= company.email_field :billing_email, class: "form-control input-sm", placeholder: 'jsmith@company.com' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Contact E-Mail</label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= company.email_field :contact_email, class: "form-control input-sm", placeholder: 'jsmith@company.com' %>
-                </div>
-              </div>
-              <%= f.fields_for @company_address do |company_addr| %>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Company Address</label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= company_addr.text_field :address_1, class: "form-control input-sm", placeholder: 'Street Address' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label"></label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= company_addr.text_field :address_2, class: "form-control input-sm", placeholder: 'Apartment, Suite , Unit, Building, Floor, etc' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-3 control-label">City</label>
-                <div class="col-sm-9 col-lg-3">
-                  <%= company_addr.text_field :city, class: "form-control input-sm", placeholder: 'City' %>
-                </div>
-                <label class="col-sm-3 col-lg-1 control-label">State</label>
-                <div class="col-sm-9 col-lg-1">
-                  <%= company_addr.text_field :state, class: "form-control input-sm", placeholder: 'MO' %>
-                </div>
-                <label class="col-sm-3 col-lg-1 control-label">Zip</label>
-                <div class="col-sm-9 col-lg-2">
-                  <%= company_addr.text_field :zipcode, class: "form-control input-sm", placeholder: 'Zip Code' %>
-                </div>
-              </div>
-              <% end %>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Main Phone</label>
-                <div class="col-sm-9 col-lg-2">
-                  <%= company.phone_field :main_number, class: "form-control input-sm", placeholder: 'XXX-XXX-XXXX', value: number_to_phone(@company.main_number, area_code: true) %>
-                </div>
-                <label class="col-sm-3 col-lg-2 control-label">Contact No</label>
-                <div class="col-sm-9 col-lg-2">
-                  <%= company.phone_field :contact_number, class: "form-control input-sm", placeholder: 'XXX-XXX-XXXX', value: number_to_phone(@company.contact_number, area_code: true) %>
-                </div>
-                <label class="col-sm-3 col-lg-2 control-label">Fax</label>
-                <div class="col-sm-9 col-lg-2">
-                  <%= company.phone_field :fax, class: "form-control input-sm", placeholder: 'XXX-XXX-XXXX', value: number_to_phone(@company.fax, area_code: true) %>
-                </div>
-              </div>
-              <% end %>
-            </div><!-- end collapsable company section -->
-
-            <div class="form-group">
-              <% @customer.build_address_book if @customer.address_book.nil? %>
-              <%= f.fields_for @customer.address_book do |addr| %>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Address</label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= addr.text_field :address_1, class: "form-control input-sm", placeholder: 'Street Address' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label"></label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= addr.text_field :address_2, class: "form-control input-sm", placeholder: 'Apartment, Suite , Unit, Building, Floor, etc' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-3 control-label">City</label>
-                <div class="col-sm-9 col-lg-3">
-                  <%= addr.text_field :city, class: "form-control input-sm", placeholder: 'City' %>
-                </div>
-                <label class="col-sm-3 col-lg-1 control-label">State</label>
-                <div class="col-sm-9 col-lg-1">
-                  <%= addr.text_field :state, class: "form-control input-sm", placeholder: 'MO' %>
-                </div>
-                <label class="col-sm-3 col-lg-1 control-label">Zip</label>
-                <div class="col-sm-9 col-lg-2">
-                  <%= addr.text_field :zipcode, class: "form-control input-sm", placeholder: 'Zip' %>
-                </div>
-              </div>
-              <% end %>
-            </div><!-- end .form-group home address -->
+            <% @customer.build_address_book if @customer.address_book.nil? %>
+            <%= f.fields_for @customer.address_book do |addr| %>
+            <%= render partial: 'ipaddresses/address', locals: {addr: addr} %>
+            <% end %> <!-- end customer address -->
 
             <div class="form-group">
               <div class="row">
@@ -245,7 +141,7 @@
                   <%= make_tdnp_button(@customer) %>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-lg-2">
-                  <button type="submit" class="btn btn-primary-outline btn-block">Save</button>
+                  <%= f.submit 'Save', class: 'btn btn-primary-outline btn-block' %>
                 </div>
               </div>
             </div><!-- end form buttons -->
@@ -333,7 +229,7 @@
               <div class="form-actions">
                 <div class="row">
                   <div class="col-xs-12 col-sm-3 col-sm-offset-9 col-lg-2 col-lg-offset-10">
-                    <button type="submit" class="btn btn-primary-outline btn-block">Save</button>
+                    <%= f.submit 'Save', class: 'btn btn-primary-outline btn-block' %>
                   </div>
                 </div>
               </div><!-- end form buttons -->
@@ -378,7 +274,7 @@
               <div class="form-actions">
                 <div class="row">
                   <div class="col-xs-12 col-sm-3 col-sm-offset-9 col-lg-2 col-lg-offset-10">
-                    <button type="submit" class="btn btn-primary-outline btn-block">Save</button>
+                    <%= f.submit 'Save', class: 'btn btn-primary-outline btn-block' %>
                   </div>
                 </div>
               </div><!-- end form buttons -->
