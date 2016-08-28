@@ -1,4 +1,9 @@
+# Customers Controller
 class CustomersController < ApplicationController
+  def update
+    raise
+  end
+
   def destroy
     @customer = Customer.find(params[:id])
 
@@ -20,5 +25,11 @@ class CustomersController < ApplicationController
     @customer.update(active: @customer.active.!)
 
     redirect_to :back
+  end
+
+  private
+
+  def customer_params
+    #
   end
 end
