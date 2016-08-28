@@ -1,3 +1,4 @@
+# IP Address Controller
 class IpaddressesController < ApplicationController
   # Create
   def new

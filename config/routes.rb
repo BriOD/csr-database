@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   end
 
   get 'customers/:id/move' => 'customers#move', as: :customer_move
+  get 'customers/:id/tdnp' => 'customers#tdnp', as: :customer_tdnp
 
   resources :customers, only: [:create, :update, :destroy]
   resources :companies, only: [:create, :update, :destroy]

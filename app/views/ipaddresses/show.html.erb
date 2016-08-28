@@ -4,7 +4,7 @@
 
 <div id="breadcrumb">
   <%= make_breadcrumb_link('dashboard', '/', 'Dashboard') %>
-  <%= make_breadcrumb_link('desktop', iprange_path(@ip_range), @ip_range.name) %>
+  <%= make_breadcrumb_link(@ip_range.service.icon, iprange_path(@ip_range), @ip_range.name) %>
   <%= make_breadcrumb_link('user', '', @ip_address.ip, 'current') %>
 </div><!-- end breadcrumb -->
 
@@ -242,7 +242,7 @@
             <div class="form-actions">
               <div class="row">
                 <div class="col-xs-12 col-sm-3 col-sm-offset-6 col-lg-2 col-lg-offset-8">
-                  <button type="button" data-isTDNP="0" data-ipRange="192.69.124.0" data-ipAddress="192.69.124.12" class="btn btn-danger btn-block TDNP">Disconnect</button>
+                  <%= make_tdnp_button(@customer) %>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-lg-2">
                   <button type="submit" class="btn btn-primary-outline btn-block">Save</button>

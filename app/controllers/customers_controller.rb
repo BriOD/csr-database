@@ -14,4 +14,11 @@ class CustomersController < ApplicationController
 
     redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
   end
+
+  def tdnp
+    @customer = Customer.find(params[:id])
+    @customer.update(active: @customer.active.!)
+
+    redirect_to :back
+  end
 end
