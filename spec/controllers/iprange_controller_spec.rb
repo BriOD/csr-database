@@ -1,13 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe IprangeController, type: :controller do
-  describe 'GET #show' do
-    it 'returns http success' do
-      get :show
-      expect(response).to have_http_status(:success)
-    end
-  end
-end
+RSpec.describe IprangesController, type: :controller do
+#   describe 'GET #show' do
+#     it 'returns http success' do
+#       get :show
+#       expect(response).to have_http_status(:success)
+#     end
 #
 #     it 'displays the current ip range as a breadcrumb' do
 #       #
@@ -49,4 +47,4 @@ end
 #       end
 #     end
 #   end
-# end
+end
