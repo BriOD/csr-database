@@ -1,3 +1,31 @@
-<%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
-<%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
-<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+<% if flash[:success] || flash[:notice] || flash[:alert] || flash[:error] %>
+  <div class="col-xs-12">
+    <% if flash[:success] %>
+    <div class="alert alert-success">
+    	<button class="close" data-dismiss="alert">×</button>
+      <%= "#{flash[:success]}" %>
+    </div>
+    <% end %>
+
+    <% if flash[:notice] %>
+    <div class="alert alert-info">
+    	<button class="close" data-dismiss="alert">×</button>
+    	<%= "#{flash[:notice]}" %>
+    </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+    <div class="alert alert-warning">
+    	<button class="close" data-dismiss="alert">×</button>
+    	<%= "#{flash[:warning]}" %>
+    </div>
+    <% end %>
+
+    <% if flash[:error] %>
+    <div class="alert alert-danger">
+    	<button class="close" data-dismiss="alert">×</button>
+    	<%= "#{flash[:error]}" %>
+    </div>
+    <% end %>
+  </div>
+<% end %>
