@@ -14,6 +14,11 @@ class Customer < ApplicationRecord
   has_one :company
   has_one :lease
 
+  accepts_nested_attributes_for :company
+  accepts_nested_attributes_for :address_book
+  accepts_nested_attributes_for :lease
+  accepts_nested_attributes_for :webspace
+
   validates_format_of :email, with: /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
   # validates :home_phone, numericality: { only_integer: true }
   # validates :cell_phone, allow_blank: true, numericality: { only_integer: true }
