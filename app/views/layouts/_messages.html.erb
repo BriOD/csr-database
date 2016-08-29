@@ -1,31 +1,9 @@
-<% if flash[:success] || flash[:notice] || flash[:alert] || flash[:error] %>
-  <div class="col-xs-12">
-    <% if flash[:success] %>
-    <div class="alert alert-success">
-    	<button class="close" data-dismiss="alert">×</button>
-      <%= "#{flash[:success]}" %>
-    </div>
+<% flash.each do |type, content| %>
+  <% if content.respond_to?('each') %>
+    <% content.each do |item| %>
+      <%= render 'layouts/alert', type: type, content: item %>
     <% end %>
-
-    <% if flash[:notice] %>
-    <div class="alert alert-info">
-    	<button class="close" data-dismiss="alert">×</button>
-    	<%= "#{flash[:notice]}" %>
-    </div>
-    <% end %>
-
-    <% if flash[:alert] %>
-    <div class="alert alert-warning">
-    	<button class="close" data-dismiss="alert">×</button>
-    	<%= "#{flash[:warning]}" %>
-    </div>
-    <% end %>
-
-    <% if flash[:error] %>
-    <div class="alert alert-danger">
-    	<button class="close" data-dismiss="alert">×</button>
-    	<%= "#{flash[:error]}" %>
-    </div>
-    <% end %>
-  </div>
+  <% else %>
+    <%= render 'layouts/alert', type: type, content: content %>
+  <% end %>
 <% end %>
