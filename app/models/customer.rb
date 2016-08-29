@@ -27,11 +27,13 @@ class Customer < ApplicationRecord
   validate :name?
 
   NULL_ATTRS = %w(first_name last_name email home_phone cell_phone work_phone)
-  before_save :blank_if_nil
+  before_validation :blank_if_nil
 
   def name?
-    if first_name == '' && last_name == '' && company.id == ''
+    if company.nil? && (first_name.nil? || last_name.nil?)
       errors.add(:base, 'You must have either a first and last name or company')
+    elsif !company.nil? && company.name.nil?
+      errors.add(:base, 'You must have a company name')
     end
   end
 
