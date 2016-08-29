@@ -1,12 +1,5 @@
 # IP Address Controller
 class IpaddressesController < ApplicationController
-  # Create
-  def new
-  end
-
-  def create
-  end
-
   # Read
   def show
     @ip_address = IpAddress.find(params[:id])
@@ -14,17 +7,6 @@ class IpaddressesController < ApplicationController
     @customer = @ip_address.customer || Customer.new
 
     @company = @customer.company || Company.new
-    @company_address = @company.address_book || AddressBook.new
-  end
-
-  # Update
-  def edit
-  end
-
-  def update
-  end
-
-  # Destroy
-  def destroy
+    @company_address = @company.company_address || AddressBook.new
   end
 end
