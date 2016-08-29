@@ -1,9 +1,25 @@
 # Customers Controller
 class CustomersController < ApplicationController
+  def create
+    @customer = Customer.find(params[:id]) || Customer.new
+
+    if @customer.update(customer_params)
+      flash[:notice] = 'Customer information has been updated successfully'
+    else
+      flash[:error] = @customer.errors.full_messages.to_sentence
+    end
+
+    redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
+  end
+
   def update
     @customer = Customer.find(params[:id])
 
-    @customer.update(customer_params)
+    if @customer.update(customer_params)
+      flash[:notice] = 'Customer information has been updated successfully'
+    else
+      flash[:error] = @customer.errors.full_messages.to_sentence
+    end
 
     redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
   end
