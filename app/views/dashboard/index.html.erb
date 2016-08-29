@@ -6,6 +6,8 @@
   <%= make_breadcrumb_link('dashboard', '/', 'Dashboard') %>
 </div>
 
+<%= render partial: 'layouts/messages' %>
+
 <div class="container-fluid">
   <% Service.main_types.each do |type| %>
     <% services = get_services(type) %>
