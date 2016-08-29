@@ -8,6 +8,8 @@
   <%= make_breadcrumb_link('user', '', @ip_address.ip, 'current') %>
 </div><!-- end breadcrumb -->
 
+<%= render partial: 'layouts/messages' %>
+
 <div class="container-fluid">
     <div class="row">
       <div class="col-xs-12">
@@ -18,8 +20,7 @@
             <h5 class="pull-right hidden-xs">Subnet: <%= @ip_range.subnet_mask %> | Gateway: <%= @ip_range.gateway %></h5>
           </div>
 
-          <%= form_for @customer, html: {class: 'form-horizontal'} do |f| %>
-          <div class="widget-content nopadding">
+          <div class="widget-content nopadding form-horizontal">
             <div class="form-group">
               <%= render partial: 'ipaddresses/move_modal' %>
 
@@ -55,7 +56,6 @@
                 </div>
               </div>
             </div>
-            <% end %>
 
             <%= form_for @customer, html: {class: 'form-horizontal'} do |f| %>
             <div class="form-group">
