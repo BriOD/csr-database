@@ -6,7 +6,7 @@ class IpaddressesController < ApplicationController
     @ip_range = @ip_address.ip_range
     @customer = @ip_address.customer || Customer.new
 
-    @company = @customer.company || Company.new
+    @company = @customer.company || @customer.build_company
     @company_address = @company.company_address || AddressBook.new
   end
 end
