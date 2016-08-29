@@ -11,17 +11,17 @@ module IpaddressHelper
     if customer.nil? || customer.id.nil?
       '211 South Main Street, Auxvasse, MO 65231'
     else
-      address = customer.address_book.address_1.to_s
+      encoded_address = customer.address_book.address_1.to_s
 
       unless customer.address_book.address_2.empty?
-        address << ", #{customer.address_book.address_2}"
+        encoded_address + ", #{customer.address_book.address_2}"
       end
 
-      address << ", #{customer.address_book.city}"
-      address << ", #{customer.address_book.state}"
-      address << ", #{customer.address_book.zipcode}"
+      encoded_address += ", #{customer.address_book.city}"
+      encoded_address += ", #{customer.address_book.state}"
+      encoded_address += ", #{customer.address_book.zipcode}"
 
-      address
+      encoded_address
     end
   end
 end
