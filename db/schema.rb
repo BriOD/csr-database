@@ -50,10 +50,10 @@ ActiveRecord::Schema.define(version: 20160822142444) do
     t.string   "cell_phone"
     t.string   "work_phone"
     t.text     "notes"
-    t.boolean  "active",          default: false
+    t.boolean  "active",          default: true
     t.string   "email"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "ip_addresses", force: :cascade do |t|
