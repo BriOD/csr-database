@@ -13,7 +13,7 @@ class CustomersController < ApplicationController
     ip_range = @customer.ip_range
     ip_address = @customer.ip_address
 
-    @customer.company.address_book.destroy unless @customer.company.nil?
+    @customer.company.company_address.destroy unless @customer.company.nil?
     @customer.company.destroy unless @customer.company.nil?
     @customer.lease.destroy unless @customer.lease.nil?
     @customer.webspace.destroy unless @customer.webspace.nil?
@@ -42,13 +42,13 @@ class CustomersController < ApplicationController
     params.require(:customer).permit(
       :first_name, :last_name, :email,
       :home_phone, :cell_phone, :work_phone,
-      :notes, :lease_checkbox, :webspace_checkbox,
-      company: [
+      :notes, :lease_checkbox, :webspace_checkbox, :id,
+      company_attributes: [
         :name, :contact_first_name, :contact_last_name, :billing_email,
-        :contact_email, :main_number, :contact_number, :fax,
-        address_book: [:address_1, :address_2, :city, :state, :zipcode]
+        :contact_email, :main_number, :contact_number, :fax, :id,
+        company_address_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
       ],
-      address_book_attributes: [:address_1, :address_2, :city, :state, :zipcode],
+      address_book_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
     )
   end
 end
