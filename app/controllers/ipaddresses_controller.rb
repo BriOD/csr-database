@@ -7,6 +7,6 @@ class IpaddressesController < ApplicationController
     @customer = @ip_address.customer || Customer.new
 
     @company = @customer.company || @customer.build_company
-    @company_address = @company.company_address || AddressBook.new
+    @company_address = @company.company_address || @company.build_company_address
   end
 end
