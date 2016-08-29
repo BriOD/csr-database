@@ -20,9 +20,9 @@ class Customer < ApplicationRecord
   accepts_nested_attributes_for :webspace
 
   validates_format_of :email, with: /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
-  validates :home_phone, numericality: { only_integer: true, message: 'must be filled in' }
-  validates :cell_phone, allow_blank: true, numericality: { only_integer: true }
-  validates :work_phone, allow_blank: true, numericality: { only_integer: true }
+  validates :home_phone, length: { minimum: 10, maximum: 10 }, numericality: { only_integer: true, message: 'must be filled in' }
+  validates :cell_phone, allow_blank: true, length: { minimum: 10, maximum: 10 }, numericality: { length: 10, only_integer: true }
+  validates :work_phone, allow_blank: true, length: { minimum: 10, maximum: 10 }, numericality: { length: 10, only_integer: true }
 
   validate :name?
 
