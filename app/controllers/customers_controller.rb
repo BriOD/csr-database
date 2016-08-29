@@ -3,17 +3,8 @@ class CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
 
-    raise
-
     @customer.update(customer_params)
 
-    if (params[:lease_checkbox] == on)
-      @lease = Lease.find_by(customer_id: params[:id]) || Lease.new
-    end
-
-    if (params[:webspace_checkbox] == on)
-      @webspace = Webspace.find_by(customer_id: params[:id]) || Webspace.new
-    end
     redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
   end
 
@@ -57,7 +48,7 @@ class CustomersController < ApplicationController
         :contact_email, :main_number, :contact_number, :fax,
         address_book: [:address_1, :address_2, :city, :state, :zipcode]
       ],
-      address_book: [:address_1, :address_2, :city, :state, :zipcode],
+      address_book_attributes: [:address_1, :address_2, :city, :state, :zipcode],
     )
   end
 end
