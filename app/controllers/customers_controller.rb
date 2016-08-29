@@ -12,11 +12,11 @@ class CustomersController < ApplicationController
 
     if @customer.save
       flash[:notice] = 'Customer information has been updated successfully'
+      redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
     else
       flash[:error] = @customer.errors.full_messages
+      redirect_back(fallback_location: root_path)
     end
-
-    redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
   end
 
   def update
@@ -29,13 +29,21 @@ class CustomersController < ApplicationController
       @customer.update(customer_company_params)
     end
 
-    if @customer.errors.empty?
-      flash[:notice] = 'Customer information has been updated successfully'
-    else
-      flash[:error] = @customer.errors.full_messages
+    if params[:lease_checkbox].nil? && !@customer.lease.nil?
+      @customer.lease.destroy
     end
 
-    redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
+    if params[:webspace].nil? && !@customer.webspace.nil?
+      @customer.webspace.destroy
+    end
+
+    if @customer.errors.empty?
+      flash[:notice] = 'Customer information has been updated successfully'
+      redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
+    else
+      flash[:error] = @customer.errors.full_messages
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def destroy
@@ -55,6 +63,8 @@ class CustomersController < ApplicationController
 
   def move
     @customer = Customer.find(params[:id])
+
+    raise
 
     redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
   end
