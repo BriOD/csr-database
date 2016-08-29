@@ -5,19 +5,16 @@
 # address_book_id, main_number, contact_number, fax
 # ==============================================================================
 class Company < ApplicationRecord
-  # validates :main_number, allow_blank: true, numericality: { only_integer: true }
-  # validates :contact_number, numericality: { only_integer: true }
-  # validates :fax, allow_blank: true, numericality: { only_integer: true }
-
   belongs_to :customer
   belongs_to :company_address, class_name: 'AddressBook', foreign_key: 'address_book_id'
   accepts_nested_attributes_for :company_address
 
-  validates :contact_number, length: { minimum: 10, maximum: 10 }, numericality: { only_integer: true, message: 'must be filled in' }
-  validates :main_number, length: { minimum: 10, maximum: 10 }, allow_blank: true, numericality: { only_integer: true }
-  validates :fax, length: { minimum: 10, maximum: 10 }, allow_blank: true, numericality: { only_integer: true }
+  validates :contact_number, if: !name.nil?, length: { minimum: 10, maximum: 10 }, numericality: { only_integer: true, message: 'must be filled in' }
+  validates :main_number, if: !name.nil?, length: { minimum: 10, maximum: 10 }, allow_blank: true, numericality: { only_integer: true }
+  validates :fax, if: !name.nil?, length: { minimum: 10, maximum: 10 }, allow_blank: true, numericality: { only_integer: true }
 
-  before_save :blank_if_nil
+  NULL_ATTRS = %w(name contact_last_name contact_last_name contact_email billing_email main_number contact_number fax)
+  before_validation :blank_if_nil
 
   def blank_if_nil
     NULL_ATTRS.each { |attr| self[attr] = nil if self[attr].blank? }
