@@ -1,12 +1,16 @@
 # Customers Controller
 class CustomersController < ApplicationController
   def create
-    @customer = Customer.find(params[:id]) || Customer.new
+    if params[:customer][:company_attributes].all? {|k,v| v.empty?}
+      @customer = Customer.new(customer_params)
+    else
+      @customer = Customer.new(customer_company_params)
+    end
 
-    if @customer.update(customer_params)
+    if @customer.save
       flash[:notice] = 'Customer information has been updated successfully'
     else
-      flash[:error] = @customer.errors.full_messages.to_sentence
+      flash[:error] = @customer.errors.full_messages
     end
 
     redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
@@ -15,10 +19,19 @@ class CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
 
-    if @customer.update(customer_params)
+    # raise
+
+    if params[:customer][:company_attributes][:name].empty? &&
+       params[:customer][:company_attributes][:contact_first_name].empty?
+      @customer.update(customer_params)
+    else
+      @customer.update(customer_company_params)
+    end
+
+    if @customer.errors.empty?
       flash[:notice] = 'Customer information has been updated successfully'
     else
-      flash[:error] = @customer.errors.full_messages.to_sentence
+      flash[:error] = @customer.errors.full_messages
     end
 
     redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
@@ -55,6 +68,15 @@ class CustomersController < ApplicationController
   private
 
   def customer_params
+    params.require(:customer).permit(
+      :first_name, :last_name, :email,
+      :home_phone, :cell_phone, :work_phone,
+      :notes, :lease_checkbox, :webspace_checkbox, :id,
+      address_book_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
+    )
+  end
+
+  def customer_company_params
     params.require(:customer).permit(
       :first_name, :last_name, :email,
       :home_phone, :cell_phone, :work_phone,
