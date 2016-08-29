@@ -180,8 +180,16 @@ IpRange.all.each do |range|
     cust_ip_addr.reserved = true
     cust_ip_addr.save
 
+    company_addr = AddressBook.create(
+      address_1: Faker::Address.street_address,
+      address_2: '',
+      city: Faker::Address.city,
+      state: Faker::Address.state_abbr,
+      zipcode: Faker::Address.zip
+    ) if (counter % 7).zero?
+
     c.create_company(
-      address_book_id: addr.id,
+      address_book_id: company_addr.id,
       name: Faker::Company.name,
       contact_first_name: Faker::Name.first_name,
       contact_last_name: Faker::Name.last_name,
