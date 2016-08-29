@@ -1,10 +1,13 @@
 # Customers Controller
 class CustomersController < ApplicationController
   def create
-    if params[:customer][:company_attributes].all? {|k,v| v.empty?}
-      @customer = Customer.new(customer_params)
+    @customer = Customer.new
+
+    if params[:customer][:company_attributes][:name].empty? &&
+       params[:customer][:company_attributes][:contact_first_name].empty?
+      @customer.update(customer_params)
     else
-      @customer = Customer.new(customer_company_params)
+      @customer.update(customer_company_params)
     end
 
     if @customer.save
@@ -18,8 +21,6 @@ class CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
-
-    # raise
 
     if params[:customer][:company_attributes][:name].empty? &&
        params[:customer][:company_attributes][:contact_first_name].empty?
@@ -69,9 +70,8 @@ class CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(
-      :first_name, :last_name, :email,
-      :home_phone, :cell_phone, :work_phone,
-      :notes, :lease_checkbox, :webspace_checkbox, :id,
+      :first_name, :last_name, :email, :home_phone, :cell_phone, :work_phone,
+      :notes, :lease_checkbox, :webspace_checkbox, :id, :ip_address_id, :account_number,
       address_book_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
     )
   end
@@ -83,7 +83,7 @@ class CustomersController < ApplicationController
       :notes, :lease_checkbox, :webspace_checkbox, :id,
       company_attributes: [
         :name, :contact_first_name, :contact_last_name, :billing_email,
-        :contact_email, :main_number, :contact_number, :fax, :id,
+        :contact_email, :main_number, :contact_number, :fax, :id, :ip_address_id, :account_number,
         company_address_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
       ],
       address_book_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
