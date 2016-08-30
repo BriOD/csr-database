@@ -104,7 +104,6 @@ IpRange.create(
     { network: '10.174.77.173/28', gateway: '10.174.77.161', service_id: 7 },
     { network: '79.216.223.43/26', gateway: '79.216.223.1', service_id: 7 },
     { network: '165.103.176.13/27', gateway: '165.103.176.1', service_id: 3 },
-    { network: '92.52.43.136/25', gateway: '92.52.43.129', service_id: 11 },
     { network: '35.192.106.249/29', gateway: '35.192.106.249', service_id: 3 },
     { network: '15.121.181.185/28', gateway: '15.121.181.177', service_id: 9 },
     { network: '190.56.3.170/24', gateway: '190.56.3.1', service_id: 5 },
@@ -121,9 +120,7 @@ IpRange.create(
     { network: '92.136.16.173/26', gateway: '92.136.16.129', service_id: 11 },
     { network: '28.25.36.25/27', gateway: '28.25.36.1', service_id: 13 },
     { network: '139.53.119.57/26', gateway: '139.53.119.1', service_id: 12 },
-    { network: '4.172.249.245/24', gateway: '4.172.249.1', service_id: 3 },
     { network: '248.109.57.174/28', gateway: '248.109.57.161', service_id: 2 },
-    { network: '166.207.68.238/26', gateway: '166.207.68.193', service_id: 7 },
     { network: '251.159.81.196/28', gateway: '251.159.81.193', service_id: 3 },
     # Blank IP Ranges
     { network: '108.236.156.4/24', gateway: '108.236.156.1', service_id: 1 },
