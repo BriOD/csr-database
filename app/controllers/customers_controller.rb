@@ -86,7 +86,7 @@ class CustomersController < ApplicationController
   end
 
   def show_tdnps
-    @results = Customer.where(active: false).include([:ip_address])
+    @results = Customer.where(active: false).includes([:ip_address])
   end
 
   private
