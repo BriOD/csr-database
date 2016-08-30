@@ -1,16 +1,22 @@
 # Global Service Helper for the Sidebar and Other Partials
 module ServiceHelper
-  def get_service_ranges(service)
-    IpRange.where(service_id: service.id).order('network::inet ASC')
-  end
-
   def get_sidebar_service_links(type)
-    service = Service.find_by(main_type: type)
-    ranges = get_service_ranges(service)
+    services = get_services(type)
+    ranges = get_service_ranges(services).flatten
     if ranges.size > 1
-      make_sidebar_submenu(ranges, service)
+      make_sidebar_submenu(ranges, services.first)
     elsif ranges.size == 1
       make_sidebar_solo_link(ranges)
+    end
+  end
+
+  def get_services(type)
+    Service.all.collect { |s| s if s.main_type == type }.reject(&:nil?)
+  end
+
+  def get_service_ranges(services)
+    services.collect do |serv|
+      IpRange.where(service_id: serv.id).order('network::inet ASC')
     end
   end
 

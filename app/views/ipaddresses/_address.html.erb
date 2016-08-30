@@ -1,0 +1,28 @@
+<div class="form-group">
+  <div class="row">
+    <label class="col-sm-3 col-lg-2 control-label">Address</label>
+    <div class="col-sm-9 col-md-9 col-lg-10">
+      <%= addr.text_field :address_1, class: "form-control input-sm", placeholder: 'Street Address' %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-sm-3 col-lg-2 control-label"></label>
+    <div class="col-sm-9 col-md-9 col-lg-10">
+      <%= addr.text_field :address_2, class: "form-control input-sm", placeholder: 'Apartment, Suite , Unit, Building, Floor, etc' %>
+    </div>
+  </div>
+  <div class="row">
+    <label class="col-sm-3 col-lg-3 control-label">City</label>
+    <div class="col-sm-9 col-lg-3">
+      <%= addr.text_field :city, class: "form-control input-sm", placeholder: 'City' %>
+    </div>
+    <label class="col-sm-3 col-lg-1 control-label">State</label>
+    <div class="col-sm-9 col-lg-1">
+      <%= addr.text_field :state, class: "form-control input-sm", placeholder: 'MO' %>
+    </div>
+    <label class="col-sm-3 col-lg-1 control-label">Zip</label>
+    <div class="col-sm-9 col-lg-2">
+      <%= addr.text_field :zipcode, class: "form-control input-sm", placeholder: 'Zip' %>
+    </div>
+  </div>
+</div><!-- end .form-group home address -->

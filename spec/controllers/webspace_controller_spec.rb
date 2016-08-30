@@ -1,5 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe WebspaceController, type: :controller do
-
+RSpec.describe WebspacesController, type: :controller do
 end

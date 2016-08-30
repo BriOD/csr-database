@@ -7,6 +7,8 @@
   <%= make_breadcrumb_link('desktop', iprange_path(@range), @range.name, 'current') %>
 </div>
 
+<%= render partial: 'layouts/messages' %>
+
 <div class="container-fluid row">
   <div class="col-xs-12">
     <div class="widget-box">
@@ -28,7 +30,7 @@
           </thead><!-- end thead -->
 
           <tbody>
-            <% @range.ip_addresses.each do |ip| %>
+            <% @range.ip_addresses.order(:id).each do |ip| %>
               <%= make_range_table_entry(ip) %>
             <% end %>
           </tbody><!-- end tbody -->

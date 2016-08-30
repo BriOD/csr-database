@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     resources :ipaddresses, only: [:show]
   end
 
-  get 'customers/:id/move' => 'customers#move', as: :customer_move
+  patch 'customers/:id/move' => 'customers#move', as: :customer_move
+  get 'customers/:id/tdnp' => 'customers#tdnp', as: :customer_tdnp
 
   resources :customers, only: [:create, :update, :destroy]
   resources :companies, only: [:create, :update, :destroy]

@@ -1,0 +1,89 @@
+<% lease = customer.lease || customer.build_lease %>
+<%= form_for lease, html: {class: 'form-horizontal'} do |f| %>
+<%= f.hidden_field :customer_id, :value => customer.id %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="widget-box collapsable">
+        <div class="widget-title">
+          <span class="icon"><i class="fa fa-user"></i></span>
+          <h5>Modem Lease</h5>
+        </div>
+        <div class="collapse widget-content nopadding<%= ' in' unless customer.lease.id.nil? %>" id="modemLease">
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-6 control-label">Modem Lease Information</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-3 col-lg-2 control-label">Manufacturer</label>
+              <div class="col-sm-9 col-lg-4">
+                <%= f.text_field :modem_manufacturer, class: "form-control input-sm", placeholder: 'Comtrend' %>
+              </div>
+
+              <label class="col-sm-3 col-lg-2 control-label">Model</label>
+              <div class="col-sm-9 col-lg-4">
+                <%= f.text_field :modem_model, class: "form-control input-sm", placeholder: 'AR-5361u' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-3 col-lg-2 control-label">Serial No</label>
+              <div class="col-sm-9 col-lg-4">
+                <%= f.text_field :modem_serial, class: "form-control input-sm", placeholder: '1415381UXXF-AA009344' %>
+              </div>
+
+              <label class="col-sm-3 col-lg-2 control-label">MAC Address</label>
+              <div class="col-sm-9 col-lg-4">
+                <%= f.text_field :modem_mac, class: "form-control input-sm", placeholder: '00:00:00:00:00:00' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-6 control-label">Router Lease Information</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-3 col-lg-2 control-label">Manufacturer</label>
+              <div class="col-sm-9 col-lg-4">
+                <%= f.text_field :router_manufacturer, class: "form-control input-sm", placeholder: 'Calix' %>
+              </div>
+
+              <label class="col-sm-3 col-lg-2 control-label">Model</label>
+              <div class="col-sm-9 col-lg-4">
+                <%= f.text_field :router_model, class: "form-control input-sm", placeholder: 'Gigacenter' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-3 col-lg-2 control-label">Serial No</label>
+              <div class="col-sm-9 col-lg-4">
+                <%= f.text_field :router_serial, class: "form-control input-sm", placeholder: '1415381UXXF-AA009344' %>
+              </div>
+
+              <label class="col-sm-3 col-lg-2 control-label">MAC Address</label>
+              <div class="col-sm-9 col-lg-4">
+                <%= f.text_field :router_mac, class: "form-control input-sm", placeholder: '00:00:00:00:00:00' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <div class="row">
+              <div class="col-xs-12 col-sm-3 col-sm-offset-9 col-lg-2 col-lg-offset-10">
+                <%= f.submit 'Save', class: 'btn btn-primary-outline btn-block' %>
+              </div>
+            </div>
+          </div><!-- end form buttons -->
+        </div><!-- end widget-content -->
+      </div><!-- end widget-box -->
+    </div><!-- end col-xs-12 -->
+  </div><!-- end modem lease row -->
+<% end %> <!-- end lease form -->

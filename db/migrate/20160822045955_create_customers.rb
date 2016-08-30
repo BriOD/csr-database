@@ -10,7 +10,7 @@ class CreateCustomers < ActiveRecord::Migration[5.0]
       t.string :cell_phone
       t.string :work_phone
       t.text :notes
-      t.boolean :active, default: false
+      t.boolean :active, default: true
       t.string :email
 
       t.timestamps

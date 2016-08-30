@@ -1,0 +1,44 @@
+<% webspace = customer.webspace || customer.build_webspace %>
+<%= form_for webspace, html: {class: 'form-horizontal'} do |f| %>
+<%= f.hidden_field :customer_id, :value => customer.id %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="widget-box collapsable">
+        <div class="widget-title">
+          <span class="icon"><i class="fa fa-user"></i></span>
+          <h5>Personal Webspace</h5>
+        </div>
+        <div class="collapse widget-content nopadding<%= ' in' unless customer.webspace.id.nil? %>" id="personalWebspace">
+          <div class="form-group">
+            <label class="col-sm-3 col-md-3 col-lg-2 control-label">URL</label>
+            <div class="col-sm-9 col-md-9 col-lg-10">
+              <%= f.url_field :url, class: "form-control input-sm", placeholder: 'http://smith.ktis.net' %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-3 col-lg-2 control-label">Username</label>
+              <div class="col-sm-9 col-lg-4">
+                <%= f.text_field :username, class: "form-control input-sm", placeholder: 'jsmith' %>
+              </div>
+
+              <label class="col-sm-3 col-lg-2 control-label">Password</label></label>
+              <div class="col-sm-9 col-lg-4">
+                <%= f.text_field :password, class: "form-control input-sm", placeholder: 'Password' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <div class="row">
+              <div class="col-xs-12 col-sm-3 col-sm-offset-9 col-lg-2 col-lg-offset-10">
+                <%= f.submit 'Save', class: 'btn btn-primary-outline btn-block' %>
+              </div>
+            </div>
+          </div><!-- end form buttons -->
+        </div><!-- end widget-content -->
+      </div><!-- end widget-box -->
+    </div><!-- end col-xs-12 -->
+  </div><!-- end webspace row -->
+<% end %><!-- end webspace form -->

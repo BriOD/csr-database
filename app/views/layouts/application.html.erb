@@ -9,10 +9,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhGy-m6er4TJWe1EkwRDKAjhbdDsWud1g&callback=initMap" type="text/javascript"></script>
-		<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3'></script>
-    <%= javascript_include_tag "googleMaps" %>
-
     <script type="text/javascript">
       function stopEnterKey(evt) {
         var evt = (evt) ? evt : ((event) ? event : null);
@@ -22,7 +18,7 @@
       document.onkeypress = stopEnterKey;
     </script>
 
-    <link rel="shortcut icon" href="favicon.ico">
+    <%= favicon_link_tag %>
   </head>
 
   <body data-color="grey" class="old">
@@ -55,6 +51,7 @@
 
     <%= javascript_include_tag "jquery.min" %>
     <%= javascript_include_tag "bootstrap.min" %>
+    <%= javascript_include_tag "bootstrap-toggle.min" %>
 
     <%= javascript_include_tag "custom" %>
   </body>

@@ -6,6 +6,7 @@
   <% end %>
 </div>
 
+<% if !@customer.id.nil? %>
 <div id="unassignConfirm" class="modal fade" style="overflow-y: auto;">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -27,3 +28,4 @@
     </div>
   </div>
 </div> <!-- end unassign modal -->
+<% end %>

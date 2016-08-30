@@ -1,3 +1,9 @@
-<%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
-<%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
-<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+<% flash.each do |type, content| %>
+  <% if content.respond_to?('each') %>
+    <% content.each do |item| %>
+      <%= render 'layouts/alert', type: type, content: item %>
+    <% end %>
+  <% else %>
+    <%= render 'layouts/alert', type: type, content: content %>
+  <% end %>
+<% end %>

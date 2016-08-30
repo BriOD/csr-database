@@ -1,11 +1,11 @@
 module IprangeHelper
   def make_tdnp_button(customer)
-    if customer.nil?
-      content_tag(:button, 'Disconnect', class: 'btn btn-sm btn-block btn-secondary disabled')
+    if customer.nil? || customer.id.nil?
+      content_tag(:button, 'Disconnect', class: 'btn btn-block btn-secondary disabled')
     elsif customer.active
-      content_tag(:button, 'Disconnect', class: 'btn btn-sm btn-block btn-danger TDNP')
+      link_to 'Disconnect', customer_tdnp_path(customer), class: 'btn btn-danger btn-block TDNP'
     else
-      content_tag(:button, 'Reconnect', class: 'btn btn-sm btn-block btn-success TDNP')
+      link_to 'Reconnect', customer_tdnp_path(customer), class: 'btn btn-success btn-block TDNP'
     end
   end
 

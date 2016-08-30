@@ -4,57 +4,61 @@
 
 <div id="breadcrumb">
   <%= make_breadcrumb_link('dashboard', '/', 'Dashboard') %>
-  <%= make_breadcrumb_link('desktop', iprange_path(@ip_range), @ip_range.name) %>
+  <%= make_breadcrumb_link(@ip_range.service.icon, iprange_path(@ip_range), @ip_range.name) %>
   <%= make_breadcrumb_link('user', '', @ip_address.ip, 'current') %>
 </div><!-- end breadcrumb -->
 
+<%= render partial: 'layouts/messages' %>
+
 <div class="container-fluid">
-  <%= form_for @customer, html: {class: 'form-horizontal'} do |f| %>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="widget-box">
-          <div class="widget-title">
-            <span class="icon"><i class="fa fa-user"></i></span>
-            <h5><%= ipaddress_widget_title(@ip_address) %></h5>
-            <h5 class="pull-right hidden-xs">Subnet: <%= @ip_range.subnet_mask %> | Gateway: <%= @ip_range.gateway %></h5>
-          </div>
-          <div class="widget-content nopadding">
-            <div class="form-group">
-              <%= render partial: 'ipaddresses/move_modal' %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="widget-box">
+        <div class="widget-title">
+          <span class="icon"><i class="fa fa-user"></i></span>
+          <h5><%= ipaddress_widget_title(@ip_address) %></h5>
+          <h5 class="pull-right hidden-xs">Subnet: <%= @ip_range.subnet_mask %> | Gateway: <%= @ip_range.gateway %></h5>
+        </div>
 
-              <%= render partial: 'ipaddresses/unassign_modal' %>
+        <div class="widget-content nopadding form-horizontal">
+          <div class="form-group">
+            <%= render partial: 'ipaddresses/move_modal' %>
 
-              <div class="col-sm-3">
-                <a role="button" target="new" href="http://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a<%="#{@ip_address.ip}"%>&run=toolpage#" class="btn btn-info btn-block">MX-Toolbox</a>
-              </div>
+            <%= render partial: 'ipaddresses/unassign_modal' %>
 
-              <div class="col-sm-3">
-                <button type="button" class="btn btn-success btn-block" data-toggle="collapse" data-target="#mapContainer">Map</button>
-              </div>
+            <div class="col-sm-3">
+              <a role="button" target="new" href="http://mxtoolbox.com/SuperTool.aspx?action=blacklist%3a<%="#{@ip_address.ip}"%>&run=toolpage#" class="btn btn-info btn-block">MX-Toolbox</a>
             </div>
 
-            <div id="mapContainer" class="form-group collapse">
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <div class="input-group input-group-sm">
-                        <input type="text" id="address_map_box" class="form-control input-sm" value=", , , , " />
-                        <span class="input-group-btn">
-                          <a id="encode_address" class="btn btn-inverse">Search</a>
-                        </span>
-                      </div>
+            <div class="col-sm-3">
+              <button type="button" class="btn btn-success btn-block" data-toggle="collapse" data-target="#mapContainer">Map</button>
+            </div>
+          </div>
+
+          <div id="mapContainer" class="form-group collapse">
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="input-group input-group-sm">
+                      <%= text_field_tag 'address_map_box', encode_address(@customer), class: 'form-control input-sm' %>
+                      <span class="input-group-btn">
+                        <a id="encode_address" class="btn btn-inverse">Search</a>
+                      </span>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <div id='map_canvas' style='width:100%; height:500px'></div>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div id='map_canvas' style='width:100%; height:500px'></div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
+          <%= form_for @customer, html: {class: 'form-horizontal'} do |f| %>
+            <%= f.hidden_field :ip_address_id, :value => @customer.ip_address.id %>
             <div class="form-group">
               <div class="row">
                 <label class="col-sm-3 col-lg-2 control-label">First Name</label>
@@ -65,8 +69,21 @@
                 <div class="col-sm-9 col-lg-4">
                   <%= f.text_field :last_name, class: "form-control input-sm", placeholder: 'Smith' %>
                 </div>
+                <label class="col-sm-3 col-lg-2 control-label">Account Number</label>
+                <div class="col-sm-9 col-md-9 col-lg-10">
+                  <%= f.number_field :account_number, class: "form-control input-sm", placeholder: '000000000' %>
+                </div>
               </div>
             </div>
+
+            <%= f.fields_for :company do |company| %>
+            <%= render partial: 'ipaddresses/company', locals: {company: company} %>
+            <% end %> <!-- end company section -->
+
+            <!-- <% @customer.build_address_book if @customer.address_book.nil? %> -->
+            <%= f.fields_for :address_book do |addr| %>
+            <%= render partial: 'ipaddresses/address', locals: {addr: addr} %>
+            <% end %> <!-- end customer address -->
 
             <div class="form-group">
               <div class="row">
@@ -76,119 +93,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="form-group">
-              <%= f.fields_for @company do |company| %>
-              <label class="col-sm-3 col-md-3 col-lg-2 control-label">Company Name</label>
-              <div class="col-sm-9 col-md-9 col-lg-10">
-                <div class="input-group input-group-sm">
-                  <%= company.text_field :name, class: "form-control input-sm", placeholder: 'Company Name (If Applicable)' %>
-                  <span class="input-group-btn">
-                    <a class="btn btn-inverse" data-toggle="collapse" data-target="#company">Show More</a>
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group collapse" id="company">
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Contact First Name</label>
-                <div class="col-sm-9 col-lg-4">
-                  <%= company.text_field :contact_first_name, class: "form-control input-sm", placeholder: 'John' %>
-                </div>
-                <label class="col-sm-3 col-lg-2 control-label">Contact Last Name</label>
-                <div class="col-sm-9 col-lg-4">
-                  <%= company.text_field :contact_last_name, class: "form-control input-sm", placeholder: 'Smith' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Billing E-Mail</label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= company.email_field :billing_email, class: "form-control input-sm", placeholder: 'jsmith@company.com' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Contact E-Mail</label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= company.email_field :contact_email, class: "form-control input-sm", placeholder: 'jsmith@company.com' %>
-                </div>
-              </div>
-              <%= f.fields_for @company_address do |company_addr| %>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Company Address</label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= company_addr.text_field :address_1, class: "form-control input-sm", placeholder: 'Street Address' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label"></label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= company_addr.text_field :address_2, class: "form-control input-sm", placeholder: 'Apartment, Suite , Unit, Building, Floor, etc' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-3 control-label">City</label>
-                <div class="col-sm-9 col-lg-3">
-                  <%= company_addr.text_field :city, class: "form-control input-sm", placeholder: 'City' %>
-                </div>
-                <label class="col-sm-3 col-lg-1 control-label">State</label>
-                <div class="col-sm-9 col-lg-1">
-                  <%= company_addr.text_field :state, class: "form-control input-sm", placeholder: 'MO' %>
-                </div>
-                <label class="col-sm-3 col-lg-1 control-label">Zip</label>
-                <div class="col-sm-9 col-lg-2">
-                  <%= company_addr.text_field :zipcode, class: "form-control input-sm", placeholder: 'Zip Code' %>
-                </div>
-              </div>
-              <% end %>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Main Phone</label>
-                <div class="col-sm-9 col-lg-2">
-                  <%= company.phone_field :main_number, class: "form-control input-sm", placeholder: 'XXX-XXX-XXXX', value: number_to_phone(@company.main_number, area_code: true) %>
-                </div>
-                <label class="col-sm-3 col-lg-2 control-label">Contact No</label>
-                <div class="col-sm-9 col-lg-2">
-                  <%= company.phone_field :contact_number, class: "form-control input-sm", placeholder: 'XXX-XXX-XXXX', value: number_to_phone(@company.contact_number, area_code: true) %>
-                </div>
-                <label class="col-sm-3 col-lg-2 control-label">Fax</label>
-                <div class="col-sm-9 col-lg-2">
-                  <%= company.phone_field :fax, class: "form-control input-sm", placeholder: 'XXX-XXX-XXXX', value: number_to_phone(@company.fax, area_code: true) %>
-                </div>
-              </div>
-              <% end %>
-            </div><!-- end collapsable company section -->
-
-            <div class="form-group">
-              <% @customer.build_address_book if @customer.address_book.nil? %>
-              <%= f.fields_for @customer.address_book do |addr| %>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label">Address</label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= addr.text_field :address_1, class: "form-control input-sm", placeholder: 'Street Address' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-2 control-label"></label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= addr.text_field :address_2, class: "form-control input-sm", placeholder: 'Apartment, Suite , Unit, Building, Floor, etc' %>
-                </div>
-              </div>
-              <div class="row">
-                <label class="col-sm-3 col-lg-3 control-label">City</label>
-                <div class="col-sm-9 col-lg-3">
-                  <%= addr.text_field :city, class: "form-control input-sm", placeholder: 'City' %>
-                </div>
-                <label class="col-sm-3 col-lg-1 control-label">State</label>
-                <div class="col-sm-9 col-lg-1">
-                  <%= addr.text_field :state, class: "form-control input-sm", placeholder: 'MO' %>
-                </div>
-                <label class="col-sm-3 col-lg-1 control-label">Zip</label>
-                <div class="col-sm-9 col-lg-2">
-                  <%= addr.text_field :zipcode, class: "form-control input-sm", placeholder: 'Zip' %>
-                </div>
-              </div>
-              <% end %>
-            </div><!-- end .form-group home address -->
 
             <div class="form-group">
               <div class="row">
@@ -218,23 +122,16 @@
               <div class="row">
                 <label class="col-sm-3 col-md-2 col-md-offset-3 control-label">Modem/Router Lease</label>
                 <div class="col-sm-3 col-md-2">
-                  <div class="btn-group btn-toggle">
-                    <% if @customer.lease.nil? %>
-                      <button class="btn btn-default" data-toggle="collapse" data-target="#modemLease">Yes</button>
-                      <button class="btn btn-primary active" data-toggle="collapse" data-target="#modemLease">No</button>
-                    <% else %>
-                      <button class="btn active btn-primary" data-toggle="collapse" data-target="#modemLease">Yes</button>
-                      <button class="btn collapsed btn-default" data-toggle="collapse" data-target="#modemLease">No</button>
-                    <% end %>
-                  </div>
+                  <span data-toggle="collapse" data-target="#modemLease">
+                    <input type="checkbox" id="lease_checkbox" name="lease_checkbox" data-size="small" data-onstyle="success" data-offstyle="default" data-width="100" data-on="Yes" data-off="No" data-toggle="toggle"<%= ' checked' unless @customer.lease.nil? %>>
+                  </span>
                 </div>
 
                 <label class="col-sm-3 col-md-2 control-label">Personal Webspace</label>
                 <div class="col-sm-3 col-md-2 ">
-                  <div class="btn-group btn-toggle">
-                    <button class="btn btn-default" data-toggle="collapse" data-target="#personalWebspace">Yes</button>
-                    <button class="btn btn-primary active" data-toggle="collapse" data-target="#personalWebspace">No</button>
-                  </div>
+                  <span data-toggle="collapse" data-target="#personalWebspace">
+                    <input type="checkbox" id="webspace_checkbox" name="webspace_checkbox" data-size="small" data-onstyle="success" data-offstyle="default" data-width="100" data-on="Yes" data-off="No" data-toggle="toggle"<%= ' checked' unless @customer.webspace.nil? %>>
+                  </span>
                 </div>
               </div>
             </div><!-- end slider buttons -->
@@ -242,151 +139,20 @@
             <div class="form-actions">
               <div class="row">
                 <div class="col-xs-12 col-sm-3 col-sm-offset-6 col-lg-2 col-lg-offset-8">
-                  <button type="button" data-isTDNP="0" data-ipRange="192.69.124.0" data-ipAddress="192.69.124.12" class="btn btn-danger btn-block TDNP">Disconnect</button>
+                  <%= make_tdnp_button(@customer) %>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-lg-2">
-                  <button type="submit" class="btn btn-primary-outline btn-block">Save</button>
+                  <%= f.submit 'Save', class: 'btn btn-primary-outline btn-block' %>
                 </div>
               </div>
             </div><!-- end form buttons -->
           </div><!-- end widget-content -->
-        </div><!-- end widget-box -->
-      </div><!-- end col-xs-12 -->
-    </div><!-- end main customer info -->
+        <% end %> <!-- end .form -->
+      </div><!-- end widget-box -->
+    </div><!-- end col-xs-12 -->
+  </div><!-- end main customer info -->
 
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="widget-box collapsable">
-          <div class="widget-title">
-            <span class="icon"><i class="fa fa-user"></i></span>
-            <h5>Modem Lease</h5>
-          </div>
-          <div class="collapse widget-content nopadding<%= ' in' unless @customer.lease.nil? %>" id="modemLease">
-            <% @lease = @customer.lease || @customer.build_lease %>
-            <%= f.fields_for @lease do |lease| %>
-              <div class="form-group">
-                <div class="row">
-                  <label class="col-sm-6 control-label">Modem Lease Information</label>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="row">
-                  <label class="col-sm-3 col-lg-2 control-label">Manufacturer</label>
-                  <div class="col-sm-9 col-lg-4">
-                    <%= lease.text_field :modem_manufacturer, class: "form-control input-sm", placeholder: 'Comtrend' %>
-                  </div>
+  <%= render partial: 'ipaddresses/lease', locals: {customer: @customer} %>
 
-                  <label class="col-sm-3 col-lg-2 control-label">Model</label>
-                  <div class="col-sm-9 col-lg-4">
-                    <%= lease.text_field :modem_model, class: "form-control input-sm", placeholder: 'AR-5361u' %>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="row">
-                  <label class="col-sm-3 col-lg-2 control-label">Serial No</label>
-                  <div class="col-sm-9 col-lg-4">
-                    <%= lease.text_field :modem_serial, class: "form-control input-sm", placeholder: '1415381UXXF-AA009344' %>
-                  </div>
-
-                  <label class="col-sm-3 col-lg-2 control-label">MAC Address</label>
-                  <div class="col-sm-9 col-lg-4">
-                    <%= lease.text_field :modem_mac, class: "form-control input-sm", placeholder: '00:00:00:00:00:00' %>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="row">
-                  <label class="col-sm-6 control-label">Router Lease Information</label>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="row">
-                  <label class="col-sm-3 col-lg-2 control-label">Manufacturer</label>
-                  <div class="col-sm-9 col-lg-4">
-                    <%= lease.text_field :router_manufacturer, class: "form-control input-sm", placeholder: 'Calix' %>
-                  </div>
-
-                  <label class="col-sm-3 col-lg-2 control-label">Model</label>
-                  <div class="col-sm-9 col-lg-4">
-                    <%= lease.text_field :router_model, class: "form-control input-sm", placeholder: 'Gigacenter' %>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="row">
-                  <label class="col-sm-3 col-lg-2 control-label">Serial No</label>
-                  <div class="col-sm-9 col-lg-4">
-                    <%= lease.text_field :router_serial, class: "form-control input-sm", placeholder: '1415381UXXF-AA009344' %>
-                  </div>
-
-                  <label class="col-sm-3 col-lg-2 control-label">MAC Address</label>
-                  <div class="col-sm-9 col-lg-4">
-                    <%= lease.text_field :router_mac, class: "form-control input-sm", placeholder: '00:00:00:00:00:00' %>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-actions">
-                <div class="row">
-                  <div class="col-xs-12 col-sm-3 col-sm-offset-9 col-lg-2 col-lg-offset-10">
-                    <button type="submit" class="btn btn-primary-outline btn-block">Save</button>
-                  </div>
-                </div>
-              </div><!-- end form buttons -->
-
-            <% end %> <!-- end lease form -->
-          </div><!-- end widget-content -->
-        </div><!-- end widget-box -->
-      </div><!-- end col-xs-12 -->
-    </div><!-- end modem lease row -->
-
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="widget-box collapsable">
-          <div class="widget-title">
-            <span class="icon"><i class="fa fa-user"></i></span>
-            <h5>Personal Webspace</h5>
-          </div>
-          <div class="collapse widget-content nopadding<%= ' in' unless @customer.webspace.nil? %>" id="personalWebspace">
-            <% @webspace = @customer.webspace || @customer.build_webspace %>
-            <%= f.fields_for @webspace do |webspace| %>
-              <div class="form-group">
-                <label class="col-sm-3 col-md-3 col-lg-2 control-label">URL</label>
-                <div class="col-sm-9 col-md-9 col-lg-10">
-                  <%= webspace.url_field :url, class: "form-control input-sm", placeholder: 'http://smith.ktis.net' %>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <div class="row">
-                  <label class="col-sm-3 col-lg-2 control-label">Username</label>
-                  <div class="col-sm-9 col-lg-4">
-                    <%= webspace.text_field :username, class: "form-control input-sm", placeholder: 'jsmith' %>
-                  </div>
-
-                  <label class="col-sm-3 col-lg-2 control-label">Password</label></label>
-                  <div class="col-sm-9 col-lg-4">
-                    <%= webspace.text_field :password, class: "form-control input-sm", placeholder: 'Password' %>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-actions">
-                <div class="row">
-                  <div class="col-xs-12 col-sm-3 col-sm-offset-9 col-lg-2 col-lg-offset-10">
-                    <button type="submit" class="btn btn-primary-outline btn-block">Save</button>
-                  </div>
-                </div>
-              </div><!-- end form buttons -->
-
-            <% end %><!-- end webspace form -->
-          </div><!-- end widget-content -->
-        </div><!-- end widget-box -->
-      </div><!-- end col-xs-12 -->
-    </div><!-- end modem lease row -->
-  <% end %> <!-- end .form -->
+  <%= render partial: 'ipaddresses/webspace', locals: {customer: @customer} %>
 </div><!-- end main content -->
