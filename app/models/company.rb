@@ -35,4 +35,9 @@ class Company < ApplicationRecord
   def strip_phone(phone_number)
     phone_number.gsub(/\D/, '')
   end
+
+  def self.empty_params?(params)
+    params[:customer][:company_attributes][:name].empty? &&
+      params[:customer][:company_attributes][:contact_first_name].empty?
+  end
 end
