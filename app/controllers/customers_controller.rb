@@ -3,8 +3,7 @@ class CustomersController < ApplicationController
   def create
     customer = Customer.new
 
-    if params[:customer][:company_attributes][:name].empty? &&
-       params[:customer][:company_attributes][:contact_first_name].empty?
+    if Company.empty_params?(params)
       customer.update(customer_params)
     else
       customer.update(customer_company_params)
@@ -22,8 +21,7 @@ class CustomersController < ApplicationController
   def update
     customer = Customer.find(params[:id])
 
-    if params[:customer][:company_attributes][:name].empty? &&
-       params[:customer][:company_attributes][:contact_first_name].empty?
+    if Company.empty_params?(params)
       customer.update(customer_params)
     else
       customer.update(customer_company_params)
@@ -88,7 +86,7 @@ class CustomersController < ApplicationController
   end
 
   def show_tdnps
-    @results = Customer.where(active: false).includes([:ip_address])
+    @results = Customer.where(active: false).include([:ip_address])
   end
 
   private
