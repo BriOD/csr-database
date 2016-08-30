@@ -1,6 +1,6 @@
-<div id="search">
+<!-- <div id="search">
   <input type="text" placeholder="Search here..."/><button type="submit" class="tip-right" title="Search"><i class="fa fa-search"></i></button>
-</div><!-- end search -->
+</div> --> <!-- end search -->
 
 <ul>
   <li class="active"><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
@@ -10,4 +10,6 @@
   <% end %>
 
   <li><a href="http://mailadmin.ktis.net/" target="new"><i class="fa fa-envelope-o"></i><span>E-Mail Accounts</span></a></li>
+  <%= content_tag(:li) { link_to "#{fa_icon('users')} #{content_tag(:span, 'All TDNPs')}".html_safe, customer_show_tdnps_path } %>
+  <%= content_tag(:li) { link_to "#{fa_icon('user-times')} #{content_tag(:span, 'All Unassigned')}".html_safe, ipaddresses_show_unassigned_path } %>
 </ul>

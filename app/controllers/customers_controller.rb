@@ -87,6 +87,10 @@ class CustomersController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def show_tdnps
+    @results = Customer.where(active: false).includes([:ip_address])
+  end
+
   private
 
   def customer_params
