@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   patch 'customers/:id/move' => 'customers#move', as: :customer_move
   get 'customers/:id/tdnp' => 'customers#tdnp', as: :customer_tdnp
+  get 'customers/tdnp' => 'customers#show_tdnps', as: :customer_show_tdnps
+
+  get 'ipaddresses/unassigned' => 'ipaddresses#show_unassigned', as: :ipaddresses_show_unassigned
 
   resources :customers, only: [:create, :update, :destroy]
   resources :companies, only: [:create, :update, :destroy]

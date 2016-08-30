@@ -9,4 +9,8 @@ class IpaddressesController < ApplicationController
     @company = @customer.company || @customer.build_company
     @company_address = @company.company_address || @company.build_company_address
   end
+
+  def show_unassigned
+    @results = IpAddress.where(reserved: false).includes(:ip)
+  end
 end
