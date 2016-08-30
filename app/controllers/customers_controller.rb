@@ -1,47 +1,47 @@
 # Customers Controller
 class CustomersController < ApplicationController
   def create
-    @customer = Customer.new
+    customer = Customer.new
 
     if params[:customer][:company_attributes][:name].empty? &&
        params[:customer][:company_attributes][:contact_first_name].empty?
-      @customer.update(customer_params)
+      customer.update(customer_params)
     else
-      @customer.update(customer_company_params)
+      customer.update(customer_company_params)
     end
 
-    if @customer.save
+    if customer.save
       flash[:notice] = 'Customer information has been updated successfully'
-      redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
+      redirect_to iprange_ipaddress_path(customer.ip_range, customer.ip_address)
     else
-      flash[:error] = @customer.errors.full_messages
+      flash[:error] = customer.errors.full_messages
       redirect_back(fallback_location: root_path)
     end
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    customer = Customer.find(params[:id])
 
     if params[:customer][:company_attributes][:name].empty? &&
        params[:customer][:company_attributes][:contact_first_name].empty?
-      @customer.update(customer_params)
+      customer.update(customer_params)
     else
-      @customer.update(customer_company_params)
+      customer.update(customer_company_params)
     end
 
-    if params[:lease_checkbox].nil? && !@customer.lease.nil?
-      @customer.lease.destroy
+    if params[:lease_checkbox].nil? && !customer.lease.nil?
+      customer.lease.destroy
     end
 
-    if params[:webspace].nil? && !@customer.webspace.nil?
-      @customer.webspace.destroy
+    if params[:webspace].nil? && !customer.webspace.nil?
+      customer.webspace.destroy
     end
 
-    if @customer.errors.empty?
+    if customer.errors.empty?
       flash[:notice] = 'Customer information has been updated successfully'
-      redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
+      redirect_to iprange_ipaddress_path(customer.ip_range, customer.ip_address)
     else
-      flash[:error] = @customer.errors.full_messages
+      flash[:error] = customer.errors.full_messages
       redirect_back(fallback_location: root_path)
     end
   end
@@ -62,16 +62,27 @@ class CustomersController < ApplicationController
   end
 
   def move
-    @customer = Customer.find(params[:id])
+    customer = Customer.find(params[:id])
+    new_ip_address = IpAddress.find_by(ip: params[:customer][:ip_address])
 
-    raise
-
-    redirect_to iprange_ipaddress_path(@customer.ip_range, @customer.ip_address)
+    if new_ip_address.nil?
+      flash[:error] = 'Unable to find a valid IP address to move this customer to.'
+      redirect_back(fallback_location: root_path)
+    elsif !new_ip_address.customer_id.nil?
+      flash[:error] = 'You can only move the customer to an empty IP address.'
+      redirect_back(fallback_location: root_path)
+    elsif customer.move(new_ip_address)
+      flash[:notice] = 'Customer has been moved successfully.'
+      redirect_to iprange_ipaddress_path(customer.ip_range, customer.ip_address)
+    else
+      flash[:error] = 'An unknown error has occured while trying to move this customer'
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def tdnp
-    @customer = Customer.find(params[:id])
-    @customer.update(active: @customer.active.!)
+    customer = Customer.find(params[:id])
+    customer.update(active: customer.active.!)
 
     redirect_back(fallback_location: root_path)
   end
