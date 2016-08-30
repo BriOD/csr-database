@@ -3,14 +3,14 @@ class CustomersController < ApplicationController
   def create
     customer = Customer.new
 
-    if Company.empty_params?(params)
-      customer.update(customer_params)
-    else
+    if !Company.empty_params?(params)
       customer.update(customer_company_params)
+    else
+      customer.update(customer_params)
     end
 
-    if customer.save
-      flash[:notice] = 'Customer information has been updated successfully'
+    if customer.errors.empty?
+      flash[:notice] = 'Customer information has been added successfully'
       redirect_to iprange_ipaddress_path(customer.ip_range, customer.ip_address)
     else
       flash[:error] = customer.errors.full_messages
@@ -21,10 +21,10 @@ class CustomersController < ApplicationController
   def update
     customer = Customer.find(params[:id])
 
-    if Company.empty_params?(params)
-      customer.update(customer_params)
-    else
+    if !Company.empty_params?(params)
       customer.update(customer_company_params)
+    else
+      customer.update(customer_params)
     end
 
     if params[:lease_checkbox].nil? && !customer.lease.nil?
