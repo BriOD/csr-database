@@ -6,31 +6,35 @@
   <% end %>
 </div>
 
+<% if !@customer.id.nil? %>
 <div id="moveConfirm" class="modal fade" style="overflow-y: auto;">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button data-dismiss="modal" class="close" type="button">×</button>
-        <h3>Move Customer</h3>
-      </div>
-
-      <div class="modal-body">
-        <div class="row">
-          <label class="col-sm-3 control-label">New IP Address</label>
-          <div class="col-sm-9">
-            <input type="text" class="form-control input-sm" id="move_new_ipaddress" name="move_new_ipaddress" placeholder="XXX.XXX.XXX.XXX" value="192.69.124.12" />
+        <%= form_for @customer, url: customer_move_path(@customer), html: {class: 'form-horizontal'} do |f| %>
+          <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button">×</button>
+            <h3>Move Customer</h3>
           </div>
-        </div>
-      </div>
 
-      <div class="modal-footer">
-        <% if @customer.id.nil? %>
-          <button class="btn btn-default btn-primary btn-disabled" href="#">Confirm</a>
-        <% else %>
-          <%= link_to 'Confirm', customer_move_path(@customer), class: 'btn btn-primary btn-small'%>
+          <div class="modal-body">
+            <div class="row">
+              <label class="col-sm-3 control-label">New IP Address</label>
+              <div class="col-sm-9">
+                <%= f.text_field :ip_address, class: "form-control input-sm", placeholder: '192.168.0.1', value: @customer.ip_address.ip %>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <% if @customer.id.nil? %>
+              <button class="btn btn-default btn-primary btn-disabled" href="#">Confirm</a>
+            <% else %>
+              <%= f.submit 'Save', class: 'btn btn-primary btn-small' %>
+            <% end %>
+            <a data-dismiss="modal" class="btn btn-default btn-small" href="#">Cancel</a>
+          </div>
         <% end %>
-        <a data-dismiss="modal" class="btn btn-default btn-small" href="#">Cancel</a>
-      </div>
     </div>
   </div>
 </div><!-- end move modal -->
+<% end %>
