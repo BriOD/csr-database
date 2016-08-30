@@ -29,6 +29,7 @@ class Customer < ApplicationRecord
   NULL_ATTRS = %w(first_name last_name email home_phone cell_phone work_phone)
   before_validation :blank_if_nil
 
+  # ====== Validation Methods ===============
   def name?
     if company.nil? && (first_name.nil? || last_name.nil?)
       errors.add(:base, 'You must have either a first and last name or company')
@@ -37,18 +38,11 @@ class Customer < ApplicationRecord
     end
   end
 
-  def name
-    "#{first_name} #{last_name}"
-  end
-
-  def self.disconnected
-    where(active: false)
-  end
-
   def blank_if_nil
     NULL_ATTRS.each { |attr| self[attr] = nil if self[attr].blank? }
   end
 
+  # ====== Setter Methods ===============
   def home_phone=(val)
     self['home_phone'] = strip_phone(val)
   end
@@ -61,7 +55,36 @@ class Customer < ApplicationRecord
     self['work_phone'] = strip_phone(val) unless val.nil?
   end
 
+  # ====== Getter Methods ===============
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  # ====== Class Methods ===============
+  def self.disconnected
+    where(active: false)
+  end
+
+  # ====== Instance Methods ===============
   def strip_phone(phone_number)
     phone_number.gsub(/\D/, '')
+  end
+
+  def move(new_ip_address)
+    unless ip_address.update(customer_id: nil, reserved: false)
+      errors.add(:base, 'You must have a company name')
+      return false
+    end
+
+    unless update(ip_address_id: new_ip_address.id)
+      errors.add(:base, 'Unable to update the customer with the new IP Address')
+      return false
+    end
+
+    unless ip_address.update(customer_id: id, reserved: true)
+      errors.add(:base, 'Unable to update the new IP Adress')
+      return false
+    end
+    true
   end
 end
