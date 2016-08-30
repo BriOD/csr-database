@@ -11,6 +11,6 @@ class IpaddressesController < ApplicationController
   end
 
   def show_unassigned
-    @results = IpAddress.where(reserved: false).includes(:ip)
+    @results = IpAddress.where(reserved: false)
   end
 end
