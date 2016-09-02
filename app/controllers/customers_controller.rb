@@ -103,10 +103,10 @@ class CustomersController < ApplicationController
     params.require(:customer).permit(
       :first_name, :last_name, :email,
       :home_phone, :cell_phone, :work_phone,
-      :notes, :lease_checkbox, :webspace_checkbox, :id,
+      :notes, :lease_checkbox, :webspace_checkbox, :id, :ip_address_id, :account_number,
       company_attributes: [
         :name, :contact_first_name, :contact_last_name, :billing_email,
-        :contact_email, :main_number, :contact_number, :fax, :id, :ip_address_id, :account_number,
+        :contact_email, :main_number, :contact_number, :fax, :id,
         company_address_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
       ],
       address_book_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
