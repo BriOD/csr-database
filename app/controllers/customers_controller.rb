@@ -10,6 +10,7 @@ class CustomersController < ApplicationController
     end
 
     if customer.errors.empty?
+      customer.ip_address.update(reserved: true)
       flash[:notice] = 'Customer information has been added successfully'
       redirect_to iprange_ipaddress_path(customer.ip_range, customer.ip_address)
     else
@@ -36,6 +37,7 @@ class CustomersController < ApplicationController
     end
 
     if customer.errors.empty?
+      customer.ip_address.update(reserved: true)
       flash[:notice] = 'Customer information has been updated successfully'
       redirect_to iprange_ipaddress_path(customer.ip_range, customer.ip_address)
     else

@@ -30,7 +30,7 @@
           </thead><!-- end thead -->
 
           <tbody>
-            <% @range.ip_addresses.order(:id).each do |ip| %>
+            <% @ip_addresses.each do |ip| %>
               <%= make_range_table_entry(ip) %>
             <% end %>
           </tbody><!-- end tbody -->

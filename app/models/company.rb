@@ -7,7 +7,7 @@
 class Company < ApplicationRecord
   belongs_to :customer
   belongs_to :company_address, class_name: 'AddressBook', foreign_key: 'address_book_id'
-  # accepts_nested_attributes_for :company_address
+  accepts_nested_attributes_for :company_address
 
   validates :contact_number, length: { minimum: 10, maximum: 10 }, numericality: { only_integer: true, message: 'must be filled in' }
   validates :main_number, length: { minimum: 10, maximum: 10 }, allow_blank: true, numericality: { only_integer: true }
@@ -39,11 +39,5 @@ class Company < ApplicationRecord
   def self.empty_params?(params)
     params[:customer][:company_attributes][:name].empty? &&
       params[:customer][:company_attributes][:contact_first_name].empty?
-  end
-
-  # === CUSTOM ATTRIBUTE WRITER ===============
-  def company_address_attributes=(company_address_params)
-    @company_address = company_address || build_company_address
-    @company_address.update(company_address_params)
   end
 end
