@@ -10,8 +10,8 @@ class Company < ApplicationRecord
   accepts_nested_attributes_for :company_address
 
   validates :contact_number, length: { minimum: 10, maximum: 10 }, numericality: { only_integer: true, message: 'must be filled in' }
-  validates :main_number, allow_blank: true, length: { minimum: 10, maximum: 10 }, allow_blank: true, numericality: { only_integer: true }
-  validates :fax, allow_blank: true, length: { minimum: 10, maximum: 10 }, allow_blank: true, numericality: { only_integer: true }
+  validates :main_number, length: { minimum: 10, maximum: 10 }, allow_blank: true, numericality: { only_integer: true }
+  validates :fax, length: { minimum: 10, maximum: 10 }, allow_blank: true, numericality: { only_integer: true }
 
   NULL_ATTRS = %w(name contact_last_name contact_last_name contact_email billing_email main_number contact_number fax)
   before_validation :blank_if_nil
