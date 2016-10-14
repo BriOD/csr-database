@@ -2,6 +2,17 @@ Rails.application.routes.draw do
   resources :ipranges, only: [:show] do
     resources :ipaddresses, only: [:show]
   end
+  
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resources :ipranges, only: [:show, :index]
+      resources :ipaddresses, only: [:show, :index]
+      resources :customers, only: [:show, :index]
+      resources :companies, only: [:show, :index]
+      resources :leases, only: [:show, :index]
+      resources :webspaces, only: [:show, :index]
+    end
+  end
 
   patch 'customers/:id/move' => 'customers#move', as: :customer_move
   get 'customers/:id/tdnp' => 'customers#tdnp', as: :customer_tdnp
