@@ -11,6 +11,6 @@ class IpaddressesController < ApplicationController
   end
 
   def show_unassigned
-    @results = IpAddress.where(reserved: false)
+    @results = IpAddress.order(:id).includes(:ip_range).includes(:customer).where(reserved: false)
   end
 end
