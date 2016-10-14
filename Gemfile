@@ -20,6 +20,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'rails_12factor'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development do
   gem 'awesome_print'
