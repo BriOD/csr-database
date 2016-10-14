@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      resources :ipranges, only: [:show, :index]
-      resources :ipaddresses, only: [:show, :index]
-      resources :customers, only: [:show, :index]
       resources :companies, only: [:show, :index]
+      resources :customers, only: [:show, :index]
+      resources :ipaddresses, only: [:show, :index]
+      resources :ipranges, only: [:show, :index]
       resources :leases, only: [:show, :index]
       resources :webspaces, only: [:show, :index]
     end
