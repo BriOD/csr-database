@@ -4,37 +4,17 @@ class Api::V1::IpaddressesController < ApplicationController
   respond_to :json
   
   def index
-    @ip_addresses = IpAddress.order(:id).includes(:ip_range).includes(:customer)
-    
-    respond_to do |f|
-      f.html { render :show }
-      f.json { 
-        render json: @ip_addresses,
-        include: ['customer']
-      }
-    end
+    @ipaddresses = IpAddress.order(:id)
+    render json: @ipaddresses, include: ['']
   end
   
   def show
-    @ip_address = IpAddress.find(params[:id])
-    @ip_range = @ip_address.ip_range
-    @customer = @ip_address.customer || @ip_address.build_customer
-
-    @company = @company || @build_company
-    @company_address = @company.company_address || @company.build_company_address unless @company.nil?
-    
-    respond_to do |f|
-      f.html { render :show }
-      f.json {
-        render json: @customer,
-        include: ['address_book',
-                  'company',
-                  'company.company_address',
-                  'lease',
-                  'webspace'
-                 ]
-      }
-    end
+    render json: @api_v1_ipaddress, include: ['customer']
+  end
+  
+  def show_unassigned
+    results = IpAddress.order(:id).includes(:ip_range).includes(:customer).where(reserved: false)
+    render json: results
   end
   
   private

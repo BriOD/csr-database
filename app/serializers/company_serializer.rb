@@ -3,4 +3,5 @@ class CompanySerializer < ActiveModel::Serializer
              :billing_email, :main_number, :contact_number, :fax
              
   has_one :company_address
+  belongs_to :customer
 end

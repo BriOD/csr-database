@@ -5,18 +5,11 @@ class Api::V1::WebspacesController < ApplicationController
   
   def index
     @webspaces = Webspace.order(:id)
-    
-    respond_to do |f|
-      f.html { render :show }
-      f.json { render json: @webspaces }
-    end
+    render json: @webspaces, include: ['']
   end
   
   def show
-    respond_to do |f|
-      f.html { render :show }
-      f.json { render json: @api_v1_webspaces }
-    end
+    render json: @api_v1_webspaces, include: ['customer']
   end
   
   private

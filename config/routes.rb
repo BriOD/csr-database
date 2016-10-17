@@ -5,12 +5,15 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      resources :companies,     only: [:show, :index]
-      resources :customers,     only: [:show, :index]
-      resources :ipaddresses,   only: [:show, :index]
-      resources :ipranges,      only: [:show, :index]
-      resources :leases,        only: [:show, :index]
-      resources :webspaces,     only: [:show, :index]
+      resources :address_book,         only: [:show, :index]
+      resources :companies,            only: [:show, :index]
+      get    'customers/tdnp'          => 'customers#show_tdnps',         as: :customer_show_tdnps
+      resources :customers,            only: [:show, :index]
+      get    'ipaddresses/unassigned'  => 'ipaddresses#show_unassigned',  as: :ipaddresses_show_unassigned
+      resources :ipaddresses,          only: [:show, :index]
+      resources :ipranges,             only: [:show, :index]
+      resources :leases,               only: [:show, :index]
+      resources :webspaces,            only: [:show, :index]
     end
   end
 
@@ -19,8 +22,8 @@ Rails.application.routes.draw do
   get    'customers/tdnp'         => 'customers#show_tdnps',        as: :customer_show_tdnps
   get    'ipaddresses/unassigned' => 'ipaddresses#show_unassigned', as: :ipaddresses_show_unassigned
   
-  get    '/dashboard',            => 'dashboard#index'
-  get    '/settings',             => 'dashboard#settings'
+  get    '/dashboard',           to: 'dashboard#index'
+  get    '/settings',            to: 'dashboard#settings'
   root   'dashboard#index'
 
   resources :customers,   only: [:create, :update, :destroy]

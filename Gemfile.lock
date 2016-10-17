@@ -300,6 +300,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
+  faraday
   font-awesome-rails
   guard-rspec
   jbuilder (~> 2.5)

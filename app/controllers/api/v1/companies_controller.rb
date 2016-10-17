@@ -1,27 +1,20 @@
 class Api::V1::CompaniesController < ApplicationController
-  before_action :set_api_v1_companies, only: [:show]
+  before_action :set_api_v1_company, only: [:show]
   
   respond_to :json
   
   def index
     @companies = Company.order(:id)
-    
-    respond_to do |f|
-      f.html { render :show }
-      f.json { render json: @companies }
-    end
+    render json: @companies, include: ['']
   end
   
   def show
-    respond_to do |f|
-      f.html { render :show }
-      f.json { render json: @api_v1_companies }
-    end
+    render json: @api_v1_company, include: ['company_address','customer']
   end
   
   private
   
-  def set_api_v1_companies
-    @api_v1_companies = Company.find(params[:id])
+  def set_api_v1_company
+    @api_v1_company = Company.find(params[:id])
   end
 end
