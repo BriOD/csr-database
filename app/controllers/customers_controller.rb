@@ -50,6 +50,8 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     ip_range = @customer.ip_range
     ip_address = @customer.ip_address
+    
+    ip_address.reserved = false
 
     @customer.company.company_address.destroy unless @customer.company.nil?
     @customer.company.destroy unless @customer.company.nil?
