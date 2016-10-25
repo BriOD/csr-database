@@ -138,15 +138,21 @@
               </div>
             </div><!-- end slider buttons -->
 
-            <div class="form-actions">
-              <div class="row">
-                <div class="col-xs-12 col-sm-3 col-sm-offset-6 col-lg-2 col-lg-offset-8">
+            <div class="form-group">
+              <!-- <div class="row"> -->
+                <div class="col-sm-3">
+                  <%= f.submit 'Previous', class: 'btn btn-info btn-block' %>
+                </div>
+                <div class="col-sm-3">
                   <%= make_tdnp_button(@customer) %>
                 </div>
-                <div class="col-xs-12 col-sm-3 col-lg-2">
+                <div class="col-sm-3">
                   <%= f.submit 'Save', class: 'btn btn-primary-outline btn-block' %>
                 </div>
-              </div>
+                <div class="col-sm-3">
+                  <%= f.submit 'Next', class: 'btn btn-info btn-block' %>
+                </div>
+              <!-- </div> -->
             </div><!-- end form buttons -->
           </div><!-- end widget-content -->
         <% end %> <!-- end .form -->
@@ -160,24 +166,31 @@
 </div><!-- end main content -->
 
 <script type="text/javascript" charset="utf-8">
-  $('input').blur(function() {
-
-  });
-  
   $('form').submit(function() {
+    var data_submitted = $(this).serialize();
     $.ajax({
       url: $(this).attr('action'),
       data: $(this).serialize(),
       type: "POST",
-      dataType: "json",
       success: function(response) {
-         console.log(response)
+        var success_message =
+          "<div class=\"col-xs-12\">"
+            +"<div class=\"alert alert-success\" role=\"alert\">"
+               +"<button class=\"close\" data-dismiss=\"alert\">×</button>"
+               +"Customer Successfully Updated"
+            +"</div>"
+          +"</div>";
+
+        $( "#messages" ).append(success_message);
+         console.log(response);
       },
       error: function(xhr, textStatus, errorThrown) {
-    
+        $( "#messages" ).append(data_submitted);
       }
     });
-    
+
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
+
     return false; // prevents normal behaviour
   });
 </script>
