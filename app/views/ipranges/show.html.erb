@@ -30,9 +30,55 @@
           </thead><!-- end thead -->
 
           <tbody>
-            <% @ip_addresses.each do |ip| %>
-              <%= make_range_table_entry(ip) %>
-            <% end %>
+            <script type="text/javascript">
+              $( InitPage );
+
+              function InitPage(){
+                $.get("/api/v1/ipranges/<%= @range.id %>", function(data) {
+                  var arrValues = data["ip_addresses"];
+
+                  $.each(
+                    arrValues,
+                    function( intIndex, objValue ){
+                      var ipAddressLink = "<a href=\"/ipranges/" + objValue["id"] + "/ipaddresses/" + objValue["id"] + "\">" + objValue["ip"] + "</a>";
+                      var ipAddress = "";
+
+                      if (objValue["customer"] == null) {
+                        var tdnp = "";
+                        var customerName = "Unassigned";
+                        var accountNumber = "-";
+                        var customerPhone = "-";
+                        var tdnpButton = "<button class=\"btn btn-block btn-secondary disabled\">Disconnect</a>";
+                      } else {
+                        var accountNumber = objValue["customer"]["account_number"];
+                        var customerId = objValue["customer"]["id"];
+                        var customerName = objValue["customer"]["name"];
+                        var customerNumber = objValue["customer"]["id"];
+                        var customerPhone = objValue["customer"]["home_phone"].replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');;
+
+                        if (objValue["customer"]["active"] == true) {
+                          var tdnp = "";
+                          var tdnpButton = "<a class=\"btn btn-danger btn-block TDNP\" href=\"/customers/" + objValue["id"] + "/tdnp\">Disconnect</a>";
+                        } else {
+                          var tdnp = " class=\"tdnp\"";
+                          var tdnpButton = "<a class=\"btn btn-success btn-block TDNP\" href=\"/customers/" + objValue["id"] + "/tdnp\">Reconnect</a>";
+                        }
+                      }
+
+                      var customerData =
+                        "<tr" + tdnp + ">"
+                        +  "<td>" + ipAddressLink + "</td>"
+                        +  "<td class=\"hidden-xs\">" + accountNumber + "</td>"
+                        +  "<td>" + customerName + "</td>"
+                        +  "<td>" + customerPhone + "</td>"
+                        +  "<td>" + tdnpButton + "</td>"
+                        +"</tr>"
+                        // console.log(customerData);
+                        $( "tbody" ).append( $(customerData) );
+                    });
+                });
+              }
+            </script>
           </tbody><!-- end tbody -->
         </table><!-- end table -->
       </div><!-- end widget-content -->
