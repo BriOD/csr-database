@@ -40,7 +40,7 @@
                   $.each(
                     arrValues,
                     function( intIndex, objValue ){
-                      var ipAddressLink = "<a href=\"/ipranges/" + objValue["id"] + "/ipaddresses/" + objValue["id"] + "\">" + objValue["ip"] + "</a>";
+                      var ipAddressLink = "<a href=\"/ipranges/<%= @range.id %>/ipaddresses/" + objValue["id"] + "\">" + objValue["ip"] + "</a>";
                       var ipAddress = "";
 
                       if (objValue["customer"] == null) {
@@ -72,9 +72,8 @@
                         +  "<td>" + customerName + "</td>"
                         +  "<td>" + customerPhone + "</td>"
                         +  "<td>" + tdnpButton + "</td>"
-                        +"</tr>"
-                        // console.log(customerData);
-                        $( "tbody" ).append( $(customerData) );
+                        +"</tr>";
+                      $( "tbody" ).append( $(customerData) );
                     });
                 });
               }
