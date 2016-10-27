@@ -200,7 +200,10 @@
       $("#js-next").removeClass("disabled");
     }
 
+
     $.get("/api/v1/ipaddresses/" + id, function(data) {
+      $(".current").replaceWith("<a class=\"current\"><i class=\"fa fa-user\"></i> " + data["ip"] + "</a>");
+
       if (data["customer"] == null) {
         $("#moveBtn").addClass("disabled");
         $("#unassignBtn").addClass("disabled");
@@ -241,10 +244,22 @@
 
         $("#tdnpButton").replaceWith("<button id=\"tdnpButton\" class=\"btn btn-block btn-secondary disabled\">Disconnect</button>");
       } else {
+        class googleMapsAddress {
+          constructor(address1, address2, city, state, zipcode) {
+            this.address1 = address1;
+            this.address2 = address2;
+            this.city = city;
+            this.state = state;
+            this.zipcode = zipcode;
+          }
+
+          encodeForGoogleMaps() {
+            return this.address1 + " " + this.address2 + ", " + this.city + ", " + this.state + ", " + this.zipcode;
+          }
+        }
+
         var customerId = data["customer"]["id"];
         var customer = data["customer"];
-        console.log(customer);
-        console.log(data["customer"])
 
         $("#moveBtn").removeClass("disabled");
         $("#unassignBtn").removeClass("disabled");
@@ -261,6 +276,10 @@
         $("#customer_address_book_attributes_city").val(customer.address_book.city);
         $("#customer_address_book_attributes_state").val(customer.address_book.state);
         $("#customer_address_book_attributes_zipcode").val(customer.address_book.zipcode);
+
+        var customerAddress = new googleMapsAddress(customer.address_book.address_1, customer.address_book.address_2, customer.address_book.city, customer.address_book.state, customer.address_book.zipcode);
+        $("#address_map_box").val(customerAddress.encodeForGoogleMaps());
+        $("#encode_address").trigger("click");
 
         if (customer.company == null) {
           $("#customer_company_attributes_name").val("");
@@ -321,7 +340,6 @@
         }
       }
 
-      $(".current").replaceWith("<a class=\"current\"><i class=\"fa fa-user\"></i> " + data["ip"] + "</a>");
       var moveLink = "/customers/" + data["id"] + "/move";
       $("moveConfirmBtn").prop("href", moveLink);
       var unassignLink = "/customers/" + data["id"] + "/unassign";
@@ -346,23 +364,16 @@
       data: $(this).serialize(),
       type: "POST",
       success: function(response) {
-        var success_message =
-          "<div class=\"col-xs-12\">"
-            +"<div class=\"alert alert-success\" role=\"alert\">"
-               +"<button class=\"close\" data-dismiss=\"alert\">×</button>"
-               +"Customer Successfully Updated"
-            +"</div>"
-          +"</div>";
 
-        $( "#messages" ).append(success_message);
-         console.log(response);
       },
       error: function(xhr, textStatus, errorThrown) {
-        $( "#messages" ).append(data_submitted);
+
       }
     });
 
-    // $('html, body').animate({ scrollTop: 0 }, 'fast');
+    $('#widget-title').text($("#customer_first_name").val() + " " + $("#customer_last_name").val());
+
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
 
     return false; // prevents normal behaviour
   });
