@@ -11,6 +11,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( devise_custom.css )
 Rails.application.config.assets.precompile += %w( respond.min.js )
+Rails.application.config.assets.precompile += %w( customer_page.js )
 Rails.application.config.assets.precompile += %w( bootstrap.min.js )
 Rails.application.config.assets.precompile += %w( bootstrap-toggle.min.js )
 Rails.application.config.assets.precompile += %w( custom.js )
