@@ -21,7 +21,7 @@
         <% if @customer.id.nil? %>
           <button class="btn btn-default btn-primary btn-disabled" href="#">Confirm</a>
         <% else %>
-          <%= link_to 'Confirm', customer_path(@customer), method: :delete, class: 'btn btn-primary btn-small'  %>
+          <%= link_to 'Confirm', customer_path(@customer), method: :delete, id: 'unassignConfirmBtn', class: 'btn btn-primary btn-small'  %>
         <% end %>
         <button data-dismiss="modal" class="btn btn-default btn-small" href="#">Cancel</a>
       </div>
