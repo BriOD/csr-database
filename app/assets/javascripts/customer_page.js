@@ -1,34 +1,10 @@
-  if (currentPosition == firstInRange) {
-    console.log("First in Range");
-    $("#js-previous").addClass("disabled");
-  } else if (currentPosition == lastInRange) {
-    console.log("Last in Range");
-    $("#js-next").addClass("disabled");
-  } else {
-    $("#js-previous").removeClass("disabled");
-    $("#js-next").removeClass("disabled");
-  }
 
   function loadCustomerInfo(id) {
     $('html, body').animate({ scrollTop: 0 }, 'fast');
 
-    // We need to disable the previous and next buttons if there are no more
-    // available in that range.  We also need to enable the buttons when we move
-    // off of those
-    if (currentPosition == firstInRange) {
-      console.log("First in Range");
-      $("#js-previous").addClass("disabled");
-    } else if (currentPosition == lastInRange) {
-      console.log("Last in Range");
-      $("#js-next").addClass("disabled");
-    } else {
-      $("#js-previous").removeClass("disabled");
-      $("#js-next").removeClass("disabled");
-    }
-
-
     $.get("/api/v1/ipaddresses/" + id, function(data) {
       $(".current").replaceWith("<a class=\"current\"><i class=\"fa fa-user\"></i> " + data["ip"] + "</a>");
+
 
       if (data["customer"] == null) {
         $("#moveBtn").addClass("disabled");
@@ -49,21 +25,9 @@
         $("#customer_home_phone").val("");
         $("#customer_cell_phone").val("");
         $("#custmer_work_phone").val("");
-
-        $("#customer_company_attributes_name").val("");
-        $("#customer_company_attributes_contact_first_name").val("");
-        $("#customer_company_attributes_contact_last_name").val("");
-        $("#customer_company_attributes_contact_email").val("");
-        $("#customer_company_attributes_billing_email").val("");
-        $("#customer_company_attributes_company_address_attributes_address_1").val("");
-        $("#customer_company_attributes_company_address_attributes_address_2").val("");
-        $("#customer_company_attributes_company_address_attributes_city").val("");
-        $("#customer_company_attributes_company_address_attributes_state").val("");
-        $("#customer_company_attributes_company_address_attributes_zipcode").val("");
-        $("#customer_company_attributes_company_address_attributes_main_number").val("");
-        $("#customer_company_attributes_company_address_attributes_contact_number").val("");
-        $("#customer_company_attributes_company_address_attributes_fax").val("");
         $("#customer_notes").val("");
+
+
 
 
         $("#widget-title").text("-");
@@ -85,7 +49,9 @@
         }
 
         var customerId = data["customer"]["id"];
+        var customerPath = '/customers/' + customerId;
         var customer = data["customer"];
+        $("#customer_form").attr('action', customerPath);
 
         $("#moveBtn").removeClass("disabled");
         $("#unassignBtn").removeClass("disabled");
@@ -106,43 +72,6 @@
         var customerAddress = new googleMapsAddress(customer.address_book.address_1, customer.address_book.address_2, customer.address_book.city, customer.address_book.state, customer.address_book.zipcode);
         $("#address_map_box").val(customerAddress.encodeForGoogleMaps());
         $("#encode_address").trigger("click");
-
-        if (customer.company == null) {
-          $("#customer_company_attributes_name").val("");
-          $("#customer_company_attributes_contact_first_name").val("");
-          $("#customer_company_attributes_contact_last_name").val("");
-          $("#customer_company_attributes_contact_email").val("");
-          $("#customer_company_attributes_billing_email").val("");
-          $("#customer_company_attributes_company_address_attributes_address_1").val("");
-          $("#customer_company_attributes_company_address_attributes_address_2").val("");
-          $("#customer_company_attributes_company_address_attributes_city").val("");
-          $("#customer_company_attributes_company_address_attributes_state").val("");
-          $("#customer_company_attributes_company_address_attributes_zipcode").val("");
-          $("#customer_company_attributes_company_address_attributes_main_number").val("");
-          $("#customer_company_attributes_company_address_attributes_contact_number").val("");
-          $("#customer_company_attributes_company_address_attributes_fax").val("");
-        } else {
-          $("#customer_company_attributes_name").val(customer.company.name);
-          $("#customer_company_attributes_contact_first_name").val(customer.company.contact_first_name);
-          $("#customer_company_attributes_contact_last_name").val(customer.company.contact_last_name);
-          $("#customer_company_attributes_contact_email").val(customer.company.contact_email);
-          $("#customer_company_attributes_billing_email").val(customer.company.billing_email);
-          $("#customer_company_attributes_company_address_attributes_address_1").val(customer.company.address_1);
-          $("#customer_company_attributes_company_address_attributes_address_2").val(customer.company.address_2);
-          $("#customer_company_attributes_company_address_attributes_city").val(customer.company.city);
-          $("#customer_company_attributes_company_address_attributes_state").val(customer.company.state);
-          $("#customer_company_attributes_company_address_attributes_zipcode").val(customer.company.zipcode);
-          $("#customer_company_attributes_company_address_attributes_main_number").val(customer.company.main_number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3'));
-
-          if (customer.company.contact_number != null) {
-            $("#customer_company_attributes_company_address_attributes_contact_number").val(customer.company.contact_number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3'));
-          }
-
-          if (customer.company.fax != null) {
-            $("#customer_company_attributes_company_address_attributes_fax").val(customer.company.fax.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3'));
-          }
-
-        }
 
         $("#customer_email").val(customer.email);
         $("#customer_home_phone").val(customer.home_phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3'));
@@ -181,6 +110,10 @@
   $("#js-next").on("click", function() {
     loadCustomerInfo(currentPosition += 1);
   });
+
+  $("#customer_first_name").keyup(function() {
+    $('#widget-title').text($("#customer_first_name").val() + " " + $("#customer_last_name").val());
+  })
 
   // Form Submitting Stuff
   $('form').submit(function() {

@@ -6,9 +6,6 @@ class IpaddressesController < ApplicationController
     @ip_range = @ip_address.ip_range
     @customer = @ip_address.customer || @ip_address.build_customer
 
-    @company = @customer.company || @customer.build_company
-    @company_address = @company.company_address || @company.build_company_address
-
     respond_to do |format|
       format.html { render :show }
       format.json {
@@ -17,8 +14,6 @@ class IpaddressesController < ApplicationController
                  [
                    'customer',
                    'customer.address_book',
-                   'customer.company',
-                   'customer.comapny.company_address',
                    'customer.webspace',
                    'customer.lease'
                  ]

@@ -78,10 +78,6 @@
               </div>
             </div>
 
-            <%= f.fields_for :company do |company| %>
-            <%= render partial: 'ipaddresses/company', locals: {company: company} %>
-            <% end %> <!-- end company section -->
-
             <!-- <% @customer.build_address_book if @customer.address_book.nil? %> -->
             <%= f.fields_for :address_book do |addr| %>
             <%= render partial: 'ipaddresses/address', locals: {addr: addr} %>

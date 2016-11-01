@@ -169,79 +169,79 @@ $(document).ready(function(){
     })
   })
 });
-
-var map;
-
-function initialize() {
-  var mapOptions = {
-    center: new google.maps.LatLng(38.867630, -91.943696),
-    zoom: 18,
-    mapTypeId: google.maps.MapTypeId.HYBRID,
-    panControl: false,
-    scaleControl: false,
-    streetViewControl: false,
-    overviewMapControl: true
-  };
-
-  // initializing map
-  map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
-
-  // geocoding
-  var geocoding  = new google.maps.Geocoder();
-  $("#encode_address").click(function(){
-    codeAddress(geocoding);
-  });
-
-  codeAddress(geocoding);
-}
-
-var info;
-function codeAddress(geocoding){
-  var address = $("#address_map_box").val();
-
-  if(address.length > 0){
-    geocoding.geocode({'address': address},function(results, status){
-      if(status == google.maps.GeocoderStatus.OK){
-        map.setCenter(results[0].geometry.location);
-        var marker  =  new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-        });
-        }else{
-        alert("Geocode was not successful for the following reason: " + status);
-      }
-    });
-  }else{
-    alert("Search field can't be blank");
-  }
-}
-
-function loadScript() {
-	console.log("map loading ...");
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-    // '&v=3.24'+
-    '&key=AIzaSyBJYFdplGeKUUEmGZ-vL4ydiSZ09Khsa_o'+
-    '&libraries=drawing'+
-    '&callback=initialize';
-  document.body.appendChild(script);
-  console.log("map done");
-}
-
-$(document).ready(function() {
-  loadScript();
-
-	// Resize map to show on a Bootstrap's modal
-	$('#mapContainer').on('shown.bs.collapse', function() {
-		var currentCenter = map.getCenter();  // Get current center before resizing
-		google.maps.event.trigger(map, "resize");
-		map.setCenter(currentCenter); // Re-set previous center
-	});
-
-  $(window).resize(function() {
-		var currentCenter = map.getCenter();  // Get current center before resizing
-		google.maps.event.trigger(map, "resize");
-		map.setCenter(currentCenter); // Re-set previous center
-  });
-});
+//
+// var map;
+//
+// function initialize() {
+//   var mapOptions = {
+//     center: new google.maps.LatLng(38.867630, -91.943696),
+//     zoom: 18,
+//     mapTypeId: google.maps.MapTypeId.HYBRID,
+//     panControl: false,
+//     scaleControl: false,
+//     streetViewControl: false,
+//     overviewMapControl: true
+//   };
+//
+//   // initializing map
+//   map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+//
+//   // geocoding
+//   var geocoding  = new google.maps.Geocoder();
+//   $("#encode_address").click(function(){
+//     codeAddress(geocoding);
+//   });
+//
+//   codeAddress(geocoding);
+// }
+//
+// var info;
+// function codeAddress(geocoding){
+//   var address = $("#address_map_box").val();
+//
+//   if(address.length > 0){
+//     geocoding.geocode({'address': address},function(results, status){
+//       if(status == google.maps.GeocoderStatus.OK){
+//         map.setCenter(results[0].geometry.location);
+//         var marker  =  new google.maps.Marker({
+//           map: map,
+//           position: results[0].geometry.location
+//         });
+//         }else{
+//         alert("Geocode was not successful for the following reason: " + status);
+//       }
+//     });
+//   }else{
+//     alert("Search field can't be blank");
+//   }
+// }
+//
+// function loadScript() {
+// 	console.log("map loading ...");
+//   var script = document.createElement('script');
+//   script.type = 'text/javascript';
+//   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
+//     // '&v=3.24'+
+//     '&key=AIzaSyBJYFdplGeKUUEmGZ-vL4ydiSZ09Khsa_o'+
+//     '&libraries=drawing'+
+//     '&callback=initialize';
+//   document.body.appendChild(script);
+//   console.log("map done");
+// }
+//
+// $(document).ready(function() {
+//   loadScript();
+//
+// 	// Resize map to show on a Bootstrap's modal
+// 	$('#mapContainer').on('shown.bs.collapse', function() {
+// 		var currentCenter = map.getCenter();  // Get current center before resizing
+// 		google.maps.event.trigger(map, "resize");
+// 		map.setCenter(currentCenter); // Re-set previous center
+// 	});
+//
+//   $(window).resize(function() {
+// 		var currentCenter = map.getCenter();  // Get current center before resizing
+// 		google.maps.event.trigger(map, "resize");
+// 		map.setCenter(currentCenter); // Re-set previous center
+//   });
+// });

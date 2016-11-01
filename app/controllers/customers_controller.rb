@@ -3,11 +3,11 @@ class CustomersController < ApplicationController
   def create
     customer = Customer.new
 
-    if !Company.empty_params?(params)
-      customer.update(customer_company_params)
-    else
+    # if !Company.empty_params?(params)
+      # customer.update(customer_company_params)
+    # else
       customer.update(customer_params)
-    end
+    # end
 
     if customer.errors.empty?
       customer.ip_address.update(reserved: true)
@@ -22,11 +22,11 @@ class CustomersController < ApplicationController
   def update
     customer = Customer.find(params[:id])
 
-    if !Company.empty_params?(params)
-      customer.update(customer_company_params)
-    else
+    # if !Company.empty_params?(params)
+    #   customer.update(customer_company_params)
+    # else
       customer.update(customer_params)
-    end
+    # end
 
     if params[:lease_checkbox].nil? && !customer.lease.nil?
       customer.lease.destroy
@@ -53,8 +53,8 @@ class CustomersController < ApplicationController
 
     ip_address.reserved = false
 
-    @customer.company.company_address.destroy unless @customer.company.nil?
-    @customer.company.destroy unless @customer.company.nil?
+    # @customer.company.company_address.destroy unless @customer.company.nil?
+    # @customer.company.destroy unless @customer.company.nil?
     @customer.lease.destroy unless @customer.lease.nil?
     @customer.webspace.destroy unless @customer.webspace.nil?
     @customer.address_book.destroy unless @customer.nil?
@@ -104,17 +104,17 @@ class CustomersController < ApplicationController
     )
   end
 
-  def customer_company_params
-    params.require(:customer).permit(
-      :first_name, :last_name, :email,
-      :home_phone, :cell_phone, :work_phone,
-      :notes, :lease_checkbox, :webspace_checkbox, :id, :ip_address_id, :account_number,
-      company_attributes: [
-        :name, :contact_first_name, :contact_last_name, :billing_email,
-        :contact_email, :main_number, :contact_number, :fax, :id,
-        company_address_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
-      ],
-      address_book_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
-    )
-  end
+  # def customer_company_params
+  #   params.require(:customer).permit(
+  #     :first_name, :last_name, :email,
+  #     :home_phone, :cell_phone, :work_phone,
+  #     :notes, :lease_checkbox, :webspace_checkbox, :id, :ip_address_id, :account_number,
+  #     company_attributes: [
+  #       :name, :contact_first_name, :contact_last_name, :billing_email,
+  #       :contact_email, :main_number, :contact_number, :fax, :id,
+  #       company_address_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
+  #     ],
+  #     address_book_attributes: [:id, :address_1, :address_2, :city, :state, :zipcode]
+  #   )
+  # end
 end
